@@ -6,11 +6,11 @@ enum MatchState {PLAYED, NOT_PLAYED}
 
 public class Match {
 
-    private int id;
-    private int firstPlayerId;
-    private int secondPlayerId;
-    private int firstPlayerScore;
-    private int secondPlayerScore;
+    private Integer id;
+    private Integer firstPlayerId;
+    private Integer secondPlayerId;
+    private Integer firstPlayerScore;
+    private Integer secondPlayerScore;
     private Calendar matchDate;
     private MatchState state;
     private TennisTable table;
@@ -110,5 +110,16 @@ public class Match {
     @Override
     public int hashCode() {
         return getId();
+    }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", firstPlayerId=" + firstPlayerId +
+                ", secondPlayerId=" + secondPlayerId +
+                ", matchDate=" + matchDate +
+                ", table=" + table +
+                '}';
     }
 }

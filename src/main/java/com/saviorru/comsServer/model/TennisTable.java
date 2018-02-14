@@ -2,8 +2,8 @@ package com.saviorru.comsServer.model;
 
 public class TennisTable {
 
-    private int id;
-    private int number;
+    private Integer id;
+    private Integer number;
     private String location;
 
     public TennisTable(int id) {
@@ -16,19 +16,19 @@ public class TennisTable {
         this.location = location;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -41,26 +41,17 @@ public class TennisTable {
     }
 
     @Override
-    public String toString() {
-        return "TennisTable{" +
-                "id=" + id +
-                ", number=" + number +
-                ", location='" + location + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         TennisTable that = (TennisTable) o;
 
-        return getId() == that.getId();
+        return getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return getId();
+        return getId().hashCode();
     }
 }

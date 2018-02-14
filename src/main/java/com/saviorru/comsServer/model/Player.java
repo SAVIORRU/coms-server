@@ -6,43 +6,14 @@ import java.util.HashMap;
 
 public class Player {
 
-    private int id;
-    private User user;
+    private Integer id;
+    private Integer userId;
     private HashMap<Integer, Integer> statistics;
 
-    public Player(int id, User user, HashMap<Integer, Integer> statistics) {
+    public Player(Integer id, Integer userId, HashMap<Integer, Integer> statistics) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.statistics = statistics;
-    }
-
-    public Player(int id) {
-        this.id = id;
-    }
-
-    public HashMap<Integer, Integer> getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(HashMap<Integer, Integer> statistics) {
-        this.statistics = statistics;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override
@@ -65,5 +36,29 @@ public class Player {
     @Override
     public int hashCode() {
         return getId();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public HashMap<Integer, Integer> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(HashMap<Integer, Integer> statistics) {
+        this.statistics = statistics;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

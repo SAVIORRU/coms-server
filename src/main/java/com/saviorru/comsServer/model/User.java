@@ -4,21 +4,18 @@ import java.util.HashMap;
 
 public class User {
 
-    private int id;
+    private Integer id;
     private String name;
-    private Player player;
+    private Integer playerId;
 
-    public User(int id) {
+    public User(Integer id) {
         this.id = id;
-        HashMap<Integer, Integer> playerStatistics = new HashMap<Integer, Integer>();
-        this.player = new Player(this.id, this, playerStatistics);
     }
 
-    public User(int id, String name) {
+    public User(Integer id, String name, Integer playerId) {
         this.id = id;
         this.name = name;
-        HashMap<Integer, Integer> playerStatistics = new HashMap<Integer, Integer>();
-        this.player = new Player(this.id, this, playerStatistics);
+        this.playerId = playerId;
     }
 
 
@@ -38,12 +35,12 @@ public class User {
         this.name = name;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Integer getPlayerId() {
+        return playerId;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
     }
 
     @Override
@@ -68,4 +65,5 @@ public class User {
     public int hashCode() {
         return getId();
     }
+
 }
