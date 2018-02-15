@@ -1,5 +1,4 @@
-package com.saviorru.comsServer.repository;
-import com.saviorru.comsServer.model.*;
+package com.saviorru.comsServer;
 
 import java.util.HashMap;
 

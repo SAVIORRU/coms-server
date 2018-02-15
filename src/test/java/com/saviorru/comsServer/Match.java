@@ -1,6 +1,4 @@
-package com.saviorru.comsServer.model;
-
-
+package com.saviorru.comsServer;
 
 import java.util.GregorianCalendar;
 
@@ -116,7 +114,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match{" +
+        return "com.saviorru.comsServer.Match{" +
                 "id=" + id +
                 ", firstPlayerId=" + firstPlayerId +
                 ", secondPlayerId=" + secondPlayerId +

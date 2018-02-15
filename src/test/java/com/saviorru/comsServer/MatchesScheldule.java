@@ -1,4 +1,4 @@
-package com.saviorru.comsServer.model;
+package com.saviorru.comsServer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +29,7 @@ public class MatchesScheldule {
 
     @Override
     public String toString() {
-        return "MatchesScheldule{" +
+        return "com.saviorru.comsServer.MatchesScheldule{" +
                 "id=" + id +
                 '}';
     }
