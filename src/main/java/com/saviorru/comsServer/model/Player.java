@@ -1,64 +1,42 @@
 package com.saviorru.comsServer.model;
 
-
-import java.util.HashMap;
+import java.util.Optional;
 
 
 public class Player {
 
-    private Integer id;
-    private Integer userId;
-    private HashMap<Integer, Integer> statistics;
+    private String firstName;
+    private String lastName;
+    private Optional<String> patronymicName;
 
-    public Player(Integer id, Integer userId, HashMap<Integer, Integer> statistics) {
-        this.id = id;
-        this.userId = userId;
-        this.statistics = statistics;
+    private Integer age;
+
+    Player(String firstName,String lastName,Integer age){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+    Player(String firstName, String lastName, Optional<String> patronymicName, Integer age){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymicName = patronymicName;
+        this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                '}';
+    public String getFirstName() {
+        return firstName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Player player = (Player) o;
-
-        return getId() == player.getId();
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
-    public int hashCode() {
-        return getId();
+    public  String getPatronymicName() {
+        return patronymicName.orElse(" ");
+        //(patronymicName != null) ? patronymicName:" ";
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public HashMap<Integer, Integer> getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(HashMap<Integer, Integer> statistics) {
-        this.statistics = statistics;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public Integer getAge() {
+        return age;
     }
 }
