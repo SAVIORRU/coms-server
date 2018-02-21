@@ -1,15 +1,16 @@
 package com.saviorru.comsServer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public interface Match {
 
     Date getDate();
-    Double getResultFirstPlayer();
-    Double getResultSecondPlayer();
-    void setResultFirstPlayer(Double resultFirstPlayer);
-    void setResultSecondPlayer(Double resultSecondPlayer);
-    Player getWinner() ;
+    Double getResultFirstSide();
+    Double getResultSecondSide();
+    void setResultFirstSide(Double resultFirstSide);
+    void setResultSecondSide(Double resultSecondSide);
+    ArrayList<Player> getWinner() ;
     void setStateMatch(StateMatch stateMatch);
     StateMatch getStateMatch();
 }

@@ -1,18 +1,18 @@
 package com.saviorru.comsServer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class OneOnOneMatch implements Match {
 
     private Date date;
-    private Double resultFirstPlayer,resultSecondPlayer;
-    private Player firstPlayer, secondPlayer;
+    private Double resultFirstSide,resultSecondSide;
+    private ArrayList<Player> firstSide, secondSide;
     private StateMatch stateMatch = StateMatch.NOTPLAYED;
 
-    OneOnOneMatch(Player firstPlayer,Player secondPlayer,Date date){
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-        this.date = date;
+    OneOnOneMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide,Date date){
+        this.firstSide = firstSide;
+        this.secondSide = secondSide;
     }
 
     @Override
@@ -21,28 +21,29 @@ public class OneOnOneMatch implements Match {
     }
 
     @Override
-    public Double getResultFirstPlayer() {
-        return this.resultFirstPlayer;
+    public Double getResultFirstSide() {
+        return this.resultFirstSide;
     }
 
     @Override
-    public Double getResultSecondPlayer() {
-        return this.resultSecondPlayer;
+    public Double getResultSecondSide() {
+        return this.resultSecondSide;
     }
 
     @Override
-    public void setResultFirstPlayer(Double resultFirstPlayer) {
-        this.resultFirstPlayer = resultFirstPlayer;
+    public void setResultFirstSide(Double resultFirstSide) {
+        this.resultFirstSide = resultFirstSide;
     }
 
     @Override
-    public void setResultSecondPlayer(Double resultSecondPlayer) {
-        this.resultSecondPlayer = resultSecondPlayer;
+    public void setResultSecondSide(Double resultSecondSide) {
+        this.resultSecondSide = resultSecondSide;
     }
 
+
     @Override
-    public Player getWinner() {
-        if(stateMatch == StateMatch.NOTPLAYED) throw new Error("Match wasn't play");
+    public ArrayList<Player> getWinner() {
+        if(stateMatch == StateMatch.NOTPLAYED) throw new Error("Match wasn't played");
         return identifyWinner();
     }
 
@@ -56,7 +57,8 @@ public class OneOnOneMatch implements Match {
         return this.stateMatch;
     }
 
-    private Player identifyWinner(){
-        return (getResultFirstPlayer() > getResultSecondPlayer())? this.firstPlayer:this.secondPlayer;
+    private ArrayList<Player> identifyWinner(){
+        return (getResultFirstSide() > getResultSecondSide())? this.firstSide:this.secondSide;
     }
+
 }
