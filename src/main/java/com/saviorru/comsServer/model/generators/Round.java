@@ -63,6 +63,6 @@ public class Round implements SchelduleGenerator {
 
     @Override
     public TypeScheme getGeneratorType() {
-        return null;
+        return this.type;
     }
 }
