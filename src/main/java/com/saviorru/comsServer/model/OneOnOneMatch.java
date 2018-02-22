@@ -9,10 +9,12 @@ public class OneOnOneMatch implements Match {
     private Double resultFirstSide,resultSecondSide;
     private ArrayList<Player> firstSide, secondSide;
     private StateMatch stateMatch = StateMatch.NOTPLAYED;
+    private Location location;
 
-    OneOnOneMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide,Date date){
+    public OneOnOneMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide, Location location, Date date){
         this.firstSide = firstSide;
         this.secondSide = secondSide;
+
     }
 
     @Override
@@ -61,4 +63,7 @@ public class OneOnOneMatch implements Match {
         return (getResultFirstSide() > getResultSecondSide())? this.firstSide:this.secondSide;
     }
 
+    public Location getLocation() {
+        return location;
+    }
 }
