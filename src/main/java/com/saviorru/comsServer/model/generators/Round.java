@@ -62,6 +62,11 @@ public class Round implements SchelduleGenerator {
     }
 
     @Override
+    public HashMap<Integer, Match> updateScheldule(HashMap<Integer, Match> scheldule) {
+        return scheldule;
+    }
+
+    @Override
     public TypeScheme getGeneratorType() {
         return this.type;
     }

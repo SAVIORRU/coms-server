@@ -14,7 +14,14 @@ public class TennisTournament implements Tournament {
     private HashMap<Integer, Location> locations;
     private HashMap<Integer, Match> scheldule;
 
-    
+    public TennisTournament(String name, HashMap<Integer, ArrayList<Player>> playersLists, TypeScheme schemeType, HashMap<Integer, Location> locations, HashMap<Integer, Match> scheldule) {
+        this.name = name;
+        this.playersLists = playersLists;
+        this.schemeType = schemeType;
+        this.locations = locations;
+        this.scheldule = scheldule;
+    }
+
 
     @Override
     public String getName() {
@@ -33,6 +40,22 @@ public class TennisTournament implements Tournament {
     @Override
     public TypeScheme getSchemeType() {
         return schemeType;
+    }
+
+    @Override
+    public void updatePlayers(HashMap<Integer, ArrayList<Player>> playersLists) {
+        this.playersLists = playersLists;
+    }
+
+    @Override
+    public void updateState(TournamentState state) {
+        this.state = state;
+
+    }
+
+    @Override
+    public void updateScheldule(HashMap<Integer, Match> scheldule) {
+        this.scheldule = scheldule;
     }
 
     @Override

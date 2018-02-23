@@ -13,5 +13,5 @@ public interface Tournament {
     public TypeScheme getSchemeType();
     public void updatePlayers(HashMap<Integer, ArrayList<Player>> playersLists);
     public void updateState(TournamentState state);
-    public void updateScheldule(HashMap<Integer, ArrayList<Player>> playersLists, Date startDate);
+    public void updateScheldule(HashMap<Integer, Match> scheldule);
 }
