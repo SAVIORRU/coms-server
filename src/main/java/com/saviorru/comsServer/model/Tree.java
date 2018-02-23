@@ -15,7 +15,7 @@ public class Tree {
         this.root = new Node();
         this.root.parent = this.root;
         buildTree(level);
-        int a = 10;
+        
     }
     public void buildTree(int level){
         ArrayList<Node> parents = new ArrayList<>();
