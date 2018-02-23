@@ -3,6 +3,7 @@ package com.saviorru.comsServer.model.tournaments;
 import com.saviorru.comsServer.model.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class TennisTournament implements Tournament {
@@ -33,6 +34,21 @@ public class TennisTournament implements Tournament {
     @Override
     public TypeScheme getSchemeType() {
         return schemeType;
+    }
+
+    @Override
+    public void updatePlayers(HashMap<Integer, ArrayList<Player>> playersLists) {
+
+    }
+
+    @Override
+    public void updateState(TournamentState state) {
+
+    }
+
+    @Override
+    public void updateScheldule(HashMap<Integer, ArrayList<Player>> playersLists, Date startDate) {
+
     }
 
     @Override

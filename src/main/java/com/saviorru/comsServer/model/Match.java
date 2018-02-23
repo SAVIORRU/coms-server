@@ -13,4 +13,6 @@ public interface Match {
     ArrayList<Player> getWinner() ;
     void setStateMatch(StateMatch stateMatch);
     StateMatch getStateMatch();
+    ArrayList<Player> getFirstSide();
+    ArrayList<Player> getSecondSide();
 }

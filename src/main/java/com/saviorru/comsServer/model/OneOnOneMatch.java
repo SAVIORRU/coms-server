@@ -14,6 +14,7 @@ public class OneOnOneMatch implements Match {
     public OneOnOneMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide, Location location, Date date){
         this.firstSide = firstSide;
         this.secondSide = secondSide;
+        this.location = location;
 
     }
 
@@ -57,6 +58,16 @@ public class OneOnOneMatch implements Match {
     @Override
     public StateMatch getStateMatch() {
         return this.stateMatch;
+    }
+
+    @Override
+    public ArrayList<Player> getFirstSide() {
+        return this.firstSide;
+    }
+
+    @Override
+    public ArrayList<Player> getSecondSide() {
+        return this.secondSide;
     }
 
     private ArrayList<Player> identifyWinner(){

@@ -11,7 +11,7 @@ public class Player {
 
     private Integer age;
 
-    Player(String firstName,String lastName,Integer age){
+    public Player(String firstName, String lastName, Integer age){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

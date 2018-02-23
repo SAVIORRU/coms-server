@@ -5,35 +5,45 @@ import java.util.ArrayList;
 public class Tree {
 
     public static class Node{
-         Match data;
-         Node left,rigth,parent;
+         Player data;
+         Node left,right,parent;
+
     }
 
     private Node root;
+    private ArrayList<Node> parents;
+    private ArrayList<Node> childrens;
 
-    Tree(Integer level){
+    public Tree(Integer level){
         this.root = new Node();
         this.root.parent = this.root;
         buildTree(level);
         
     }
-    public void buildTree(int level){
-        ArrayList<Node> parents = new ArrayList<>();
-        ArrayList<Node> childrens = new ArrayList<>();
-        parents.add(this.root);
+    private void buildTree(int level){
+        this.parents = new ArrayList<>();
+        this.childrens = new ArrayList<>();
+        this.parents.add(this.root);
         for (int i = 1; i < level ; i++)
         {
-            for (Node parent: parents)
+            for (Node parent: this.parents)
             {
                 parent.left = new Node();
                 parent.left.parent = parent;
-                childrens.add(parent.left);
-                parent.rigth = new Node();
-                parent.rigth.parent = parent;
-                childrens.add(parent.rigth);
+                this.childrens.add(parent.left);
+                parent.right = new Node();
+                parent.right.parent = parent;
+                this.childrens.add(parent.right);
             }
-            parents = new ArrayList<Node>(childrens);
-            childrens.clear();
+            this.parents = new ArrayList<Node>(this.childrens);
+            if(level != i+1) this.childrens.clear();
         }
+    }
+    public Node getRoot(){
+        return this.root;
+    }
+
+    public ArrayList<Node> getChildrens(){
+        return this.childrens;
     }
 }
