@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public interface Tournament {
+    public String getName();
     public HashMap<Integer, ArrayList<Player>> getPlayers();
     public TournamentState getState();
     public HashMap<Integer, Match> getScheldule();
