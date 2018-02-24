@@ -16,6 +16,9 @@ public class OneOnOneMatch implements Match {
         this.secondSide = secondSide;
         this.location = location;
 
+        this.resultSecondSide = 0.0;
+        this.resultFirstSide = 0.0;
+
     }
 
     @Override

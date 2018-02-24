@@ -4,8 +4,14 @@ import java.util.ArrayList;
 
 public class Tree {
 
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
     public static class Node{
-         Player data;
+         ArrayList<Player> data;
          Node left,right,parent;
 
     }
@@ -17,6 +23,7 @@ public class Tree {
     public Tree(Integer level){
         this.root = new Node();
         this.root.parent = this.root;
+        this.level = level;
         buildTree(level);
         
     }

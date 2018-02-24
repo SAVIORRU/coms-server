@@ -1,6 +1,5 @@
 package com.saviorru.comsServer.model;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,11 +9,15 @@ public class RandomTossUp implements TossUp {
 
     private ArrayList<Player> players,firstSide,secondSide;
     private Match match;
+    private ArrayList<Location> locationArrayList;
+    private Date startDate;
 
-    RandomTossUp(ArrayList<Player> players){
+    RandomTossUp(ArrayList<Player> players,ArrayList<Location> locationsList, Date startDate){
          this.players = players;
          this.firstSide = new ArrayList<>();
          this.secondSide = new ArrayList<>();
+         this.locationArrayList = locationsList;
+         this.startDate = startDate;
     }
 
     private HashMap<Integer,Match> generationMathes(){
@@ -23,7 +26,7 @@ public class RandomTossUp implements TossUp {
         Random generation = new Random();
         int element1,element2;
 
-        int table = 1;
+        int table = 0;
 
         int size = this.players.size();
 
@@ -35,7 +38,7 @@ public class RandomTossUp implements TossUp {
                 a.add(this.players.get(element1));
                 ArrayList<Player> b = new ArrayList<Player>();
                 b.add(this.players.get(element2));
-                match = new OneOnOneMatch(a,b, new Location(table),new Date());
+                match = new OneOnOneMatch(a,b,locationArrayList.get(0),startDate);
                 matches.put(table,match);
                 table++;
                 size -= 2 ;
