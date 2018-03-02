@@ -41,16 +41,17 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         if(this.countPlayers == Math.pow(2,countTour(this.countPlayers))) fillFirstTourStandartCountPlayer(playersLists);
         else{
             fillFirstTourNotStandartCountPlayer(playersLists);
+            System.out.println("NoStandart");
         }
     }
 
     private void fillFirstTourNotStandartCountPlayer(ArrayList<ArrayList<Player>> playersLists){
-        for(int i = 0, j = 0  ; j < this.countPlayers ; i += 2 , j += 4) {
+        for(int i = 0, j = 0  ; j < this.child.size() ; i += 2 , j += 4) {
             this.child.get(j).data = playersLists.get(i);
             this.child.get(j + 1).data = playersLists.get(i+1);
             this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
         }
-        for(int i = this.matchHashMap.size()*2, j = 2; j < this.countPlayers ; i ++, j += 4) {
+        for(int i = this.matchHashMap.size()*2, j = 2; j < this.child.size() ; i ++, j += 4) {
             this.child.get(j).data = playersLists.get(i);
             addPlayersNextTour(this.child.get(j));
         }
