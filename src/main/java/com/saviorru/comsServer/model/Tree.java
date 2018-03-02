@@ -1,5 +1,7 @@
 package com.saviorru.comsServer.model;
 
+import com.saviorru.comsServer.model.Player;
+
 import java.util.ArrayList;
 
 public class Tree {
@@ -11,9 +13,8 @@ public class Tree {
     }
 
     public static class Node{
-         ArrayList<Player> data;
-         Node left,right,parent;
-
+         public ArrayList<Player> data;
+         public Node left,right,parent;
     }
 
     private Node root;

@@ -30,15 +30,15 @@ public class RandomTossUp implements TossUp {
 
         int size = this.players.size();
 
-        while(size > 0){
-            element1 = generation.nextInt(this.players.size());
-            element2 = generation.nextInt(this.players.size());
+        while(size > 1){
+            element1 = generation.nextInt(size);
+            element2 = generation.nextInt(size);
             if(element1 != element2){
                 ArrayList<Player> a = new ArrayList<Player>();
                 a.add(this.players.get(element1));
                 ArrayList<Player> b = new ArrayList<Player>();
                 b.add(this.players.get(element2));
-                match = new OneOnOneMatch(a,b,locationArrayList.get(0),startDate);
+                match = new OneOnOneMatch(a,b,locationArrayList.get(table),startDate);
                 matches.put(table,match);
                 table++;
                 size -= 2 ;
@@ -46,7 +46,11 @@ public class RandomTossUp implements TossUp {
                 this.players.remove((element2-1 >= 0)?element2-1:0);
             }
         }
-
+        if(this.players.size() == 1){
+            ArrayList<Player> firstSide = new ArrayList<Player>();
+            firstSide.add(this.players.get(0));
+            match = new OneOnOneMatch(firstSide,null,this.locationArrayList.get(this.locationArrayList.size()-1),startDate);
+        }
         return matches;
     }
 
