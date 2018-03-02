@@ -12,22 +12,23 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     private HashMap<Integer,Match> matchHashMap;
     private ArrayList<ArrayList<Player>> playersLists;
     private Date dateBegin;
-    private Integer countMatchesInDate;
+    private ArrayList<Location> locationArrayList;
     private Tree tree;
     private Integer countPlayers;
     private ArrayList<Tree.Node> child,parents = new ArrayList<>();
 
-    public OlympicSchelduleGenerator(ArrayList<ArrayList<Player>> playersLists, Date dateBegin, Integer countMatchesInDate){
+    public OlympicSchelduleGenerator(){
+    }
+    private void init(ArrayList<ArrayList<Player>> playersLists, ArrayList<Location> locationsList, Date startDate){
         this.playersLists = playersLists;
         this.matchHashMap = new HashMap<>();
-        this.dateBegin = dateBegin;
-        this.countMatchesInDate = countMatchesInDate;
+        this.dateBegin = startDate;
+        this.locationArrayList = locationsList;
         this.countPlayers = playersLists.size();
         this.tree = new Tree(countTour(this.countPlayers).intValue());
         this.child = this.tree.getChildrens();
         addPlayers(this.playersLists);
     }
-
     private Double countTour(Integer countPlayers){
         Double count = 0.0,st = 2.0,n = 1.0;
         while(count  < countPlayers){
@@ -41,7 +42,6 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         if(this.countPlayers == Math.pow(2,countTour(this.countPlayers))) fillFirstTourStandartCountPlayer(playersLists);
         else{
             fillFirstTourNotStandartCountPlayer(playersLists);
-            System.out.println("NoStandart");
         }
     }
 
@@ -142,7 +142,8 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     }
     @Override
     public HashMap<Integer, Match> generateScheldule(ArrayList<ArrayList<Player>> playersLists, ArrayList<Location> locationsList, Date startDate) {
-        return createSchedule(this.matchHashMap,this.child);
+        init(playersLists,locationsList,startDate);
+        return this.matchHashMap;
     }
 
     @Override
