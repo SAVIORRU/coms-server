@@ -1,4 +1,7 @@
-package com.saviorru.comsServer.model;
+package com.saviorru.comsServer.model.generators;
+
+import com.saviorru.comsServer.model.*;
+import com.saviorru.comsServer.model.Tree;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,23 +10,25 @@ import java.util.HashMap;
 public class OlympicSchelduleGenerator implements SchelduleGenerator {
 
     private HashMap<Integer,Match> matchHashMap;
+    private ArrayList<ArrayList<Player>> playersLists;
     private Date dateBegin;
-    private Integer countMatchesInDate;
+    private ArrayList<Location> locationArrayList;
     private Tree tree;
     private Integer countPlayers;
     private ArrayList<Tree.Node> child,parents = new ArrayList<>();
 
-    public OlympicSchelduleGenerator(HashMap<Integer,Match> matchHashMap, Date dateBegin, Integer countMatchesInDate){
-        this.matchHashMap = matchHashMap;
-        this.dateBegin = dateBegin;
-        this.countMatchesInDate = countMatchesInDate;
-        this.countPlayers = matchHashMap.size()*2;
-        tree = new Tree(countTour(this.countPlayers).intValue());
-        this.child = tree.getChildrens();
-        addPlayers();
+    public OlympicSchelduleGenerator(){
     }
-
-
+    private void init(ArrayList<ArrayList<Player>> playersLists, ArrayList<Location> locationsList, Date startDate){
+        this.playersLists = playersLists;
+        this.matchHashMap = new HashMap<>();
+        this.dateBegin = startDate;
+        this.locationArrayList = locationsList;
+        this.countPlayers = playersLists.size();
+        this.tree = new Tree(countTour(this.countPlayers).intValue());
+        this.child = this.tree.getChildrens();
+        addPlayers(this.playersLists);
+    }
     private Double countTour(Integer countPlayers){
         Double count = 0.0,st = 2.0,n = 1.0;
         while(count  < countPlayers){
@@ -33,13 +38,52 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         return n;
     }
 
-    private void addPlayers(){
-        for(Integer i = 0,j = 0  ;i < this.matchHashMap.size(); i++,j+= 2){
-            this.child.get(j).data = this.matchHashMap.get(i).getFirstSide();
-            this.child.get(j+1).data = this.matchHashMap.get(i).getSecondSide();
-       }
+    private void addPlayers(ArrayList<ArrayList<Player>> playersLists){
+        if(this.countPlayers == Math.pow(2,countTour(this.countPlayers))) fillFirstTourStandartCountPlayer(playersLists);
+        else{
+            fillFirstTourNotStandartCountPlayer(playersLists);
+        }
     }
 
+    private void fillFirstTourNotStandartCountPlayer(ArrayList<ArrayList<Player>> playersLists){
+        for(int i = 0, j = 0  ; j < this.child.size() ; i += 2 , j += 4) {
+            this.child.get(j).data = playersLists.get(i);
+            this.child.get(j + 1).data = playersLists.get(i+1);
+            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
+        }
+        for(int i = this.matchHashMap.size()*2, j = 2; j < this.child.size() ; i ++, j += 4) {
+            this.child.get(j).data = playersLists.get(i);
+            addPlayersNextTour(this.child.get(j));
+        }
+    }
+
+    private void fillFirstTourStandartCountPlayer(ArrayList<ArrayList<Player>> playersLists){
+        for(int i = 0, j = 0  ;i < playersLists.size(); i+=2 , j += 2) {
+            this.child.get(j).data = playersLists.get(i);
+            this.child.get(j + 1).data = playersLists.get(i+1);
+            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
+        }
+    }
+
+    private Tree.Node addPlayersNextTour(Tree.Node node){
+        if(node.parent.right.data == null || node.parent.left.data == null){
+            if(!checkLackPartner(node)){
+                if(node.parent.data == null) { node.parent.data = node.data;
+                    return  node.parent;
+                }
+            }
+        }
+        return node;
+    }
+
+    private boolean checkLackPartner(Tree.Node node){
+        if((node.parent.right.right == null && node.parent.right.left == null)|| (node.parent.right.right.data == null && node.parent.right.left.data == null)) {
+            if ((node.parent.left.right == null && node.parent.left.left == null) || (node.parent.left.right.data == null && node.parent.left.left.data == null)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private HashMap<Integer,Match> createSchedule(HashMap<Integer,Match> matchHashMap,ArrayList<Tree.Node> parents){
         int  countPLayedMatch = 0;
@@ -62,14 +106,15 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         return arrayList;
     }
     private boolean addInSceme(ArrayList<Tree.Node> child,ArrayList<Player> winner){
-        Tree.Node node = new Tree.Node();
+        Tree.Node node;
         for(int i = 0;i < child.size(); i++){
             if(child.get(i).data == winner){
                 if(child.get(i).parent.data == null) {
                     child.get(i).parent.data = winner;
-                    node = finedTour(child.get(i).parent);
+                    node = addPlayersNextTour(child.get(i).parent);
+                    node = finedTour(node);
                     if (node != null) {
-                        if (!noClone(createNewMatch(node.left.data, node.right.data)))
+                        if (noClone(createNewMatch(node.left.data, node.right.data)))
                             this.matchHashMap.put(matchHashMap.size(), createNewMatch(node.left.data, node.right.data));
                     }
                 }
@@ -81,13 +126,13 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     private boolean noClone(Match match){
         for(int i = 0; i < this.matchHashMap.size() ; i++){
             if (match.getFirstSide() == this.matchHashMap.get(i).getFirstSide() && match.getSecondSide() == this.matchHashMap.get(i).getSecondSide()
-                                                                                || match.getFirstSide() == match.getSecondSide()) return true;
-            if(match.getFirstSide() ==  this.matchHashMap.get(i).getSecondSide() && match.getSecondSide() == this.matchHashMap.get(i).getFirstSide()) return true;
+                                                                                || match.getFirstSide() == match.getSecondSide()) return false;
+            if(match.getFirstSide() ==  this.matchHashMap.get(i).getSecondSide() && match.getSecondSide() == this.matchHashMap.get(i).getFirstSide()) return false;
         }
-        return false;
+        return true;
     }
     private Match createNewMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide){
-        return new OneOnOneMatch(firstSide,secondSide,new Location<Integer>(5),new Date());
+        return new OneOnOneMatch(firstSide,secondSide,null,new Date());
     }
     private Tree.Node finedTour(Tree.Node node){
         if(node.parent.right.data != null && node.parent.left.data != null) {
@@ -97,12 +142,13 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     }
     @Override
     public HashMap<Integer, Match> generateScheldule(ArrayList<ArrayList<Player>> playersLists, ArrayList<Location> locationsList, Date startDate) {
-        return createSchedule(this.matchHashMap,this.child);
+        init(playersLists,locationsList,startDate);
+        return this.matchHashMap;
     }
 
     @Override
     public TypeScheme getGeneratorType() {
-        return null;
+        return TypeScheme.OLYMPIC;
     }
 
     @Override
