@@ -104,7 +104,9 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     public TypeScheme getGeneratorType() {
         return null;
     }
-    public HashMap<Integer, Match> update(HashMap<Integer, Match> matchHashMap){
+
+    @Override
+    public HashMap<Integer, Match> updateScheldule(HashMap<Integer, Match> matchHashMap){
         return createSchedule(matchHashMap,this.child);
     }
 
