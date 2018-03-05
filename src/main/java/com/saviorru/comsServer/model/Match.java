@@ -6,13 +6,12 @@ import java.util.Date;
 public interface Match {
 
     Date getDate();
-    Double getResultFirstSide();
-    Double getResultSecondSide();
-    void setResultFirstSide(Double resultFirstSide);
-    void setResultSecondSide(Double resultSecondSide);
-    ArrayList<Player> getWinner() ;
+    Player getWinner() throws Exception;
     void setStateMatch(StateMatch stateMatch);
-    StateMatch getStateMatch();
-    ArrayList<Player> getFirstSide();
-    ArrayList<Player> getSecondSide();
+    boolean isPlayed();
+    Player getFirstPlayer();
+    Player getSecondPlayer();
+    int getPointsFirstSide();
+    int getPointsSecondSide();
+    void setPoints(int pointsFirstSide,int pointsSecondSide);
 }
