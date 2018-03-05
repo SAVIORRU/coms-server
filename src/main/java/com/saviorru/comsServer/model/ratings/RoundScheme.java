@@ -1,6 +1,9 @@
 package com.saviorru.comsServer.model.ratings;
 
-import com.saviorru.comsServer.model.*;
+import com.saviorru.comsServer.model.Match;
+import com.saviorru.comsServer.model.Player;
+import com.saviorru.comsServer.model.TournamentRating;
+import com.saviorru.comsServer.model.TypeScheme;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +39,13 @@ public class RoundScheme implements TournamentRating {
                                                                             ArrayList<Match> matchesList) {
         for (Match match: matchesList)
         {
-            if (match.getStateMatch() == StateMatch.PLAYED) {
-                ArrayList<Player> playersList = match.getWinner();
+            if (match.isPlayed()) {
+                ArrayList<Player> playersList = null;
+                try {
+                    //playersList = match.getWinner();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 ArrayList<Integer> rating = ratingTable.get(playersList);
                 for (int i = 0; i < ratingValuesCount; i++ )
                 {

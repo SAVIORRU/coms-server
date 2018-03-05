@@ -1,6 +1,5 @@
 package com.saviorru.comsServer.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public interface Match {

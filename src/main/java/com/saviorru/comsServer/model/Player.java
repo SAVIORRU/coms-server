@@ -13,12 +13,16 @@ public class Player {
 
     private LocalDate birthDate;
 
-    public Player(String firstName, String lastName, LocalDate birthDate){
+    public Player(String firstName, String lastName, LocalDate birthDate) throws Exception {
+        if (firstName == null || lastName == null || birthDate == null )throw new NullPointerException();
+        if(firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
-    public Player(String firstName, String lastName, Optional<String> patronymicName, LocalDate birthDate){
+    public Player(String firstName, String lastName, Optional<String> patronymicName, LocalDate birthDate) throws Exception {
+        if (firstName == null || lastName == null || birthDate == null) throw new NullPointerException();
+        if(firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymicName = patronymicName;
@@ -37,8 +41,8 @@ public class Player {
         return patronymicName.orElse(" ");
     }
 
-    private int calculateAge(LocalDate birthdate){
-        return Period.between(birthdate,LocalDate.now()).getYears();
+    private int calculateAge(LocalDate birthDate){
+        return Period.between(birthDate,LocalDate.now()).getYears();
     }
 
     public int getAge() {

@@ -1,6 +1,5 @@
 package com.saviorru.comsServer.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class OneOnOneMatch implements Match {
@@ -63,7 +62,7 @@ public class OneOnOneMatch implements Match {
     @Override
     public void setPoints(int pointsFirstSide, int pointsSecondSide) {
         try {
-            this.points.setPoints(pointsFirstSide, pointsSecondSide);
+           if(!isPlayed()) this.points.setPoints(pointsFirstSide, pointsSecondSide);
         } catch (Exception e) {
             e.printStackTrace();
         }

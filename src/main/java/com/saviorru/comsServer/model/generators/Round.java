@@ -49,9 +49,9 @@ public class Round implements SchelduleGenerator {
                 currentDate.set(Calendar.HOUR_OF_DAY, allowedTimeStart);
                 currentDate.set(Calendar.MINUTE, 0);
             }
-            Match match = new OneOnOneMatch(playersLists.get(meet.get(0)), playersLists.get(meet.get(1)),
-                    locationsList.get(locationIndex), currentDate.getTime());
-            matchesList.add(match);
+//            Match match = new OneOnOneMatch(playersLists.get(meet.get(0)), playersLists.get(meet.get(1)),
+//                    locationsList.get(locationIndex), currentDate.getTime());
+           // matchesList.add(match);
             locationIndex += 1;
         }
         for (int i = 0; i < matchesList.size(); i++)

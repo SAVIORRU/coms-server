@@ -3,7 +3,6 @@ package com.saviorru.comsServer.model.tournaments;
 import com.saviorru.comsServer.model.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class TennisTournament implements Tournament {

@@ -1,7 +1,5 @@
 package com.saviorru.comsServer.model;
 
-import com.saviorru.comsServer.model.Player;
-
 import java.util.ArrayList;
 
 public class Tree {

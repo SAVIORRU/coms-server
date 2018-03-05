@@ -1,7 +1,5 @@
 package com.saviorru.comsServer.model;
 
-import java.util.HashMap;
-
 public class User {
 
     private Integer id;
