@@ -1,5 +1,6 @@
 package com.saviorru.comsServer.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OneOnOneMatch implements Match {
@@ -10,8 +11,9 @@ public class OneOnOneMatch implements Match {
     private StateMatch stateMatch = StateMatch.NOTPLAYED;
     private Location location;
 
-    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, Date date) {
-        if (firstSide == null || secondSide == null || location == null) throw new NullPointerException();
+    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDate date) {
+        if (firstSide == null || secondSide == null || location == null || date == null)
+            throw new NullPointerException();
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.location = location;
@@ -56,15 +58,15 @@ public class OneOnOneMatch implements Match {
 
     @Override
     public int getPointsSecondSide() {
-        return this.getPointsSecondSide();
+        return this.points.getPointsSecondSide();
     }
 
     @Override
     public void setPoints(int pointsFirstSide, int pointsSecondSide) {
         try {
-           if(!isPlayed()) this.points.setPoints(pointsFirstSide, pointsSecondSide);
+            if (!isPlayed()) this.points.setPoints(pointsFirstSide, pointsSecondSide);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 

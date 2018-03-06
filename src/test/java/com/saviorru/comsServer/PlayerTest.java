@@ -1,6 +1,7 @@
 package com.saviorru.comsServer;
 
 import com.saviorru.comsServer.model.Player;
+import com.sun.org.apache.xalan.internal.lib.ExsltBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -8,9 +9,12 @@ import org.junit.runners.Parameterized;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 
-import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
+
+
 
 @RunWith(Parameterized.class)
 public class PlayerTest {
@@ -39,11 +43,16 @@ public class PlayerTest {
     }
 
     @Test
-    public void testInitializingClassFieldGetExseption() {
+    public void testInitializingClassField() {
+        boolean flagInit = true;
         try {
-            new Player(firstName, lastName, birthDate);
+           Player player = new Player(firstName, lastName, birthDate);
+           flagInit = false;
         } catch (Exception e) {
+            assertTrue(flagInit);
+            return;
         }
+        assertFalse(flagInit);
     }
 
 

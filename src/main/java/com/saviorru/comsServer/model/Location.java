@@ -4,7 +4,7 @@ public class Location<T> {
 
     private T locationGamePlace;
 
-    Location(T locationGamePlace){
+    public Location(T locationGamePlace){
         this.locationGamePlace = locationGamePlace;
     }
 
