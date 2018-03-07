@@ -9,20 +9,21 @@ public class Player {
 
     private String firstName;
     private String lastName;
-    private Optional<String> patronymicName;
+    private String patronymicName;
 
     private LocalDate birthDate;
 
     public Player(String firstName, String lastName, LocalDate birthDate) throws Exception {
-        if (firstName == null || lastName == null || birthDate == null )throw new NullPointerException();
-        if(firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
+        if (firstName == null || lastName == null || birthDate == null) throw new NullPointerException();
+        if (firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
-    public Player(String firstName, String lastName, Optional<String> patronymicName, LocalDate birthDate) throws Exception {
+
+    public Player(String firstName, String lastName, String patronymicName, LocalDate birthDate) throws Exception {
         if (firstName == null || lastName == null || birthDate == null) throw new NullPointerException();
-        if(firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
+        if (firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymicName = patronymicName;
@@ -37,12 +38,12 @@ public class Player {
         return lastName;
     }
 
-    public  String getPatronymicName() {
-        return patronymicName.orElse(" ");
+    public String getPatronymicName() {
+        return (patronymicName == null) ? "" : patronymicName;
     }
 
-    private int calculateAge(LocalDate birthDate){
-        return Period.between(birthDate,LocalDate.now()).getYears();
+    private int calculateAge(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     public int getAge() {

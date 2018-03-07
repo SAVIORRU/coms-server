@@ -16,54 +16,30 @@ import static junit.framework.TestCase.*;
 
 public class PlayerTest {
 
-    @Test
-    public void testInitializingClassField() {
-        boolean flagInit = true;
-        try {
+    @Test(expected = Exception.class)
+    public void testInitializingClassField()throws Exception {
            Player player = new Player(null, null, null);
-           flagInit = false;
-        } catch (Exception e) {
-            assertTrue(flagInit);
-            return;
-        }
-        assertFalse(flagInit);
     }
 
     @Test
-    public void tesGetFirstNameResultEmptyString(){
-        try {
+    public void tesGetPatronymicNameResultEmptyString() throws Exception{
             Player player = new Player("a","b",null, LocalDate.of(1972,2,1));
             assertEquals("",player.getPatronymicName());
-        } catch (Exception e) {
-
-        }
     }
     @Test
-    public void testGetFirstNameResultNoEmptyString(){
-        try {
-            Player player = new Player("a","b", java.util.Optional.of("c"), LocalDate.of(1972,2,1));
+    public void testGetPatronymicNameResultNoEmptyString() throws Exception{
+            Player player = new Player("a","b", "c", LocalDate.of(1972,2,1));
             assertEquals("c",player.getPatronymicName());
-        } catch (Exception e) {
-
-        }
     }
     @Test
-    public void testGetAgeResult32(){
-        try {
-            Player player = new Player("a","b", java.util.Optional.of("c"), LocalDate.of(1986,1,1));
+    public void testGetAgeResult32()throws Exception{
+            Player player = new Player("a","b", "c", LocalDate.of(1986,1,1));
             assertEquals(32,player.getAge());
-        } catch (Exception e) {
-
-        }
     }
     @Test
-    public void testGetAgeResult31(){
-        try {
-            Player player = new Player("a","b", java.util.Optional.of("c"), LocalDate.of(1986,4,1));
+    public void testGetAgeResult31()throws Exception{
+            Player player = new Player("a","b", "c", LocalDate.of(1986,4,1));
             assertEquals(31,player.getAge());
-        } catch (Exception e) {
-
-        }
     }
 
 
