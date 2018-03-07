@@ -1,6 +1,13 @@
 package com.saviorru.comsserver.model.ratings;
 
+<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
 import com.saviorru.comsserver.model.*;
+=======
+import com.saviorru.comsserver.model.Match;
+import com.saviorru.comsserver.model.Player;
+import com.saviorru.comsserver.model.TournamentRating;
+import com.saviorru.comsserver.model.TypeScheme;
+>>>>>>> feature/refactor_match_player:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +43,13 @@ public class RoundScheme implements TournamentRating {
                                                                             ArrayList<Match> matchesList) {
         for (Match match: matchesList)
         {
-            if (match.getStateMatch() == StateMatch.PLAYED) {
-                ArrayList<Player> playersList = match.getWinner();
+            if (match.isPlayed()) {
+                ArrayList<Player> playersList = null;
+                try {
+                    //playersList = match.getWinner();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 ArrayList<Integer> rating = ratingTable.get(playersList);
                 for (int i = 0; i < ratingValuesCount; i++ )
                 {

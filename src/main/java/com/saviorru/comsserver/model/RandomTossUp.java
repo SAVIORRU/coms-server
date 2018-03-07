@@ -38,7 +38,7 @@ public class RandomTossUp implements TossUp {
                 a.add(this.players.get(element1));
                 ArrayList<Player> b = new ArrayList<Player>();
                 b.add(this.players.get(element2));
-                match = new OneOnOneMatch(a,b,locationArrayList.get(table),startDate);
+               // match = new OneOnOneMatch(a,b,locationArrayList.get(table),startDate);
                 matches.put(table,match);
                 table++;
                 size -= 2 ;
@@ -49,7 +49,7 @@ public class RandomTossUp implements TossUp {
         if(this.players.size() == 1){
             ArrayList<Player> firstSide = new ArrayList<Player>();
             firstSide.add(this.players.get(0));
-            match = new OneOnOneMatch(firstSide,null,this.locationArrayList.get(this.locationArrayList.size()-1),startDate);
+           // match = new OneOnOneMatch(firstSide,null,this.locationArrayList.get(this.locationArrayList.size()-1),startDate);
         }
         return matches;
     }

@@ -1,5 +1,9 @@
 package com.saviorru.comsserver.model.generators;
 
+<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
+=======
+import com.saviorru.comsserver.model.Tree;
+>>>>>>> feature/refactor_match_player:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
 import com.saviorru.comsserver.model.*;
 
 import java.util.ArrayList;
@@ -87,10 +91,10 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     private HashMap<Integer,Match> createSchedule(HashMap<Integer,Match> matchHashMap,ArrayList<Tree.Node> parents){
         int  countPLayedMatch = 0;
         for(int i =  matchHashMap.size()-1 ;i >= 0 ; i-- ) {
-            if (matchHashMap.get(i).getStateMatch() == StateMatch.PLAYED){
-                countPLayedMatch++;
-                addInSceme(parents,matchHashMap.get(i).getWinner());
-            }
+//            if (matchHashMap.get(i).getStateMatch() == StateMatch.PLAYED){
+//                countPLayedMatch++;
+//                addInSceme(parents,matchHashMap.get(i).getWinner());
+//            }
         }
         if(countPLayedMatch == this.matchHashMap.size() && parents.size() > 1)  {
             createSchedule(this.matchHashMap,initParents(parents));
@@ -124,14 +128,14 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     }
     private boolean noClone(Match match){
         for(int i = 0; i < this.matchHashMap.size() ; i++){
-            if (match.getFirstSide() == this.matchHashMap.get(i).getFirstSide() && match.getSecondSide() == this.matchHashMap.get(i).getSecondSide()
-                                                                                || match.getFirstSide() == match.getSecondSide()) return false;
-            if(match.getFirstSide() ==  this.matchHashMap.get(i).getSecondSide() && match.getSecondSide() == this.matchHashMap.get(i).getFirstSide()) return false;
+//            if (match.getFirstSide() == this.matchHashMap.get(i).getFirstSide() && match.getSecondSide() == this.matchHashMap.get(i).getSecondSide()
+//                                                                                || match.getFirstSide() == match.getSecondSide()) return false;
+//            if(match.getFirstSide() ==  this.matchHashMap.get(i).getSecondSide() && match.getSecondSide() == this.matchHashMap.get(i).getFirstSide()) return false;
         }
         return true;
     }
     private Match createNewMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide){
-        return new OneOnOneMatch(firstSide,secondSide,null,new Date());
+        return null; //new OneOnOneMatch(firstSide,secondSide,null,new Date());
     }
     private Tree.Node finedTour(Tree.Node node){
         if(node.parent.right.data != null && node.parent.left.data != null) {

@@ -1,52 +1,15 @@
 package com.saviorru.comsserver.model;
 
-public class Location {
+public class Location<T> {
 
-    private String place;
-    private String description;
+    private T locationGamePlace;
 
-    private Boolean isBusy;
-
-
-    public Location(String place, String description) throws Exception {
-        if ((place == null) || (place.isEmpty()))
-        {
-            throw new Exception("Place string cannot be empty or null");
-        }
-        if (description == null)
-        {
-            throw  new Exception("Description string cannot be null");
-        }
-        this.place = place;
-        this.description = description;
-        this.isBusy = true;
+    public Location(T locationGamePlace){
+        this.locationGamePlace = locationGamePlace;
     }
 
-    public String getPlace() {
-        return place;
-    }
+    T getLocationGamePlace(){
+        return locationGamePlace;
+    };
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Boolean isBusy() {
-        return isBusy;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Location location = (Location) o;
-
-        return getPlace().equals(location.getPlace());
-    }
-
-    public void setBusy(Boolean busy) throws Exception {
-        if (busy == null)
-            throw new Exception("Method's argument cannot be null");
-        isBusy = busy;
-    }
 }
