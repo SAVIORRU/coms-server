@@ -1,6 +1,4 @@
-package com.saviorru.comsServer.model;
-
-import com.saviorru.comsServer.model.Player;
+package com.saviorru.comsserver.model;
 
 import java.util.ArrayList;
 

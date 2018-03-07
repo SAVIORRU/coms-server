@@ -1,6 +1,4 @@
-package com.saviorru.comsServer.model;
-
-import java.util.HashMap;
+package com.saviorru.comsserver.model;
 
 public class User {
 

@@ -1,7 +1,6 @@
-package com.saviorru.comsServer.model;
+package com.saviorru.comsserver.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public interface Tournament {

@@ -1,6 +1,6 @@
-package com.saviorru.comsServer.model.ratings;
+package com.saviorru.comsserver.model.ratings;
 
-import com.saviorru.comsServer.model.*;
+import com.saviorru.comsserver.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
