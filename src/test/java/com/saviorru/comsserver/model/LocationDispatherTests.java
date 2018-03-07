@@ -60,9 +60,154 @@ public class LocationDispatherTests {
         testSubject.removeLocation(mock);
     }
     @Test()
-    public void dispatherRemoveByPlaceTest()
+    public void dispatherRemoveByPlaceTest() throws  Exception
     {
         String testString = "1";
-        
+        Location testLoc = new Location(testString, "");
+        Location testLocMock1 = mock(Location.class);
+        Location testLocMock2 = mock(Location.class);
+        when(testLocMock1.getPlace()).thenReturn("2");
+        when(testLocMock2.getPlace()).thenReturn("3");
+        testSubject.addLocation(testLoc);
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.removeLocationByPlace(testString);
+        assertEquals(2, testSubject.getAllLocations().size());
+    }
+    @Test(expected = Exception.class)
+    public void dispatherRemoveByPlaceExceptionTest() throws Exception
+    {
+        Location testLocMock1 = mock(Location.class);
+        Location testLocMock2 = mock(Location.class);
+        when(testLocMock1.getPlace()).thenReturn("2");
+        when(testLocMock2.getPlace()).thenReturn("3");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.removeLocationByPlace("1");
+    }
+    @Test()
+    public void dispatherGetFreeTest() throws Exception
+    {
+        Location testLocMock1 = mock(Location.class);
+        Location testLocMock2 = mock(Location.class);
+        when(testLocMock1.isBusy()).thenReturn(false);
+        when(testLocMock2.isBusy()).thenReturn(true);
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        assertFalse(testSubject.getFreeLocation().isBusy());
+
+    }
+    @Test()
+    public void dispatherGetNoFreeTest() throws Exception
+    {
+        Location testLocMock1 = mock(Location.class);
+        Location testLocMock2 = mock(Location.class);
+        when(testLocMock1.isBusy()).thenReturn(true);
+        when(testLocMock2.isBusy()).thenReturn(true);
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        assertEquals(null, testSubject.getFreeLocation());
+    }
+    @Test()
+    public void dispatherGetAllFreeTest() throws Exception
+    {
+        Location testLocMock1 = mock(Location.class);
+        Location testLocMock2 = mock(Location.class);
+        when(testLocMock1.isBusy()).thenReturn(false);
+        when(testLocMock2.isBusy()).thenReturn(false);
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        assertEquals(2, testSubject.getAllFreeLocations().size());
+    }
+    @Test()
+    public void dispatherReserveTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocation(testLocMock1);
+        testSubject.reserveLocation(testLocMock2);
+        assertEquals(0, testSubject.getAllFreeLocations().size());
+    }
+    @Test(expected = Exception.class)
+    public void dispatherReserveExceptionTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocation(testLocMock1);
+        testSubject.reserveLocation(testLocMock1);
+    }
+    @Test()
+    public void dispatherReserveByPlaceTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        testSubject.reserveLocationByPlace("2");
+        assertEquals(0, testSubject.getAllFreeLocations().size());
+    }
+    @Test(expected = Exception.class)
+    public void dispatherReserveByPlaceExcTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        testSubject.reserveLocationByPlace("1");
+        assertEquals(0, testSubject.getAllFreeLocations().size());
+    }
+    @Test()
+    public void dispatherFreeLocTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        testSubject.reserveLocationByPlace("2");
+        testSubject.freeLocation(testLocMock1);
+        assertEquals(1, testSubject.getAllFreeLocations().size());
+    }
+    @Test(expected = Exception.class)
+    public void dispatherFreeLocExcTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        //testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        testSubject.reserveLocationByPlace("2");
+        testSubject.freeLocation(testLocMock2);
+        //assertEquals(1, testSubject.getAllFreeLocations().size());
+    }
+    @Test()
+    public void dispatherFreeLocByPlaceTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        testSubject.reserveLocationByPlace("2");
+        testSubject.freeLocationByPlace("1");
+        assertEquals(1, testSubject.getAllFreeLocations().size());
+    }
+    @Test(expected = Exception.class)
+    public void dispatherFreeLocByPlaceExcTest() throws Exception
+    {
+        Location testLocMock1 = new Location("1", "");
+        Location testLocMock2 = new Location("2", "");
+        testSubject.addLocation(testLocMock1);
+        //testSubject.addLocation(testLocMock2);
+        testSubject.reserveLocationByPlace("1");
+        //testSubject.reserveLocationByPlace("2");
+        testSubject.freeLocationByPlace("2");
+        //assertEquals(1, testSubject.getAllFreeLocations().size());
     }
 }

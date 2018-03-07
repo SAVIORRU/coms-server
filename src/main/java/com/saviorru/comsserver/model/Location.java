@@ -19,7 +19,7 @@ public class Location {
         }
         this.place = place;
         this.description = description;
-        this.isBusy = true;
+        this.isBusy = false;
     }
 
     public String getPlace() {
