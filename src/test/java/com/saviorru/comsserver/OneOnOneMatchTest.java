@@ -34,7 +34,7 @@ public class OneOnOneMatchTest {
     public void initialize() throws Exception {
         testPlayer1 = new Player("a", "b", LocalDate.now());
         testPlayer2 = new Player("c", "b", LocalDate.now());
-        match = new OneOnOneMatch(testPlayer1, testPlayer2, new Location(1), LocalDate.now());
+        match = new OneOnOneMatch(testPlayer1, testPlayer2, new Location("1", ""), LocalDate.now());
     }
 
     @Test

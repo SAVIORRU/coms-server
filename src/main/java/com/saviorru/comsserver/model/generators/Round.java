@@ -1,14 +1,7 @@
 package com.saviorru.comsserver.model.generators;
-<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/Round.java
-<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/Round.java
-=======
 
 import com.saviorru.comsserver.model.*;
->>>>>>> feature/refactor_match_player:src/main/java/com/saviorru/comsserver/model/generators/Round.java
-=======
->>>>>>> feature/location:src/main/java/com/saviorru/comsserver/model/generators/Round.java
 
-import com.saviorru.comsserver.model.*;
 
 import java.util.*;
 

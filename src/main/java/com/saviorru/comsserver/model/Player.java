@@ -1,5 +1,7 @@
 package com.saviorru.comsserver.model;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 
 
@@ -7,20 +9,25 @@ public class Player {
 
     private String firstName;
     private String lastName;
-    private Optional<String> patronymicName;
+    private String patronymicName;
 
-    private Integer age;
+    private LocalDate birthDate;
 
-    public Player(String firstName, String lastName, Integer age){
+    public Player(String firstName, String lastName, LocalDate birthDate) throws Exception {
+        if (firstName == null || lastName == null || birthDate == null) throw new NullPointerException();
+        if (firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.birthDate = birthDate;
     }
-    Player(String firstName, String lastName, Optional<String> patronymicName, Integer age){
+
+    public Player(String firstName, String lastName, String patronymicName, LocalDate birthDate) throws Exception {
+        if (firstName == null || lastName == null || birthDate == null) throw new NullPointerException();
+        if (firstName == "" || lastName == "") throw new Exception("Name of surname can't be empty");
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymicName = patronymicName;
-        this.age = age;
+        this.birthDate = birthDate;
     }
 
     public String getFirstName() {
@@ -31,12 +38,15 @@ public class Player {
         return lastName;
     }
 
-    public  String getPatronymicName() {
-        return patronymicName.orElse(" ");
-        //(patronymicName != null) ? patronymicName:" ";
+    public String getPatronymicName() {
+        return (patronymicName == null) ? "" : patronymicName;
     }
 
-    public Integer getAge() {
-        return age;
+    private int calculateAge(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    public int getAge() {
+        return calculateAge(this.birthDate);
     }
 }
