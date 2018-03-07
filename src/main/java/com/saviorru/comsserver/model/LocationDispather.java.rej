@@ -1,0 +1,9 @@
+diff a/src/main/java/com/saviorru/comsserver/model/LocationDispather.java b/src/main/java/com/saviorru/comsserver/model/LocationDispather.java	(rejected hunks)
+@@ -132,7 +132,6 @@
+         {
+             if (location.getPlace().equals(locationPlace))
+             {
+-                if (!(location.isBusy()))
+                     location.setBusy(false);
+                     return;
+             }

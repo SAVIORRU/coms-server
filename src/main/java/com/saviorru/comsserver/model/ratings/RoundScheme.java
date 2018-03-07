@@ -1,6 +1,7 @@
 package com.saviorru.comsserver.model.ratings;
 
 <<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
+<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
 import com.saviorru.comsserver.model.*;
 =======
 import com.saviorru.comsserver.model.Match;
@@ -8,6 +9,9 @@ import com.saviorru.comsserver.model.Player;
 import com.saviorru.comsserver.model.TournamentRating;
 import com.saviorru.comsserver.model.TypeScheme;
 >>>>>>> feature/refactor_match_player:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
+=======
+import com.saviorru.comsserver.model.*;
+>>>>>>> feature/location:src/main/java/com/saviorru/comsserver/model/ratings/RoundScheme.java
 
 import java.util.ArrayList;
 import java.util.HashMap;

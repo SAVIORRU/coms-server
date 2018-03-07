@@ -1,9 +1,12 @@
 package com.saviorru.comsserver.model.generators;
 
 <<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
+<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
 =======
 import com.saviorru.comsserver.model.Tree;
 >>>>>>> feature/refactor_match_player:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
+=======
+>>>>>>> feature/location:src/main/java/com/saviorru/comsserver/model/generators/OlympicSchelduleGenerator.java
 import com.saviorru.comsserver.model.*;
 
 import java.util.ArrayList;
