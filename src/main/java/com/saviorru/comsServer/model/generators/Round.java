@@ -1,7 +1,6 @@
-package com.saviorru.comsServer.model.generators;
+package com.saviorru.comsserver.model.generators;
 
-import com.saviorru.comsServer.model.*;
-
+import com.saviorru.comsserver.model.*;
 
 import java.util.*;
 
