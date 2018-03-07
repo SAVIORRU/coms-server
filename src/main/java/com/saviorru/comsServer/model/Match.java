@@ -1,16 +1,17 @@
 package com.saviorru.comsServer.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public interface Match {
 
-    Date getDate();
+    LocalDate getDate();
     Player getWinner() throws Exception;
     void setStateMatch(StateMatch stateMatch);
     boolean isPlayed();
-    Player getFirstPlayer();
-    Player getSecondPlayer();
+    Player getFirstSide();
+    Player getSecondSide();
     int getPointsFirstSide();
     int getPointsSecondSide();
     void setPoints(int pointsFirstSide,int pointsSecondSide);
+
 }

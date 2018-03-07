@@ -1,11 +1,10 @@
 package com.saviorru.comsServer.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class OneOnOneMatch implements Match {
 
-    private Date date;
+    private LocalDate date;
     private Points points;
     private Player firstSide, secondSide;
     private StateMatch stateMatch = StateMatch.NOTPLAYED;
@@ -18,10 +17,11 @@ public class OneOnOneMatch implements Match {
         this.secondSide = secondSide;
         this.location = location;
         this.points = new Points();
+        this.date = date;
     }
 
     @Override
-    public Date getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
@@ -42,12 +42,12 @@ public class OneOnOneMatch implements Match {
     }
 
     @Override
-    public Player getFirstPlayer() {
+    public Player getFirstSide() {
         return this.firstSide;
     }
 
     @Override
-    public Player getSecondPlayer() {
+    public Player getSecondSide() {
         return this.secondSide;
     }
 
