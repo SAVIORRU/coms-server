@@ -1,4 +1,4 @@
-package com.saviorru.comsServer;
+package com.saviorru.comsserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

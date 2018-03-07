@@ -1,4 +1,4 @@
-package com.saviorru.comsServer.model;
+package com.saviorru.comsserver.model;
 
 import java.time.LocalDate;
 import java.time.Period;

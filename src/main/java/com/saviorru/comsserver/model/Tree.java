@@ -1,4 +1,4 @@
-package com.saviorru.comsServer.model;
+package com.saviorru.comsserver.model;
 
 import java.util.ArrayList;
 

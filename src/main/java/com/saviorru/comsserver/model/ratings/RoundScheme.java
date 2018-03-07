@@ -1,9 +1,9 @@
-package com.saviorru.comsServer.model.ratings;
+package com.saviorru.comsserver.model.ratings;
 
-import com.saviorru.comsServer.model.Match;
-import com.saviorru.comsServer.model.Player;
-import com.saviorru.comsServer.model.TournamentRating;
-import com.saviorru.comsServer.model.TypeScheme;
+import com.saviorru.comsserver.model.Match;
+import com.saviorru.comsserver.model.Player;
+import com.saviorru.comsserver.model.TournamentRating;
+import com.saviorru.comsserver.model.TypeScheme;
 
 import java.util.ArrayList;
 import java.util.HashMap;

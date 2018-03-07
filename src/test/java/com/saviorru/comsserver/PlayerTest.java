@@ -1,6 +1,6 @@
-package com.saviorru.comsServer;
+package com.saviorru.comsserver;
 
-import com.saviorru.comsServer.model.Player;
+import com.saviorru.comsserver.model.Player;
 
 import org.junit.Test;
 

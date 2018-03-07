@@ -1,6 +1,6 @@
-package com.saviorru.comsServer.model.tournaments;
+package com.saviorru.comsserver.model.tournaments;
 
-import com.saviorru.comsServer.model.*;
+import com.saviorru.comsserver.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

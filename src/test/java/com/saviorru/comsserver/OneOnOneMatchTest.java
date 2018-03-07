@@ -1,10 +1,9 @@
-package com.saviorru.comsServer;
+package com.saviorru.comsserver;
 
-import com.saviorru.comsServer.model.*;
+import com.saviorru.comsserver.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import static junit.framework.TestCase.assertEquals;
@@ -51,8 +50,8 @@ public class OneOnOneMatchTest {
     }
     @Test
     public void testGetWinnerResultFirstSidePlayers() {
-            match.setPoints(11,10);
         try {
+            match.setPoints(11,10);
             assertEquals(testPlayer1,match.getWinner());
         } catch (Exception e) {
             e.printStackTrace();
