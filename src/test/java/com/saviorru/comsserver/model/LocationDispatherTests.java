@@ -8,12 +8,13 @@ import static org.mockito.Mockito.*;
 import static junit.framework.TestCase.*;
 
 public class LocationDispatherTests {
-    private LocationDispather testObject;
+    private LocationDispather testSubject;
+
 
     @Before
     public void testInit()
     {
-        testObject = new LocationDispather();
+        testSubject = new LocationDispather();
     }
 
 
@@ -22,8 +23,8 @@ public class LocationDispatherTests {
     {
         Location testLockMock = mock(Location.class);
         try {
-            testObject.addLocation(testLockMock);
-            assertEquals(1, testObject.getAllLocations().size());
+            testSubject.addLocation(testLockMock);
+            assertEquals(1, testSubject.getAllLocations().size());
         }
         catch (Exception e) {}
     }
@@ -31,32 +32,37 @@ public class LocationDispatherTests {
     public void dispatherAddExceptionTest() throws Exception
     {
         Location testLockMock = mock(Location.class);
-        testObject.addLocation(testLockMock);
-        testObject.addLocation(testLockMock);
+        testSubject.addLocation(testLockMock);
+        testSubject.addLocation(testLockMock);
     }
     @Test(expected = Exception.class)
     public void dispatherAddExceptionByPlaceTest() throws Exception
     {
         Location testLoc1 = new Location("1", "");
         Location testLoc2 = new Location("1", "");
-        testObject.addLocation(testLoc1);
-        testObject.addLocation(testLoc2);
+        testSubject.addLocation(testLoc1);
+        testSubject.addLocation(testLoc2);
     }
     @Test
     public void dispatherRemoveTest() throws Exception
     {
         Location testMock = mock(Location.class);
-        testObject.addLocation(testMock);
-        testObject.addLocation(mock(Location.class));
-        testObject.removeLocation(testMock);
-        assertEquals(1, testObject.getAllLocations().size());
+        testSubject.addLocation(testMock);
+        testSubject.addLocation(mock(Location.class));
+        testSubject.removeLocation(testMock);
+        assertEquals(1, testSubject.getAllLocations().size());
     }
     @Test(expected = Exception.class)
     public void dispatherRemoveExceptionTest() throws Exception
     {
-        testObject.addLocation(mock(Location.class));
+        testSubject.addLocation(mock(Location.class));
         Location mock = mock(Location.class);
-        testObject.removeLocation(mock);
+        testSubject.removeLocation(mock);
     }
-    //@Test(expected = Exception.class)
+    @Test()
+    public void dispatherRemoveByPlaceTest()
+    {
+        String testString = "1";
+        
+    }
 }

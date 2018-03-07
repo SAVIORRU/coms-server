@@ -44,7 +44,9 @@ public class Location {
         return getPlace().equals(location.getPlace());
     }
 
-    public void setBusy(Boolean busy) {
+    public void setBusy(Boolean busy) throws Exception {
+        if (busy == null)
+            throw new Exception("Method's argument cannot be null");
         isBusy = busy;
     }
 }
