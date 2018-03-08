@@ -1,6 +1,7 @@
 package com.saviorru.comsserver.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class OneOnOneMatch implements Match {
 
@@ -68,6 +69,16 @@ public class OneOnOneMatch implements Match {
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OneOnOneMatch that = (OneOnOneMatch) o;
+        return Objects.equals(date, that.date) &&
+                Objects.equals(firstSide, that.firstSide) &&
+                Objects.equals(secondSide, that.secondSide);
     }
 
 }
