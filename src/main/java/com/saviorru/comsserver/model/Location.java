@@ -7,7 +7,6 @@ public class Location {
 
     private Boolean isBusy;
 
-
     public Location(String place, String description) throws Exception {
         if ((place == null) || (place.isEmpty()))
         {

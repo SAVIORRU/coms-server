@@ -1,5 +1,7 @@
 package com.saviorru.comsserver.model;
 
+import com.sun.org.apache.xalan.internal.lib.ExsltBase;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,9 +13,10 @@ public class OneOnOneMatch implements Match {
     private StateMatch stateMatch = StateMatch.NOTPLAYED;
     private Location location;
 
-    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDate date) {
+    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDate date) throws Exception {
         if (firstSide == null || secondSide == null || location == null || date == null)
             throw new NullPointerException();
+        if(firstSide.equals(secondSide)) throw new Exception("Player can't be for 2 sides simultaneously");
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.location = location;

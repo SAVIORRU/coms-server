@@ -15,6 +15,11 @@ public class OneOnOneMatchTest {
     private Player testPlayer1, testPlayer2;
     private Match match;
 
+    @Test(expected = Exception.class)
+    public void testInitialiaingMatchWithCloneSidesResultNull() throws Exception {
+        new OneOnOneMatch(testPlayer1, testPlayer1, new Location("1","2"), LocalDate.now());
+    }
+
     @Test(expected = NullPointerException.class)
     public void testInitialiaingMatchWithNullParametersResultNull() throws Exception {
         new OneOnOneMatch(null, null, null, null);
