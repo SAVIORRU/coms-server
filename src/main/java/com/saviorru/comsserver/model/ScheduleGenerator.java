@@ -10,6 +10,5 @@ public interface ScheduleGenerator {
 
     List<Match> updateSchedule(List<Match> schedule);
 
-    TypeScheme getGeneratorType();
 
 }

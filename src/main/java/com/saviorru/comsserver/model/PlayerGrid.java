@@ -1,12 +1,12 @@
 package com.saviorru.comsserver.model;
 
-import javafx.util.Pair;
 
-import java.util.List;
+
+import java.util.*;
 
 public interface PlayerGrid {
-    public List<Pair<Player, Player>> getAllMeets();
-    public List<Pair<Player, Player>> getUnassignedMeets();
-    public List<Pair<Player, Player>> getAssignedMeets();
+    public List<Meet> getAllMeets();
+    public List<Meet> getUnassignedMeets();
+    public List<Meet> getAssignedMeets();
     public void assignMeet(Player firstPlayer, Player secondPlayer) throws Exception;
 }
