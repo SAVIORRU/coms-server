@@ -1,20 +1,16 @@
 package com.saviorru.comsserver.model.generators;
 
 import com.saviorru.comsserver.model.*;
-
+import
 
 import java.util.*;
 
-<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/model/generators/Round.java
-public class Round implements ScheduleGenerator {
-=======
-public class RoundSchelduleGenerator implements SchelduleGenerator {
->>>>>>> feature/scheldule:src/main/java/com/saviorru/comsserver/model/generators/RoundSchelduleGenerator.java
+public class RoundScheduleGenerator implements ScheduleGenerator {
 
     private Integer allowedTimeStart = 10; //24-hour
     private Integer allowedTimeEnd = 18; //24-hour
 
-    public RoundSchelduleGenerator(Integer matchDuration, Integer allowedTimeStart, Integer allowedTimeEnd) {
+    public RoundScheduleGenerator(Integer matchDuration, Integer allowedTimeStart, Integer allowedTimeEnd) {
         this.allowedTimeStart = allowedTimeStart;
         this.allowedTimeEnd = allowedTimeEnd;
     }

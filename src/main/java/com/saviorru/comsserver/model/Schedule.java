@@ -3,7 +3,7 @@ package com.saviorru.comsserver.model;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface Scheldule {
+public interface Schedule {
     public List<Match> getAllMatches();
     public List<Match> getMatchesByState(StateMatch state);
     public List<Match> getMatchesByPlayer(Player player);
