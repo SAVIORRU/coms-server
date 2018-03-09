@@ -5,15 +5,12 @@ import com.saviorru.comsserver.model.*;
 
 import java.util.*;
 
-public class Round implements SchelduleGenerator {
+public class RoundSchelduleGenerator implements SchelduleGenerator {
 
-    private TypeScheme type = TypeScheme.ROUND;
-    private Integer matchDuration = 30; //in minutes
     private Integer allowedTimeStart = 10; //24-hour
     private Integer allowedTimeEnd = 18; //24-hour
 
-    public Round(Integer matchDuration, Integer allowedTimeStart, Integer allowedTimeEnd) {
-        this.matchDuration = matchDuration;
+    public RoundSchelduleGenerator(Integer matchDuration, Integer allowedTimeStart, Integer allowedTimeEnd) {
         this.allowedTimeStart = allowedTimeStart;
         this.allowedTimeEnd = allowedTimeEnd;
     }
@@ -66,8 +63,5 @@ public class Round implements SchelduleGenerator {
         return scheldule;
     }
 
-    @Override
-    public TypeScheme getGeneratorType() {
-        return this.type;
-    }
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public interface SchelduleController {
     public void createScheldule(List<Player> players);
     public void updateScheldule();
-    public List<Match> getMatchesByPlayer(Player player, StateMatch state);
+    public List<Match> getMatchesByPlayer(Player player);
     public List<Match> getMatchesByDate(LocalDate date);
     public List<Match> getMatchesByLocation(Location location);
 }

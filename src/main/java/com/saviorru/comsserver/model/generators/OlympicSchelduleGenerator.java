@@ -146,10 +146,6 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         return this.matchHashMap;
     }
 
-    @Override
-    public TypeScheme getGeneratorType() {
-        return TypeScheme.OLYMPIC;
-    }
 
     @Override
     public HashMap<Integer, Match> updateScheldule(HashMap<Integer, Match> matchHashMap){
