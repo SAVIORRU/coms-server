@@ -32,7 +32,7 @@ public class OlympicScheme {
         this.parents = new ArrayList<>();
         this.childrens = new ArrayList<>();
         this.parents.add(this.root);
-        for (int i = 1; i < level; i++) {
+        for (int i = 0; i < level; i++) {
             for (Node parent : this.parents) {
                 parent.leftPlayer = new Node();
                 parent.leftPlayer.nextPositionPlayer = parent;

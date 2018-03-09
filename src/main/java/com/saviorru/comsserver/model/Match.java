@@ -13,5 +13,5 @@ public interface Match {
     int getPointsFirstSide();
     int getPointsSecondSide();
     void setPoints(int pointsFirstSide,int pointsSecondSide);
-
+    Location getLocation();
 }
