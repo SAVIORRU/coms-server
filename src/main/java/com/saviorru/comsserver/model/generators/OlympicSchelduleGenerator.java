@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class OlympicSchelduleGenerator implements SchelduleGenerator {
+public class OlympicSchelduleGenerator implements ScheduleGenerator {
 
     private HashMap<Integer,Match> matchHashMap;
     private ArrayList<ArrayList<Player>> playersLists;

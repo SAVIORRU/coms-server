@@ -5,7 +5,7 @@ import com.saviorru.comsserver.model.*;
 
 import java.util.*;
 
-public class Round implements SchelduleGenerator {
+public class Round implements ScheduleGenerator {
 
     private TypeScheme type = TypeScheme.ROUND;
     private Integer matchDuration = 30; //in minutes

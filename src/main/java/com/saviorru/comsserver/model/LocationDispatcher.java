@@ -3,11 +3,11 @@ package com.saviorru.comsserver.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationDispather {
+public class LocationDispatcher {
     private List<Location> locationsList;
 
 
-    public LocationDispather() {
+    public LocationDispatcher() {
         this.locationsList = new ArrayList<Location>();
     }
 

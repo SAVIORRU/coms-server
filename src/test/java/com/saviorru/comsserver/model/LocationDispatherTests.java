@@ -1,20 +1,18 @@
 package com.saviorru.comsserver.model;
 
-import com.saviorru.comsserver.model.Location;
-import com.saviorru.comsserver.model.LocationDispather;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import static junit.framework.TestCase.*;
 
 public class LocationDispatherTests {
-    private LocationDispather testSubject;
+    private LocationDispatcher testSubject;
 
 
     @Before
     public void testInit()
     {
-        testSubject = new LocationDispather();
+        testSubject = new LocationDispatcher();
     }
 
 
