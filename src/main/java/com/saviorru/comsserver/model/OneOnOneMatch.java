@@ -1,6 +1,5 @@
 package com.saviorru.comsserver.model;
 
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -30,7 +29,7 @@ public class OneOnOneMatch implements Match {
 
     @Override
     public Player getWinner() throws Exception {
-        if (isPlayed()) throw new Exception("Match didn't played");
+        if (!isPlayed()) throw new Exception("Match didn't played");
         return (this.points.getPointsFirstSide() > this.points.getPointsSecondSide()) ? this.firstSide : this.secondSide;
     }
 
@@ -41,7 +40,7 @@ public class OneOnOneMatch implements Match {
 
     @Override
     public boolean isPlayed() {
-        return (StateMatch.PLAYED == this.stateMatch) ? true : false;
+        return StateMatch.PLAYED == this.stateMatch;
     }
 
     @Override
@@ -83,4 +82,7 @@ public class OneOnOneMatch implements Match {
                 Objects.equals(secondSide, that.secondSide);
     }
 
+    public Location getLocation() {
+        return location;
+    }
 }
