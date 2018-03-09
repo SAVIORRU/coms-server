@@ -45,6 +45,13 @@ public class ScheduleImpl implements Schedule {
     }
 
     @Override
+    public void addMatches(List<Match> matches) throws Exception {
+        if(matches == null) throw new NullPointerException();
+        if(matches.isEmpty()) throw new Exception("List is empty");
+        matchesList.addAll(matches);
+    }
+
+    @Override
     public List<Match> getMatchesByState(MatchState state) throws Exception {
         if (state == null) throw new NullPointerException();
         List<Match> returnList = new ArrayList<Match>();

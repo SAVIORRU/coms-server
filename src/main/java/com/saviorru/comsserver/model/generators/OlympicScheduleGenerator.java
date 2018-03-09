@@ -3,30 +3,27 @@ package com.saviorru.comsserver.model.generators;
 import com.saviorru.comsserver.model.OlympicScheme;
 import com.saviorru.comsserver.model.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-public class OlympicSchelduleGenerator implements ScheduleGenerator {
+public class OlympicScheduleGenerator implements ScheduleGenerator {
 
     private List<Match> matchList;
     private List<Player> playersLists;
-    private LocalDate dateBegin;
+    private DateDispatcher dateDispatcher;
     private LocationDispatcher locationDispatcher;
     private OlympicScheme olympicScheme;
     private Integer countPlayers;
     private List<OlympicScheme.Node> child, parents = new ArrayList<>();
 
-    public OlympicSchelduleGenerator() {
+    public OlympicScheduleGenerator() {
     }
 
-    private void init(List<Player> playersLists, LocationDispatcher locationDispatcher, LocalDate startDate) {
+    private void init(List<Player> playersLists, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher) {
         this.playersLists = playersLists;
         this.matchList = new ArrayList<>();
-        this.dateBegin = startDate;
+        this.dateDispatcher = dateDispatcher;
         this.locationDispatcher = locationDispatcher;
         this.countPlayers = playersLists.size();
         this.olympicScheme = new OlympicScheme(countTour(this.countPlayers));
@@ -112,18 +109,18 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
     }
 
     private List<Match> createSchedule(List<Match> matches, List<OlympicScheme.Node> parents) {
-        int countPLayedMatch = 0;
+        int countPlayedMatch = 0;
         for (int i = matches.size() - 1; i >= 0; i--) {
             if (matchList.get(i).isPlayed()) {
-                countPLayedMatch++;
+                countPlayedMatch++;
                 try {
-                    addInSceme(parents, matchList.get(i).getWinner());
+                    addInScheme(parents, matchList.get(i).getWinner());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        if (countPLayedMatch == this.matchList.size() && parents.size() > 1) {
+        if (countPlayedMatch == this.matchList.size() && parents.size() > 1) {
             createSchedule(this.matchList, initParents(parents));
         }
         return this.matchList;
@@ -137,7 +134,7 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
         return arrayList;
     }
 
-    private boolean addInSceme(List<OlympicScheme.Node> child, Player winner) {
+    private boolean addInScheme(List<OlympicScheme.Node> child, Player winner) {
         OlympicScheme.Node node;
         for (int i = 0; i < child.size(); i++) {
             if (child.get(i).data == winner) {
@@ -175,7 +172,7 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
     private Match createNewMatch(Player firstSide, Player secondSide) throws Exception {
         Location newLocation = locationDispatcher.getFreeLocation();
         locationDispatcher.reserveLocation(newLocation);
-        return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDateTime.now());
+        return new OneOnOneMatch(firstSide, secondSide, newLocation, dateDispatcher.getNextDate());
     }
 
     private OlympicScheme.Node finedTour(OlympicScheme.Node node) {
@@ -187,8 +184,8 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
 
 
     @Override
-    public List<Match> generateSchedule(List<Player> playersLists, LocationDispatcher locationDispatcher, LocalDate startDate) {
-        init(playersLists, locationDispatcher, startDate);
+    public List<Match> generateSchedule(List<Player> playersLists, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher) {
+        init(playersLists, locationDispatcher, dateDispatcher);
         return this.matchList;
     }
 

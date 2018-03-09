@@ -14,7 +14,7 @@ public class OneOnOneMatch implements Match {
     public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDateTime date) throws Exception {
         if (firstSide == null || secondSide == null || location == null || date == null)
             throw new NullPointerException();
-        if (firstSide.equals(secondSide)) throw new Exception("Player can't be for 2 sides simultaneously");
+        if(firstSide.equals(secondSide)) throw new Exception("Player can't be for 2 sides simultaneously");
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.location = location;
@@ -81,9 +81,9 @@ public class OneOnOneMatch implements Match {
                 Objects.equals(firstSide, that.firstSide) &&
                 Objects.equals(secondSide, that.secondSide) ||
                 (Objects.equals(firstSide, that.secondSide) &&
-                        Objects.equals(secondSide, that.firstSide));
+                Objects.equals(secondSide, that.firstSide));
     }
-
+    @Override
     public Location getLocation() {
         return location;
     }

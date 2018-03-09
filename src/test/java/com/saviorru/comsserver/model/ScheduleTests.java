@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -15,12 +16,13 @@ public class ScheduleTests {
     private Player testPlayer;
     private Location testLocation;
     private LocalDate testDate;
+    private List<Match> testList;
 
     @Before
     public void initTest() throws Exception
     {
 
-        List<Match> testList = new ArrayList<>();
+        testList = new ArrayList<>();
 
         testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,2,1,1)));
         testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,3,1,1)));
@@ -97,6 +99,20 @@ public class ScheduleTests {
         testResult.setPoints(1, 0);
         testSubject.finishMatch(testMatch, testResult);
         testSubject.finishMatch(mock(Match.class), testResult);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddMatchesWithNullParamResultNullPointerException()throws Exception{
+       testSubject.addMatches(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void testAddMatchesParamEmptyListResultException()throws Exception{
+        testSubject.addMatches(new ArrayList<>());
+    }
+    @Test
+    public void testAddMatches()throws Exception{
+        testSubject.addMatches(testList);
     }
 
 }

@@ -3,14 +3,14 @@ package com.saviorru.comsserver.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class DateDispather {
+public class DateDispatcher {
 
     private LocalDateTime startDate;
     private Integer allowedHourStart;
     private Integer allowedHourEnd;
     private Integer dateHourOffset;
 
-    public DateDispather(LocalDateTime startDate, Integer allowedHourStart, Integer allowedHourEnd, Integer dateHourOffset) throws Exception
+    public DateDispatcher(LocalDateTime startDate, Integer allowedHourStart, Integer allowedHourEnd, Integer dateHourOffset) throws Exception
     {
         if ((startDate == null) || (allowedHourStart == null) || (allowedHourEnd == null) || (dateHourOffset == null))
             throw new NullPointerException();

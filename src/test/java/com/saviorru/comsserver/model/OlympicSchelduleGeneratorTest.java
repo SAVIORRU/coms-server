@@ -1,12 +1,12 @@
 package com.saviorru.comsserver.model;
 
-import com.saviorru.comsserver.model.generators.OlympicSchelduleGenerator;
+import com.saviorru.comsserver.model.generators.OlympicScheduleGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -15,19 +15,25 @@ import static org.mockito.Mockito.mock;
 public class OlympicSchelduleGeneratorTest {
 
 
-    private OlympicSchelduleGenerator olympicGenerator;
+    private OlympicScheduleGenerator olympicGenerator;
     private List<Match> matchesList;
     private List<Player> playersList;
     private LocationDispatcher locationDispatcher;
     private List<Player> playersListNoStandardSize;
+    private DateDispatcher dateDispatcher;
 
     @Before
     public void init() {
-        olympicGenerator = new OlympicSchelduleGenerator();
+        olympicGenerator = new OlympicScheduleGenerator();
         playersList = new ArrayList<>();
         playersListNoStandardSize = new ArrayList<>();
         matchesList = new ArrayList<>();
         locationDispatcher = new LocationDispatcher();
+        try {
+            dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 12);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             locationDispatcher.addLocation(new Location("table1", ""));
             locationDispatcher.addLocation(new Location("table2", ""));
@@ -58,7 +64,7 @@ public class OlympicSchelduleGeneratorTest {
     public void testGenerateScheduleAllLocationsFree() {
         try {
             matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                    , LocalDate.now());
+                    ,dateDispatcher);
             assertEquals(4, matchesList.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +76,7 @@ public class OlympicSchelduleGeneratorTest {
         try {
             locationDispatcher.reserveLocation(locationDispatcher.getFreeLocation());
             matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                    , LocalDate.now());
+                    , dateDispatcher);
             assertEquals(3, matchesList.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +86,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleCreateNewMatch() {
         matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         matchesList.get(0).setPoints(10, 11);
         matchesList.get(0).setMatchState(MatchState.PLAYED);
         try {
@@ -107,7 +113,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleNotCreateNewMatchWhenOneMatchPlayed() {
         matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         matchesList.get(0).setPoints(10, 11);
         matchesList.get(0).setMatchState(MatchState.PLAYED);
         try {
@@ -122,7 +128,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleNotCreateNewMatchWhenTwoMatchPlayedFromDifferentBranches() {
         matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         matchesList.get(0).setPoints(10, 11);
         matchesList.get(0).setMatchState(MatchState.PLAYED);
         try {
@@ -144,7 +150,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleCreateNewMatchOnThirdTour() {
         matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         try {
             matchesList.get(0).setPoints(12, 11);
             matchesList.get(0).setMatchState(MatchState.PLAYED);
@@ -185,7 +191,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleCreateLastMatchAndGetChampion() {
         matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         try {
             matchesList.get(0).setPoints(12, 11);
             matchesList.get(0).setMatchState(MatchState.PLAYED);
@@ -231,7 +237,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleCreateNewMatchNoStandardSizePlayers() {
         matchesList = olympicGenerator.generateSchedule(playersListNoStandardSize, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         try {
             assertEquals(3, matchesList.size());
         } catch (Exception e) {
@@ -241,7 +247,7 @@ public class OlympicSchelduleGeneratorTest {
     @Test
     public void testUpdateScheduleCreateNewMatchNoStandardSizePlayersSecondTour() {
         matchesList = olympicGenerator.generateSchedule(playersListNoStandardSize, locationDispatcher
-                , LocalDate.now());
+                , dateDispatcher);
         try {
             matchesList.get(0).setPoints(12, 11);
             matchesList.get(0).setMatchState(MatchState.PLAYED);

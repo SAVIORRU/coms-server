@@ -6,7 +6,7 @@ import java.util.List;
 public interface ScheduleGenerator {
 
     List<Match> generateSchedule(List<Player> playersLists,LocationDispatcher locationDispatcher,
-                                         LocalDate startDate);
+                                         DateDispatcher dateDispatcher);
 
     List<Match> updateSchedule(List<Match> matches);
 
