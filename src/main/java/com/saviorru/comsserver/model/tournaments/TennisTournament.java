@@ -10,11 +10,11 @@ public class TennisTournament implements Tournament {
     private String name;
     private HashMap<Integer, ArrayList<Player>> playersLists;
     private TournamentState state = TournamentState.OPEN;
-    private TypeScheme schemeType;
+    private SchemeType schemeType;
     private HashMap<Integer, Location> locations;
     private HashMap<Integer, Match> scheldule;
 
-    public TennisTournament(String name, HashMap<Integer, ArrayList<Player>> playersLists, TypeScheme schemeType, HashMap<Integer, Location> locations, HashMap<Integer, Match> scheldule) {
+    public TennisTournament(String name, HashMap<Integer, ArrayList<Player>> playersLists, SchemeType schemeType, HashMap<Integer, Location> locations, HashMap<Integer, Match> scheldule) {
         this.name = name;
         this.playersLists = playersLists;
         this.schemeType = schemeType;
@@ -38,7 +38,7 @@ public class TennisTournament implements Tournament {
     }
 
     @Override
-    public TypeScheme getSchemeType() {
+    public SchemeType getSchemeType() {
         return schemeType;
     }
 

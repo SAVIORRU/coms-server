@@ -2,21 +2,21 @@ package com.saviorru.comsserver.model.ratings;
 
 import com.saviorru.comsserver.model.Match;
 import com.saviorru.comsserver.model.Player;
+import com.saviorru.comsserver.model.SchemeType;
 import com.saviorru.comsserver.model.TournamentRating;
-import com.saviorru.comsserver.model.TypeScheme;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoundScheme implements TournamentRating {
-    private TypeScheme type = TypeScheme.ROUND;
+    private SchemeType type = SchemeType.ROUND;
     static final Integer ratingValuesCount = 1;
 
     public RoundScheme() {
 
     }
 
-    public TypeScheme getType() {
+    public SchemeType getType() {
         return type;
     }
 

@@ -10,7 +10,9 @@ import org.junit.runners.Suite;
         OneOnOneMatchTest.class,
         LocationTests.class,
         LocationDispatherTests.class,
-        OlympicScemeTest.class
+        OlympicScemeTest.class,
+        MeetTests.class
+
 })
 public class TestManager {
 }

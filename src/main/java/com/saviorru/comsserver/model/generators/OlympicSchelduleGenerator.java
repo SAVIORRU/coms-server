@@ -186,9 +186,5 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
         return createSchedule(matches, this.child);
     }
 
-    @Override
-    public TypeScheme getGeneratorType() {
-        return TypeScheme.OLYMPIC;
-    }
 
 }

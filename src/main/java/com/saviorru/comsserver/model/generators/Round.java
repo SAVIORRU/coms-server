@@ -7,7 +7,7 @@ import java.util.*;
 
 //public class Round implements ScheduleGenerator {
 //
-//    private TypeScheme type = TypeScheme.ROUND;
+//    private SchemeType type = SchemeType.ROUND;
 //    private Integer matchDuration = 30; //in minutes
 //    private Integer allowedTimeStart = 10; //24-hour
 //    private Integer allowedTimeEnd = 18; //24-hour
@@ -67,7 +67,7 @@ import java.util.*;
 //    }
 //
 //    @Override
-//    public TypeScheme getGeneratorType() {
+//    public SchemeType getGeneratorType() {
 //        return this.type;
 //    }
 //}

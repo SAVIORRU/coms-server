@@ -1,6 +1,5 @@
 package com.saviorru.comsserver.model;
 
-import com.saviorru.comsserver.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,7 +70,7 @@ public class OneOnOneMatchTest {
     @Test
     public void testSetPointsWhenPlayedMatchResultNoChangePoints() throws Exception {
         match.setPoints(10, 11);
-        match.setStateMatch(StateMatch.PLAYED);
+        match.setMatchState(MatchState.PLAYED);
         match.setPoints(8, 5);
         assertEquals(10, match.getPointsFirstSide());
         assertEquals(11, match.getPointsSecondSide());
@@ -80,7 +79,7 @@ public class OneOnOneMatchTest {
     @Test
     public void testIsPlayedResultTrue() throws Exception {
         match.setPoints(10, 11);
-        match.setStateMatch(StateMatch.PLAYED);
+        match.setMatchState(MatchState.PLAYED);
         assertTrue(match.isPlayed());
     }
 

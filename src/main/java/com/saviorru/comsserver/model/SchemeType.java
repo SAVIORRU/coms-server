@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.model;
 
-public enum TypeScheme {
+public enum SchemeType {
     ROUND,
     OLYMPIC,
     IMPROVEDOLYMPIC

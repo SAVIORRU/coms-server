@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Schedule {
     public List<Match> getAllMatches();
-    public List<Match> getMatchesByState(StateMatch state);
+    public List<Match> getMatchesByState(MatchState state);
     public List<Match> getMatchesByPlayer(Player player);
     public List<Match> getMatchesByDate(LocalDate date);
     public List<Match> getMatchesByLocation(Location location);

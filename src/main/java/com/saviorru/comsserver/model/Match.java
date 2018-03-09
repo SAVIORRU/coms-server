@@ -6,7 +6,7 @@ public interface Match {
 
     LocalDate getDate();
     Player getWinner() throws Exception;
-    void setStateMatch(StateMatch stateMatch);
+    void setMatchState(MatchState matchState);
     boolean isPlayed();
     Player getFirstSide();
     Player getSecondSide();

@@ -8,7 +8,7 @@ public class OneOnOneMatch implements Match {
     private LocalDate date;
     private Points points;
     private Player firstSide, secondSide;
-    private StateMatch stateMatch = StateMatch.NOTPLAYED;
+    private MatchState matchState = MatchState.NOTPLAYED;
     private Location location;
 
     public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDate date) throws Exception {
@@ -34,13 +34,13 @@ public class OneOnOneMatch implements Match {
     }
 
     @Override
-    public void setStateMatch(StateMatch stateMatch) {
-        this.stateMatch = stateMatch;
+    public void setMatchState(MatchState matchState) {
+        this.matchState = matchState;
     }
 
     @Override
     public boolean isPlayed() {
-        return StateMatch.PLAYED == this.stateMatch;
+        return MatchState.PLAYED == this.matchState;
     }
 
     @Override

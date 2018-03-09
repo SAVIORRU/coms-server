@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.model;
 
-public enum StateMatch {
+public enum MatchState {
     NOTPLAYED,
     PLAYED
 }
