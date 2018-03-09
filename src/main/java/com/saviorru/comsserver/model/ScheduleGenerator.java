@@ -10,5 +10,4 @@ public interface ScheduleGenerator {
 
     List<Match> updateSchedule(List<Match> matches);
 
-
 }

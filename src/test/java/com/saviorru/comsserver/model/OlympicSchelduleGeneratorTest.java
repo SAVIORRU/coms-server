@@ -6,9 +6,11 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class OlympicSchelduleGeneratorTest {
 
@@ -17,11 +19,13 @@ public class OlympicSchelduleGeneratorTest {
     private List<Match> matchesList;
     private List<Player> playersList;
     private LocationDispatcher locationDispatcher;
+    private List<Player> playersListNoStandardSize;
 
     @Before
     public void init() {
         olympicGenerator = new OlympicSchelduleGenerator();
         playersList = new ArrayList<>();
+        playersListNoStandardSize = new ArrayList<>();
         matchesList = new ArrayList<>();
         locationDispatcher = new LocationDispatcher();
         try {
@@ -41,6 +45,10 @@ public class OlympicSchelduleGeneratorTest {
             playersList.add(new Player("Player6", "6", LocalDate.of(1965, 1, 25)));
             playersList.add(new Player("Player7", "7", LocalDate.of(1965, 1, 29)));
             playersList.add(new Player("Player8", "8", LocalDate.of(1965, 1, 2)));
+
+            for(int i = 0 ; i < 7;i++) {
+                playersListNoStandardSize.add(mock(Player.class));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -175,6 +183,98 @@ public class OlympicSchelduleGeneratorTest {
     }
 
     @Test
-    public void getGeneratorType() {
+    public void testUpdateScheduleCreateLastMatchAndGetChampion() {
+        matchesList = olympicGenerator.generateSchedule(playersList, locationDispatcher
+                , LocalDate.now());
+        try {
+            matchesList.get(0).setPoints(12, 11);
+            matchesList.get(0).setMatchState(MatchState.PLAYED);
+            matchesList.get(0).getLocation().setBusy(false);
+
+            matchesList.get(1).setPoints(12, 11);
+            matchesList.get(1).setMatchState(MatchState.PLAYED);
+            matchesList.get(1).getLocation().setBusy(false);
+
+            matchesList.get(2).setPoints(12, 11);
+            matchesList.get(2).setMatchState(MatchState.PLAYED);
+            matchesList.get(2).getLocation().setBusy(false);
+
+            matchesList.get(3).setPoints(12, 11);
+            matchesList.get(3).setMatchState(MatchState.PLAYED);
+            matchesList.get(3).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+
+            matchesList.get(4).setPoints(12, 11);
+            matchesList.get(4).setMatchState(MatchState.PLAYED);
+            matchesList.get(4).getLocation().setBusy(false);
+
+            matchesList.get(5).setPoints(12, 11);
+            matchesList.get(5).setMatchState(MatchState.PLAYED);
+            matchesList.get(5).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+
+            matchesList.get(6).setPoints(12, 11);
+            matchesList.get(6).setMatchState(MatchState.PLAYED);
+            matchesList.get(6).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+
+            assertEquals("Player1", matchesList.get(matchesList.size() - 1).getWinner().getFirstName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testUpdateScheduleCreateNewMatchNoStandardSizePlayers() {
+        matchesList = olympicGenerator.generateSchedule(playersListNoStandardSize, locationDispatcher
+                , LocalDate.now());
+        try {
+            assertEquals(3, matchesList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testUpdateScheduleCreateNewMatchNoStandardSizePlayersSecondTour() {
+        matchesList = olympicGenerator.generateSchedule(playersListNoStandardSize, locationDispatcher
+                , LocalDate.now());
+        try {
+            matchesList.get(0).setPoints(12, 11);
+            matchesList.get(0).setMatchState(MatchState.PLAYED);
+            matchesList.get(0).getLocation().setBusy(false);
+
+            matchesList.get(1).setPoints(12, 11);
+            matchesList.get(1).setMatchState(MatchState.PLAYED);
+            matchesList.get(1).getLocation().setBusy(false);
+
+            matchesList.get(2).setPoints(12, 11);
+            matchesList.get(2).setMatchState(MatchState.PLAYED);
+            matchesList.get(2).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+
+            matchesList.get(3).setPoints(12, 11);
+            matchesList.get(3).setMatchState(MatchState.PLAYED);
+            matchesList.get(3).getLocation().setBusy(false);
+
+            matchesList.get(4).setPoints(12, 11);
+            matchesList.get(4).setMatchState(MatchState.PLAYED);
+            matchesList.get(4).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+
+            matchesList.get(5).setPoints(12, 11);
+            matchesList.get(5).setMatchState(MatchState.PLAYED);
+            matchesList.get(5).getLocation().setBusy(false);
+
+            matchesList = olympicGenerator.updateSchedule(matchesList);
+            assertEquals(playersListNoStandardSize.get(0), matchesList.get(matchesList.size()-1).getWinner());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

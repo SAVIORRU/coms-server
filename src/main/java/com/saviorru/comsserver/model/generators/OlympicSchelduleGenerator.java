@@ -38,8 +38,8 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
         int count = 0, st = 2, n = 0;
         do {
             n++;
-            count = (int)Math.pow(st, n);
-        }while (count < countPlayers);
+            count = (int) Math.pow(st, n);
+        } while (count < countPlayers);
         return n;
     }
 
@@ -62,14 +62,23 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
                 e.printStackTrace();
             }
         }
-        for (int i = this.matchList.size() * 2, j = 2; j < this.child.size(); i++, j += 4) {
+        for (int i = this.matchList.size() * 2, j = 2; j < this.child.size() && i < playersLists.size(); i++, j += 4) {
             this.child.get(j).data = playersLists.get(i);
+            if (j + 4 > this.child.size() && i + 1 < playersLists.size()) {
+                this.child.get((j + 1 < this.child.size()) ? j + 1 : j).data = playersLists.get(i + 1);
+                try {
+                    this.matchList.add(createNewMatch(this.child.get(j).data, this.child.get(j + 1).data));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
             addPlayersNextTour(this.child.get(j));
         }
     }
 
     private void fillFirstTourStandardCountPlayer(List<Player> playersLists) {
-        for (int i = 0; i < playersLists.size()-1; i += 2) {
+        for (int i = 0; i < playersLists.size() - 1; i += 2) {
             this.child.get(i).data = playersLists.get(i);
             this.child.get(i + 1).data = playersLists.get(i + 1);
             try {
@@ -105,10 +114,10 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
     private List<Match> createSchedule(List<Match> matches, List<OlympicScheme.Node> parents) {
         int countPLayedMatch = 0;
         for (int i = matches.size() - 1; i >= 0; i--) {
-            if (matchList.get(i).isPlayed()){
+            if (matchList.get(i).isPlayed()) {
                 countPLayedMatch++;
                 try {
-                    addInSceme(parents,matchList.get(i).getWinner());
+                    addInSceme(parents, matchList.get(i).getWinner());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -130,9 +139,9 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
 
     private boolean addInSceme(List<OlympicScheme.Node> child, Player winner) {
         OlympicScheme.Node node;
-        for(int i = 0;i < child.size(); i++){
-            if(child.get(i).data == winner){
-                if(child.get(i).nextPositionPlayer.data == null) {
+        for (int i = 0; i < child.size(); i++) {
+            if (child.get(i).data == winner) {
+                if (child.get(i).nextPositionPlayer.data == null) {
                     child.get(i).nextPositionPlayer.data = winner;
                     node = addPlayersNextTour(child.get(i).nextPositionPlayer);
                     node = finedTour(node);
@@ -153,7 +162,7 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
 
     private boolean noClone(Match match) {
         for (int i = 0; i < this.matchList.size(); i++) {
-            if(match.equals(this.matchList.get(i))) return false;
+            if (match.equals(this.matchList.get(i))) return false;
         }
         return true;
     }
@@ -162,6 +171,7 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
         Location newLocation = locationDispatcher.getFreeLocation();
         return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDateTime.now());
     }
+
     private Match createNewMatch(Player firstSide, Player secondSide) throws Exception {
         Location newLocation = locationDispatcher.getFreeLocation();
         locationDispatcher.reserveLocation(newLocation);

@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
         LocationTests.class,
         LocationDispatherTests.class,
         OlympicScemeTest.class,
-        MeetTests.class
+        MeetTests.class,
+        OlympicSchelduleGeneratorTest.class
 
 })
 public class TestManager {

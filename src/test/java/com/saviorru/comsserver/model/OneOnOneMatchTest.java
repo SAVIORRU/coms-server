@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class OneOnOneMatchTest {
 
@@ -90,5 +91,15 @@ public class OneOnOneMatchTest {
     public void testIsPlayedResultFalse() throws Exception {
         match.setPoints(10, 11);
         assertFalse(match.isPlayed());
+    }
+    @Test
+    public void testEquals(){
+        try {
+            Match match = new OneOnOneMatch(testPlayer1,testPlayer2,mock(Location.class),LocalDateTime.of(1975,1,1,1,1));
+            Match match2 = new OneOnOneMatch(testPlayer2,testPlayer1,mock(Location.class),LocalDateTime.of(1975,1,1,1,1));
+            assertTrue(match.equals(match2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
