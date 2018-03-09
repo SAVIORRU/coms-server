@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
@@ -16,7 +17,7 @@ public class OneOnOneMatchTest {
 
     @Test(expected = Exception.class)
     public void testInitMatchWithCloneSidesResultNull() throws Exception {
-        new OneOnOneMatch(testPlayer1, testPlayer1, new Location("1","2"), LocalDate.now());
+        new OneOnOneMatch(testPlayer1, testPlayer1, new Location("1","2"), LocalDateTime.now());
     }
 
     @Test(expected = NullPointerException.class)
@@ -38,18 +39,20 @@ public class OneOnOneMatchTest {
     public void initialize() throws Exception {
         testPlayer1 = new Player("a", "b", LocalDate.now());
         testPlayer2 = new Player("c", "b", LocalDate.now());
-        match = new OneOnOneMatch(testPlayer1, testPlayer2, new Location("1", ""), LocalDate.now());
+        match = new OneOnOneMatch(testPlayer1, testPlayer2, new Location("1", ""), LocalDateTime.now());
     }
 
     @Test
     public void testGetWinnerResultFirstSidePlayers() throws Exception {
         match.setPoints(11, 10);
+        match.setMatchState(MatchState.PLAYED);
         assertEquals(testPlayer1, match.getWinner());
     }
 
     @Test
     public void testGetWinnerResultSecondSidePlayers() throws Exception {
         match.setPoints(10, 11);
+        match.setMatchState(MatchState.PLAYED);
         assertEquals(testPlayer2, match.getWinner());
     }
 

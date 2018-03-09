@@ -2,6 +2,7 @@ package com.saviorru.comsserver.model;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -69,7 +70,7 @@ public class ScheduleImpl implements Schedule {
     }
 
     @Override
-    public List<Match> getMatchesByDate(LocalDate date)  {
+    public List<Match> getMatchesByDate(LocalDateTime date)  {
         if (date == null) throw new NullPointerException();
         List<Match> returnList = new ArrayList<Match>();
         for (Match match: matchesList)

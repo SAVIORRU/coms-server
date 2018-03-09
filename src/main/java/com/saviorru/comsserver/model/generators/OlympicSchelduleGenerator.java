@@ -4,6 +4,7 @@ import com.saviorru.comsserver.model.OlympicScheme;
 import com.saviorru.comsserver.model.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -159,12 +160,12 @@ public class OlympicSchelduleGenerator implements ScheduleGenerator {
 
     private Match createMockMatch(Player firstSide, Player secondSide) throws Exception {
         Location newLocation = locationDispatcher.getFreeLocation();
-        return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDate.now());
+        return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDateTime.now());
     }
     private Match createNewMatch(Player firstSide, Player secondSide) throws Exception {
         Location newLocation = locationDispatcher.getFreeLocation();
         locationDispatcher.reserveLocation(newLocation);
-        return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDate.now());
+        return new OneOnOneMatch(firstSide, secondSide, newLocation, LocalDateTime.now());
     }
 
     private OlympicScheme.Node finedTour(OlympicScheme.Node node) {

@@ -1,17 +1,17 @@
 package com.saviorru.comsserver.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class OneOnOneMatch implements Match {
 
-    private LocalDate date;
+    private LocalDateTime date;
     private Points points;
     private Player firstSide, secondSide;
     private MatchState matchState = MatchState.NOTPLAYED;
     private Location location;
 
-    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDate date) throws Exception {
+    public OneOnOneMatch(Player firstSide, Player secondSide, Location location, LocalDateTime date) throws Exception {
         if (firstSide == null || secondSide == null || location == null || date == null)
             throw new NullPointerException();
         if(firstSide.equals(secondSide)) throw new Exception("Player can't be for 2 sides simultaneously");
@@ -23,7 +23,7 @@ public class OneOnOneMatch implements Match {
     }
 
     @Override
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 

@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class ScheduleTests {
 
         List<Match> testList = new ArrayList<>();
 
-        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,2)));
-        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,3)));
-        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,4)));
-        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,5)));
+        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,2,1,1)));
+        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,3,1,1)));
+        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,4,1,1)));
+        testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,5,1,1)));
         this.testSubject = new ScheduleImpl(testList);
         this.testPlayer = mock(Player.class);
         this.testDate =  LocalDate.of(1970, 1,1);
@@ -62,7 +63,7 @@ public class ScheduleTests {
     @Test()
     public void schedGetByStateTest() throws Exception
     {
-        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,6));
+        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
         testSubject.addMatch(testMatch);
         testMatch.setMatchState(MatchState.PLAYED);
         assertEquals(1, testSubject.getMatchesByState(MatchState.PLAYED).size());
@@ -70,7 +71,7 @@ public class ScheduleTests {
     @Test()
     public void schedFinishMatchTest() throws Exception
     {
-        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,6));
+        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
         testSubject.addMatch(testMatch);
         Points testResult = new Points();
         testResult.setPoints(1, 0);
@@ -80,7 +81,7 @@ public class ScheduleTests {
     @Test(expected = Exception.class)
     public void schedFinishExcClashMatchTest() throws Exception
     {
-        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,6));
+        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
         testSubject.addMatch(testMatch);
         Points testResult = new Points();
         testResult.setPoints(1, 0);
@@ -90,7 +91,7 @@ public class ScheduleTests {
     @Test(expected = Exception.class)
     public void schedFinishExcNotFoundMatchTest() throws Exception
     {
-        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDate.of(1970, 1,6));
+        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
         testSubject.addMatch(testMatch);
         Points testResult = new Points();
         testResult.setPoints(1, 0);
