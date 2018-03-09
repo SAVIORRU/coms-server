@@ -1,4 +1,4 @@
-package com.saviorru.comsserver;
+package com.saviorru.comsserver.model;
 
 import com.saviorru.comsserver.model.*;
 import org.junit.Before;
@@ -16,22 +16,22 @@ public class OneOnOneMatchTest {
     private Match match;
 
     @Test(expected = Exception.class)
-    public void testInitialiaingMatchWithCloneSidesResultNull() throws Exception {
+    public void testInitMatchWithCloneSidesResultNull() throws Exception {
         new OneOnOneMatch(testPlayer1, testPlayer1, new Location("1","2"), LocalDate.now());
     }
 
     @Test(expected = NullPointerException.class)
-    public void testInitialiaingMatchWithNullParametersResultNull() throws Exception {
+    public void testInitMatchWithNullParametersResultNull() throws Exception {
         new OneOnOneMatch(null, null, null, null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testInitialiaingMatchParametersResultNull() throws Exception {
+    public void testInitMatchParametersResultNull() throws Exception {
         new OneOnOneMatch(null,testPlayer2, null, null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testInitialiaingMatchParametersWithDateNullResultNull() throws Exception {
+    public void testInitMatchParametersWithDateNullResultNull() throws Exception {
         new OneOnOneMatch(testPlayer1, testPlayer2, null, null);
     }
 
@@ -62,14 +62,14 @@ public class OneOnOneMatchTest {
     }
 
     @Test
-    public void testSetPointsParametrsNegativeNumberResultDefaultValue() throws Exception {
+    public void testSetPointsParamNegativeNumberResultDefaultValue() throws Exception {
         match.setPoints(-5, 11);
         assertEquals(0, match.getPointsFirstSide());
         assertEquals(0, match.getPointsSecondSide());
     }
 
     @Test
-    public void testSetPointsWhenPlayedMatchResultNoChangePounts() throws Exception {
+    public void testSetPointsWhenPlayedMatchResultNoChangePoints() throws Exception {
         match.setPoints(10, 11);
         match.setStateMatch(StateMatch.PLAYED);
         match.setPoints(8, 5);

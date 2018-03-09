@@ -1,4 +1,4 @@
-package com.saviorru.comsserver;
+package com.saviorru.comsserver.model;
 
 import com.saviorru.comsserver.model.Player;
 

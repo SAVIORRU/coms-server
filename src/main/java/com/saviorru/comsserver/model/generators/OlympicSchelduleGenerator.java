@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.model.generators;
 
-import com.saviorru.comsserver.model.Tree;
+import com.saviorru.comsserver.model.OlympicScheme;
 import com.saviorru.comsserver.model.*;
 
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     private ArrayList<ArrayList<Player>> playersLists;
     private Date dateBegin;
     private ArrayList<Location> locationArrayList;
-    private Tree tree;
+    private OlympicScheme tree;
     private Integer countPlayers;
-    private ArrayList<Tree.Node> child,parents = new ArrayList<>();
+    private ArrayList<OlympicScheme.Node> child,parents = new ArrayList<>();
 
     public OlympicSchelduleGenerator(){
     }
@@ -25,8 +25,8 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         this.dateBegin = startDate;
         this.locationArrayList = locationsList;
         this.countPlayers = playersLists.size();
-        this.tree = new Tree(countTour(this.countPlayers).intValue());
-        this.child = this.tree.getChildrens();
+        this.tree = new OlympicScheme(countTour(this.countPlayers).intValue());
+        //this.child = this.tree.getChildrens();
         addPlayers(this.playersLists);
     }
     private Double countTour(Integer countPlayers){
@@ -47,45 +47,45 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
 
     private void fillFirstTourNotStandartCountPlayer(ArrayList<ArrayList<Player>> playersLists){
         for(int i = 0, j = 0  ; j < this.child.size() ; i += 2 , j += 4) {
-            this.child.get(j).data = playersLists.get(i);
-            this.child.get(j + 1).data = playersLists.get(i+1);
-            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
+//            this.child.get(j).data = playersLists.get(i);
+//            this.child.get(j + 1).data = playersLists.get(i+1);
+//            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
         }
         for(int i = this.matchHashMap.size()*2, j = 2; j < this.child.size() ; i ++, j += 4) {
-            this.child.get(j).data = playersLists.get(i);
+           // this.child.get(j).data = playersLists.get(i);
             addPlayersNextTour(this.child.get(j));
         }
     }
 
     private void fillFirstTourStandartCountPlayer(ArrayList<ArrayList<Player>> playersLists){
         for(int i = 0, j = 0  ;i < playersLists.size(); i+=2 , j += 2) {
-            this.child.get(j).data = playersLists.get(i);
-            this.child.get(j + 1).data = playersLists.get(i+1);
-            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
+//            this.child.get(j).data = playersLists.get(i);
+//            this.child.get(j + 1).data = playersLists.get(i+1);
+//            this.matchHashMap.put(this.matchHashMap.size(),createNewMatch(this.child.get(j).data,this.child.get(j + 1).data));
         }
     }
 
-    private Tree.Node addPlayersNextTour(Tree.Node node){
-        if(node.parent.right.data == null || node.parent.left.data == null){
+    private OlympicScheme.Node addPlayersNextTour(OlympicScheme.Node node){
+        if(node.nextPositionPlayer.rightPlayer.data == null || node.nextPositionPlayer.leftPlayer.data == null){
             if(!checkLackPartner(node)){
-                if(node.parent.data == null) { node.parent.data = node.data;
-                    return  node.parent;
+                if(node.nextPositionPlayer.data == null) { node.nextPositionPlayer.data = node.data;
+                    return  node.nextPositionPlayer;
                 }
             }
         }
         return node;
     }
 
-    private boolean checkLackPartner(Tree.Node node){
-        if((node.parent.right.right == null && node.parent.right.left == null)|| (node.parent.right.right.data == null && node.parent.right.left.data == null)) {
-            if ((node.parent.left.right == null && node.parent.left.left == null) || (node.parent.left.right.data == null && node.parent.left.left.data == null)) {
+    private boolean checkLackPartner(OlympicScheme.Node node){
+        if((node.nextPositionPlayer.rightPlayer.rightPlayer == null && node.nextPositionPlayer.rightPlayer.leftPlayer == null)|| (node.nextPositionPlayer.rightPlayer.rightPlayer.data == null && node.nextPositionPlayer.rightPlayer.leftPlayer.data == null)) {
+            if ((node.nextPositionPlayer.leftPlayer.rightPlayer == null && node.nextPositionPlayer.leftPlayer.leftPlayer == null) || (node.nextPositionPlayer.leftPlayer.rightPlayer.data == null && node.nextPositionPlayer.leftPlayer.leftPlayer.data == null)) {
                 return false;
             }
         }
         return true;
     }
 
-    private HashMap<Integer,Match> createSchedule(HashMap<Integer,Match> matchHashMap,ArrayList<Tree.Node> parents){
+    private HashMap<Integer,Match> createSchedule(HashMap<Integer,Match> matchHashMap,ArrayList<OlympicScheme.Node> parents){
         int  countPLayedMatch = 0;
         for(int i =  matchHashMap.size()-1 ;i >= 0 ; i-- ) {
 //            if (matchHashMap.get(i).getStateMatch() == StateMatch.PLAYED){
@@ -98,29 +98,29 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         }
         return this.matchHashMap;
     }
-    private ArrayList<Tree.Node> initParents(ArrayList<Tree.Node> child){
-        ArrayList<Tree.Node> arrayList = new ArrayList<>();
+    private ArrayList<OlympicScheme.Node> initParents(ArrayList<OlympicScheme.Node> child){
+        ArrayList<OlympicScheme.Node> arrayList = new ArrayList<>();
         for(int i = 0; i < child.size();i+=2){
-            arrayList.add(child.get(i).parent);
+            arrayList.add(child.get(i).nextPositionPlayer);
         }
         return arrayList;
     }
-    private boolean addInSceme(ArrayList<Tree.Node> child,ArrayList<Player> winner){
-        Tree.Node node;
-        for(int i = 0;i < child.size(); i++){
-            if(child.get(i).data == winner){
-                if(child.get(i).parent.data == null) {
-                    child.get(i).parent.data = winner;
-                    node = addPlayersNextTour(child.get(i).parent);
-                    node = finedTour(node);
-                    if (node != null) {
-                        if (noClone(createNewMatch(node.left.data, node.right.data)))
-                            this.matchHashMap.put(matchHashMap.size(), createNewMatch(node.left.data, node.right.data));
-                    }
-                }
-                return true;
-            }
-        }
+    private boolean addInSceme(ArrayList<OlympicScheme.Node> child, ArrayList<Player> winner){
+        OlympicScheme.Node node;
+//        for(int i = 0;i < child.size(); i++){
+//            if(child.get(i).data == winner){
+//                if(child.get(i).nextPositionPlayer.data == null) {
+//                    child.get(i).nextPositionPlayer.data = winner;
+//                    node = addPlayersNextTour(child.get(i).nextPositionPlayer);
+//                    node = finedTour(node);
+//                    if (node != null) {
+//                        if (noClone(createNewMatch(node.leftPlayer.data, node.rightPlayer.data)))
+//                            this.matchHashMap.put(matchHashMap.size(), createNewMatch(node.leftPlayer.data, node.rightPlayer.data));
+//                    }
+//                }
+//                return true;
+//            }
+//        }
         return false;
     }
     private boolean noClone(Match match){
@@ -134,9 +134,9 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
     private Match createNewMatch(ArrayList<Player> firstSide,ArrayList<Player> secondSide){
         return null; //new OneOnOneMatch(firstSide,secondSide,null,new Date());
     }
-    private Tree.Node finedTour(Tree.Node node){
-        if(node.parent.right.data != null && node.parent.left.data != null) {
-            if (node.parent.data == null) return node.parent;
+    private OlympicScheme.Node finedTour(OlympicScheme.Node node){
+        if(node.nextPositionPlayer.rightPlayer.data != null && node.nextPositionPlayer.leftPlayer.data != null) {
+            if (node.nextPositionPlayer.data == null) return node.nextPositionPlayer;
         }
         return null;
     }
@@ -156,22 +156,22 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
         return createSchedule(matchHashMap,this.child);
     }
 
-    public ArrayList<Player> getСhampion(){
-        return this.tree.getRoot().data;
-    }
+//    public ArrayList<Player> getСhampion(){
+//        return this.tree.getRoot().data;
+//    }
 
     public  ArrayList<ArrayList<Player>> getPlayersOnTour(int level){
-        if(level > this.tree.getLevel() || level < 1) throw new Error("invalid level");
+        if(level > this.tree.getCountRounds() || level < 1) throw new Error("invalid level");
         return getPlayersOnLevel(level);
     }
 
     private ArrayList<ArrayList<Player>> getPlayersOnLevel(int level) {
-        ArrayList<Tree.Node> ch = this.child;
+        ArrayList<OlympicScheme.Node> ch = this.child;
         ArrayList<ArrayList<Player>> arrayList = new ArrayList<>();
         int count = 1;
         if(level == 1) {
             for(int i = 0;i < ch.size();i++){
-                if(ch.get(i).data != null) arrayList.add(ch.get(i).data);
+                //if(ch.get(i).data != null) arrayList.add(ch.get(i).data);
             }
             return arrayList;
         }
@@ -180,7 +180,7 @@ public class OlympicSchelduleGenerator implements SchelduleGenerator {
             ch = initParents(ch);
         }
         for(int i = 0;i < ch.size();i++){
-            if(ch.get(i).data != null) arrayList.add(ch.get(i).data);
+            //if(ch.get(i).data != null) arrayList.add(ch.get(i).data);
         }
         return arrayList;
     }
