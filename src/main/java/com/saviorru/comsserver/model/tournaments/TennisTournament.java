@@ -22,6 +22,8 @@ public class TennisTournament implements Tournament {
     private Player champion;
 
     TennisTournament(List<Player> players, List<Location> locations, SchemeType schemeType, LocalDateTime startDate, String nameTournament) throws Exception {
+        if(players == null || locations == null || schemeType == null || startDate == null || nameTournament == null) throw new NullPointerException();
+        if(players.isEmpty() || locations.isEmpty() || nameTournament.isEmpty() ) throw new Exception("Empty parameter");
         this.players = players;
         this.locationDispatcher.addAllLocation(locations);
         this.startDate = startDate;
