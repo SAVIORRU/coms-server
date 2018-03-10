@@ -194,7 +194,7 @@ public class OlympicScheduleGenerator implements ScheduleGenerator {
         int oldSize = matches.size();
         List<Match> newMatches = new ArrayList<>();
         createSchedule(matches, this.child);
-        for(int i = oldSize-1; i < this.matchList.size();i++){
+        for(int i = oldSize; i < this.matchList.size();i++){
             newMatches.add(this.matchList.get(i));
         }
         return newMatches;
