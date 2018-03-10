@@ -122,7 +122,7 @@ public class OlympicSchelduleGeneratorTest {
             e.printStackTrace();
         }
         matchesList = olympicGenerator.updateSchedule(matchesList);
-        assertEquals(4, matchesList.size());
+        assertEquals(1, matchesList.size());
     }
 
     @Test
@@ -144,7 +144,7 @@ public class OlympicSchelduleGeneratorTest {
             e.printStackTrace();
         }
         matchesList = olympicGenerator.updateSchedule(matchesList);
-        assertEquals(4, matchesList.size());
+        assertEquals(1, matchesList.size());
     }
 
     @Test

@@ -70,36 +70,6 @@ public class ScheduleTests {
         testMatch.setMatchState(MatchState.PLAYED);
         assertEquals(1, testSubject.getMatchesByState(MatchState.PLAYED).size());
     }
-//    @Test()
-//    public void schedFinishMatchTest() throws Exception
-//    {
-//        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
-//        testSubject.addMatch(testMatch);
-//        Points testResult = new Points();
-//        testResult.setPoints(1, 0);
-//        testSubject.finishMatch(testMatch, testResult);
-//        assertEquals(1, testSubject.getMatchesByState(MatchState.PLAYED).size());
-//    }
-//    @Test(expected = Exception.class)
-//    public void schedFinishExcClashMatchTest() throws Exception
-//    {
-//        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
-//        testSubject.addMatch(testMatch);
-//        Points testResult = new Points();
-//        testResult.setPoints(1, 0);
-//        testSubject.finishMatch(testMatch, testResult);
-//        testSubject.finishMatch(testMatch, testResult);
-//    }
-//    @Test(expected = Exception.class)
-//    public void schedFinishExcNotFoundMatchTest() throws Exception
-//    {
-//        Match testMatch = new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,6,1,1));
-//        testSubject.addMatch(testMatch);
-//        Points testResult = new Points();
-//        testResult.setPoints(1, 0);
-//        testSubject.finishMatch(testMatch, testResult);
-//        testSubject.finishMatch(mock(Match.class), testResult);
-//    }
 
     @Test(expected = NullPointerException.class)
     public void testAddMatchesWithNullParamResultNullPointerException()throws Exception{
@@ -110,7 +80,7 @@ public class ScheduleTests {
     public void testAddMatchesParamEmptyListResultException()throws Exception{
         testSubject.addMatches(new ArrayList<>());
     }
-    @Test
+    @Test(expected = Exception.class)
     public void testAddMatches()throws Exception{
         testSubject.addMatches(testList);
     }

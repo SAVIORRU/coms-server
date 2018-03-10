@@ -4,8 +4,6 @@ import com.saviorru.comsserver.model.*;
 import com.saviorru.comsserver.model.generators.OlympicScheduleGenerator;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class TennisTournament implements Tournament {
@@ -18,19 +16,23 @@ public class TennisTournament implements Tournament {
     private boolean isStart;
     private SchemeType schemeType;
     private ScheduleGenerator scheduleGenerator;
-    private String nameTournament;
+    private String tournamentName;
     private Player champion;
 
-    TennisTournament(List<Player> players, List<Location> locations, SchemeType schemeType, LocalDateTime startDate, String nameTournament) throws Exception {
-        if(players == null || locations == null || schemeType == null || startDate == null || nameTournament == null) throw new NullPointerException();
-        if(players.isEmpty() || locations.isEmpty() || nameTournament.isEmpty() ) throw new Exception("Empty parameter");
+    public TennisTournament(List<Player> players, List<Location> locations, SchemeType schemeType, LocalDateTime startDate, String tournamentName) throws Exception {
+        if (players == null || locations == null || schemeType == null || startDate == null || tournamentName == null)
+            throw new NullPointerException();
+        if (players.isEmpty() || locations.isEmpty() || tournamentName.isEmpty())
+            throw new Exception("Empty parameter");
         this.players = players;
+        this.schedule = new ScheduleImpl();
+        this.locationDispatcher = new LocationDispatcher();
         this.locationDispatcher.addAllLocation(locations);
         this.startDate = startDate;
         this.dateDispatcher = new DateDispatcher(startDate, 10, 18, 12);
         this.isStart = false;
         this.schemeType = schemeType;
-        this.nameTournament = nameTournament;
+        this.tournamentName = tournamentName;
         generationSchedule(schemeType);
     }
 
@@ -50,7 +52,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public String getName() {
-        return this.nameTournament;
+        return this.tournamentName;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public Schedule getSchedule() throws Exception {
-        if (isStart) throw new Exception("Tournament is not started");
+        if (!isStart) throw new Exception("Tournament is not started");
         return this.schedule;
     }
 
@@ -88,6 +90,7 @@ public class TennisTournament implements Tournament {
     public void finish() throws Exception {
         if (this.isStart) {
             this.isStart = false;
+            if(schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
             this.champion = schedule.getMatchesByState(MatchState.PLAYED).get(schedule.getAllMatches().size() - 1).getWinner();
         }
         throw new Exception("Tournament is not started");
@@ -97,7 +100,7 @@ public class TennisTournament implements Tournament {
     public Match getNextMatch() throws Exception {
         if (isStart) throw new Exception("Tournament is not started");
         List<Match> matchesByState = schedule.getMatchesByState(MatchState.NOTPLAYED);
-        if(matchesByState.size() == 0) return null;
+        if (matchesByState.size() == 0) return null;
         Match nextMatch = matchesByState.get(0);
         for (int i = 0; i < matchesByState.size() - 1; i++) {
             if (matchesByState.get(i).getDate().isBefore(matchesByState.get(i + 1).getDate())) {
@@ -124,7 +127,7 @@ public class TennisTournament implements Tournament {
         if (isStart) throw new Exception("Tournament is not started");
         if (matches == null || points == null) throw new NullPointerException();
         for (int i = 0; i < matches.size(); i++) {
-            finishMatch(matches.get(i),points.get(i));
+            finishMatch(matches.get(i), points.get(i));
         }
     }
 

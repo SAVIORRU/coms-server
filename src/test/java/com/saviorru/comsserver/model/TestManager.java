@@ -16,6 +16,7 @@ import org.junit.runners.Suite;
         ScheduleTests.class,
         DateDispatherTests.class,
         OlympicSchelduleGeneratorTest.class,
+        TournamentTests.class
 })
 public class TestManager {
 }
