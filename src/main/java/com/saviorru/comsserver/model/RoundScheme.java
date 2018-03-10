@@ -1,18 +1,17 @@
-package com.saviorru.comsserver.model.grids;
+package com.saviorru.comsserver.model;
 
 import com.saviorru.comsserver.model.Meet;
 import com.saviorru.comsserver.model.Player;
-import com.saviorru.comsserver.model.PlayerGrid;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoundSchemeGrid implements PlayerGrid
+public class RoundScheme
 {
 
     private List<Meet> meetsList;
 
-    public RoundSchemeGrid(List<Meet> meetsList) throws Exception
+    public RoundScheme(List<Meet> meetsList) throws Exception
     {
         if (meetsList == null) throw new NullPointerException();
         for (Meet meet: meetsList)
@@ -26,13 +25,11 @@ public class RoundSchemeGrid implements PlayerGrid
 
 
 
-    @Override
     public List<Meet> getAllMeets() {
 
         return this.meetsList;
     }
 
-    @Override
     public List<Meet> getUnassignedMeets() {
 
         List<Meet> pairsList = new ArrayList<>();
@@ -45,7 +42,6 @@ public class RoundSchemeGrid implements PlayerGrid
         return pairsList;
     }
 
-    @Override
     public List<Meet> getAssignedMeets() {
         List<Meet> pairsList = new ArrayList<>();
         for (Meet meet: this.meetsList)
@@ -56,12 +52,22 @@ public class RoundSchemeGrid implements PlayerGrid
 
         return pairsList;
     }
+    public Meet getNextUnassignedMeet()
+    {
+        for (Meet meet: this.meetsList)
+        {
+            if (!(meet.isAssigned()))
+                return meet;
+        }
+        return null;
+    }
 
-    @Override
+
     public void assignMeet(Player firstPlayer, Player secondPlayer) throws Exception {
         for (Meet meet: this.meetsList)
         {
-            if ((meet.getFirstPlayer().equals(firstPlayer)) && (meet.getSecondPlayer().equals(secondPlayer)))
+            if ((meet.getFirstPlayer().equals(firstPlayer)) && (meet.getSecondPlayer().equals(secondPlayer)) ||
+                    (meet.getSecondPlayer().equals(firstPlayer)) && (meet.getFirstPlayer().equals(secondPlayer)))
             {
                 meet.assign();
                 return;

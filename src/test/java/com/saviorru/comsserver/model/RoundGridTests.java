@@ -1,17 +1,16 @@
 package com.saviorru.comsserver.model;
 
-import com.saviorru.comsserver.model.grids.RoundSchemeGrid;
 import org.junit.Before;
 import org.junit.Test;
+import static junit.framework.TestCase.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static junit.framework.TestCase.*;
 
 public class RoundGridTests {
-    private PlayerGrid testSubject;
+    private RoundScheme testSubject;
 
     @Before
     public void testInit() throws Exception
@@ -23,7 +22,7 @@ public class RoundGridTests {
         testList.add(testMeet1);
         testList.add(testMeet2);
         testList.add(testMeet3);
-        testSubject = new RoundSchemeGrid(testList);
+        testSubject = new RoundScheme(testList);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class RoundGridTests {
         Meet testMeet = new Meet(testPlMock1, testPlMock2);
         List<Meet> newList = testSubject.getAllMeets();
         newList.add(testMeet);
-        testSubject = new RoundSchemeGrid(newList);
+        testSubject = new RoundScheme(newList);
         testSubject.assignMeet(testPlMock1, testPlMock2);
         assertEquals(3, testSubject.getUnassignedMeets().size());
     }
@@ -56,7 +55,7 @@ public class RoundGridTests {
         Meet testMeet = new Meet(testPlMock1, testPlMock2);
         List<Meet> newList = testSubject.getAllMeets();
         newList.add(testMeet);
-        testSubject = new RoundSchemeGrid(newList);
+        testSubject = new RoundScheme(newList);
         testSubject.assignMeet(testPlMock2, testPlMock1);
     }
 
