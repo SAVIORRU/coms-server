@@ -10,6 +10,12 @@ public class Points {
         this.pointsSecondSide = 0;
     }
 
+    public Points(int pointsFirstSide, int pointsSecondSide) throws Exception {
+        if(pointsFirstSide < 0 || pointsSecondSide < 0) throw new Exception("The number of points is indicated by a negative number");
+        this.pointsFirstSide = pointsFirstSide;
+        this.pointsSecondSide = pointsSecondSide;
+    }
+
     void setPoints(int pointsFirstSide,int pointsSecondSide) throws Exception {
         if(pointsFirstSide < 0 || pointsSecondSide < 0) throw new Exception("The number of points is indicated by a negative number");
         this.pointsFirstSide = pointsFirstSide;

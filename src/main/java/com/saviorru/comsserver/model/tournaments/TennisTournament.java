@@ -151,4 +151,5 @@ public class TennisTournament implements Tournament {
         if (champion == null) throw new Exception("Tournament is not finished");
         return champion;
     }
+
 }
