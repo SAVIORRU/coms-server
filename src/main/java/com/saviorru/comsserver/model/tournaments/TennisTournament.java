@@ -95,6 +95,7 @@ public class TennisTournament implements Tournament {
     public Match getNextMatch() throws Exception {
         if (isStart) throw new Exception("Tournament is not started");
         List<Match> matchesByState = schedule.getMatchesByState(MatchState.NOTPLAYED);
+        if(matchesByState.size() == 0) return null;
         Match nextMatch = matchesByState.get(0);
         for (int i = 0; i < matchesByState.size() - 1; i++) {
             if (matchesByState.get(i).getDate().isBefore(matchesByState.get(i + 1).getDate())) {
