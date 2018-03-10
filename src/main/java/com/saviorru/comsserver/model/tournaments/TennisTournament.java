@@ -2,6 +2,7 @@ package com.saviorru.comsserver.model.tournaments;
 
 import com.saviorru.comsserver.model.*;
 import com.saviorru.comsserver.model.generators.OlympicScheduleGenerator;
+import com.saviorru.comsserver.model.generators.RoundScheduleGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class TennisTournament implements Tournament {
 
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
-            //generate();
+            scheduleGenerator = new RoundScheduleGenerator();
+            generate(scheduleGenerator);
         }
         if (schemeType == SchemeType.OLYMPIC) {
             scheduleGenerator = new OlympicScheduleGenerator();
