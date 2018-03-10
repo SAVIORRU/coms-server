@@ -1,16 +1,19 @@
 package com.saviorru.comsserver.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public interface Tournament {
     public String getName();
-    public HashMap<Integer, ArrayList<Player>> getPlayers();
-    public TournamentState getState();
-    public HashMap<Integer, Match> getScheldule();
-    public HashMap<Integer, Location> getLocations();
+    public List<Player> getPlayers();
+    public Schedule getSchedule() throws Exception;
+    public List<Location> getLocations() throws Exception;
     public SchemeType getSchemeType();
-    public void updatePlayers(HashMap<Integer, ArrayList<Player>> playersLists);
-    public void updateState(TournamentState state);
-    public void updateScheldule(HashMap<Integer, Match> scheldule);
+    public void start() throws Exception;
+    public void finish() throws Exception;
+    public Match getNextMatch() throws Exception;
+    public void finishMatch(Match match,Points points) throws Exception;
+    public void finishMatches(List<Match> matches,List<Points> points) throws Exception;
+    public Meet getNextMeet() throws Exception;
+    public boolean isStart();
+    public Player getChampion() throws Exception;
 }

@@ -191,7 +191,13 @@ public class OlympicScheduleGenerator implements ScheduleGenerator {
 
     @Override
     public List<Match> updateSchedule(List<Match> matches) {
-        return createSchedule(matches, this.child);
+        int oldSize = matches.size();
+        List<Match> newMatches = new ArrayList<>();
+        createSchedule(matches, this.child);
+        for(int i = oldSize-1; i < this.matchList.size();i++){
+            newMatches.add(this.matchList.get(i));
+        }
+        return newMatches;
     }
 
 

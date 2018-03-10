@@ -1,70 +1,148 @@
 package com.saviorru.comsserver.model.tournaments;
 
 import com.saviorru.comsserver.model.*;
+import com.saviorru.comsserver.model.generators.OlympicScheduleGenerator;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TennisTournament implements Tournament {
 
-    private String name;
-    private HashMap<Integer, ArrayList<Player>> playersLists;
-    private TournamentState state = TournamentState.OPEN;
+    private LocationDispatcher locationDispatcher;
+    private Schedule schedule;
+    private LocalDateTime startDate, endDate;
+    private List<Player> players;
+    private DateDispatcher dateDispatcher;
+    private boolean isStart;
     private SchemeType schemeType;
-    private HashMap<Integer, Location> locations;
-    private HashMap<Integer, Match> scheldule;
+    private ScheduleGenerator scheduleGenerator;
+    private String nameTournament;
+    private Player champion;
 
-    public TennisTournament(String name, HashMap<Integer, ArrayList<Player>> playersLists, SchemeType schemeType, HashMap<Integer, Location> locations, HashMap<Integer, Match> scheldule) {
-        this.name = name;
-        this.playersLists = playersLists;
+    TennisTournament(List<Player> players, List<Location> locations, SchemeType schemeType, LocalDateTime startDate, String nameTournament) throws Exception {
+        if(players == null || locations == null || schemeType == null || startDate == null || nameTournament == null) throw new NullPointerException();
+        if(players.isEmpty() || locations.isEmpty() || nameTournament.isEmpty() ) throw new Exception("Empty parameter");
+        this.players = players;
+        this.locationDispatcher.addAllLocation(locations);
+        this.startDate = startDate;
+        this.dateDispatcher = new DateDispatcher(startDate, 10, 18, 12);
+        this.isStart = false;
         this.schemeType = schemeType;
-        this.locations = locations;
-        this.scheldule = scheldule;
+        this.nameTournament = nameTournament;
+        generationSchedule(schemeType);
     }
 
+    private void generationSchedule(SchemeType schemeType) throws Exception {
+        if (schemeType == SchemeType.ROUND) {
+            //generate();
+        }
+        if (schemeType == SchemeType.OLYMPIC) {
+            scheduleGenerator = new OlympicScheduleGenerator();
+            generate(scheduleGenerator);
+        }
+    }
+
+    private void generate(ScheduleGenerator scheduleGenerator) throws Exception {
+        schedule.addMatches(scheduleGenerator.generateSchedule(players, locationDispatcher, dateDispatcher));
+    }
 
     @Override
     public String getName() {
-        return name;
-    }
-
-    public HashMap<Integer, ArrayList<Player>> getPlayers() {
-        return playersLists;
+        return this.nameTournament;
     }
 
     @Override
-    public TournamentState getState() {
-        return state;
+    public List<Player> getPlayers() {
+        return this.players;
+    }
+
+    @Override
+    public Schedule getSchedule() throws Exception {
+        if (isStart) throw new Exception("Tournament is not started");
+        return this.schedule;
+    }
+
+    @Override
+    public List<Location> getLocations() throws Exception {
+        if (isStart) throw new Exception("Tournament is not started");
+        return locationDispatcher.getAllLocations();
     }
 
     @Override
     public SchemeType getSchemeType() {
-        return schemeType;
+        return this.schemeType;
     }
 
     @Override
-    public void updatePlayers(HashMap<Integer, ArrayList<Player>> playersLists) {
-        this.playersLists = playersLists;
+    public void start() throws Exception {
+        if (!this.isStart) {
+            this.isStart = true;
+            return;
+        }
+        throw new Exception("Tournament is started");
     }
 
     @Override
-    public void updateState(TournamentState state) {
-        this.state = state;
-
+    public void finish() throws Exception {
+        if (this.isStart) {
+            this.isStart = false;
+            this.champion = schedule.getMatchesByState(MatchState.PLAYED).get(schedule.getAllMatches().size() - 1).getWinner();
+        }
+        throw new Exception("Tournament is not started");
     }
 
     @Override
-    public void updateScheldule(HashMap<Integer, Match> scheldule) {
-        this.scheldule = scheldule;
+    public Match getNextMatch() throws Exception {
+        if (isStart) throw new Exception("Tournament is not started");
+        List<Match> matchesByState = schedule.getMatchesByState(MatchState.NOTPLAYED);
+        if(matchesByState.size() == 0) return null;
+        Match nextMatch = matchesByState.get(0);
+        for (int i = 0; i < matchesByState.size() - 1; i++) {
+            if (matchesByState.get(i).getDate().isBefore(matchesByState.get(i + 1).getDate())) {
+                nextMatch = matchesByState.get(i);
+            }
+        }
+        return nextMatch;
     }
 
     @Override
-    public HashMap<Integer, Location> getLocations() {
-        return locations;
+    public void finishMatch(Match match, Points points) throws Exception {
+        if (match == null || points == null) throw new NullPointerException();
+        match.setPoints(points.getPointsFirstSide(), points.getPointsSecondSide());
+        match.setMatchState(MatchState.PLAYED);
+        this.locationDispatcher.freeLocation(match.getLocation());
+        List<Match> updateMatches = this.scheduleGenerator.updateSchedule(this.schedule.getAllMatches());
+        if (updateMatches.size() > 0) {
+            this.schedule.addMatches(updateMatches);
+        }
     }
 
     @Override
-    public HashMap<Integer, Match> getScheldule() {
-        return scheldule;
+    public void finishMatches(List<Match> matches, List<Points> points) throws Exception {
+        if (isStart) throw new Exception("Tournament is not started");
+        if (matches == null || points == null) throw new NullPointerException();
+        for (int i = 0; i < matches.size(); i++) {
+            finishMatch(matches.get(i),points.get(i));
+        }
+    }
+
+    @Override
+    public Meet getNextMeet() throws Exception {
+        if (isStart) throw new Exception("Tournament is not started");
+        if (schedule.getMatchesByState(MatchState.NOTPLAYED).size() == 0) return null;
+        return new Meet(schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getFirstSide(), schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getSecondSide());
+    }
+
+    @Override
+    public boolean isStart() {
+        return this.isStart;
+    }
+
+    @Override
+    public Player getChampion() throws Exception {
+        if (champion == null) throw new Exception("Tournament is not finished");
+        return champion;
     }
 }

@@ -13,5 +13,4 @@ public interface Schedule {
     public List<Match> getMatchesByPlayer(Player player);
     public List<Match> getMatchesByDate(LocalDateTime date);
     public List<Match> getMatchesByLocation(Location location);
-    public void finishMatch(Match match, Points result) throws Exception;
 }

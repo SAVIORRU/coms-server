@@ -25,6 +25,16 @@ public class LocationDispatcher {
             this.locationsList.add(newLocation);
         }
     }
+    public void addAllLocation(List<Location> Locations) throws Exception
+    {
+        if (Locations == null) throw new Exception("Null argument");
+        if (this.locationsList.containsAll(Locations)) {
+            throw new Exception("Duplicate locations is not allowed");
+        }
+        else {
+            this.locationsList.addAll(Locations);
+        }
+    }
     public void removeLocation(Location existingLocation) throws Exception
     {
         if (existingLocation == null) throw new Exception("Null argument");
