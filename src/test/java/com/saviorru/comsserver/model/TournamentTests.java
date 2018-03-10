@@ -30,7 +30,7 @@ public class TournamentTests {
         for (int i = 0; i < countPlayers; i++) {
             playerList.add(mock(Player.class));
         }
-        tournament = new TennisTournament(playerList, locationList, SchemeType.OLYMPIC, LocalDateTime.now(), "ten");
+        tournament = new TennisTournament(playerList, locationList, SchemeType.ROUND, LocalDateTime.now(), "ten");
     }
 
     @Test(expected = NullPointerException.class)
@@ -94,6 +94,30 @@ public class TournamentTests {
     @Test
     public void testIsPlayedFalse() throws Exception {
         assertFalse(tournament.isStart());
+    }
+
+    @Test()
+    public void testFinishMatch() throws Exception
+    {
+        tournament.start();
+        Points testPoints = new Points();
+        testPoints.setPoints(1, 0);
+        tournament.finishMatch(tournament.getNextMatch(), testPoints);
+    }
+
+    @Test()
+    public void testGetNextMatch() throws Exception
+    {
+        tournament.start();
+        Match match = tournament.getNextMatch();
+        assertFalse(match.isPlayed());
+        while (tournament.getNextMatch() != null)
+        {
+            Points testPoints = new Points();
+            testPoints.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+        }
+        assertEquals(null, tournament.getNextMatch());
     }
 
 }

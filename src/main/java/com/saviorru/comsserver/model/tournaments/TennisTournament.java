@@ -38,7 +38,7 @@ public class TennisTournament implements Tournament {
 
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
-            //generate();
+            scheduleGenerator = new RoundScheduleGenerator();
         }
         if (schemeType == SchemeType.OLYMPIC) {
             scheduleGenerator = new OlympicScheduleGenerator();
@@ -98,7 +98,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public Match getNextMatch() throws Exception {
-        if (isStart) throw new Exception("Tournament is not started");
+        if (!(isStart)) throw new Exception("Tournament is not started");
         List<Match> matchesByState = schedule.getMatchesByState(MatchState.NOTPLAYED);
         if (matchesByState.size() == 0) return null;
         Match nextMatch = matchesByState.get(0);
