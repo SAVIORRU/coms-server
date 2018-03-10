@@ -48,6 +48,7 @@ public class ScheduleImpl implements Schedule {
     public void addMatches(List<Match> matches) throws Exception {
         if(matches == null) throw new NullPointerException();
         if(matches.isEmpty()) throw new Exception("List is empty");
+        if (this.matchesList.containsAll(matches)) throw new Exception("Duplicate matches is not allowed");
         matchesList.addAll(matches);
     }
 
@@ -98,25 +99,4 @@ public class ScheduleImpl implements Schedule {
         return returnList;
     }
 
-    @Override
-    public void finishMatch(Match match, Points result) throws Exception {
-        if ((match == null) || (result == null)) throw new NullPointerException();
-        for (Match iterator: matchesList)
-        {
-            if (iterator.equals(match))
-            {
-                if (!iterator.isPlayed())
-                {
-                    iterator.setPoints(result.getPointsFirstSide(), result.getPointsSecondSide());
-                    iterator.setMatchState(MatchState.PLAYED);
-                    return;
-                }
-                else
-                {
-                    throw new Exception("Match is already played");
-                }
-            }
-        }
-        throw new Exception("Cant find specified match");
-    }
 }

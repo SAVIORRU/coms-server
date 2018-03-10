@@ -16,11 +16,11 @@ public class Points {
         this.pointsSecondSide = pointsSecondSide;
     }
 
-    int getPointsFirstSide() {
+    public int getPointsFirstSide() {
         return this.pointsFirstSide;
     }
 
-    int getPointsSecondSide() {
+    public int getPointsSecondSide() {
         return this.pointsSecondSide;
     }
 }
