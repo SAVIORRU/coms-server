@@ -52,11 +52,9 @@ public class RoundGridTests {
     {
         Player testPlMock1 = mock(Player.class);
         Player testPlMock2 = mock(Player.class);
-        Meet testMeet = new Meet(testPlMock1, testPlMock2);
         List<Meet> newList = testSubject.getAllMeets();
-        newList.add(testMeet);
         testSubject = new RoundScheme(newList);
-        testSubject.assignMeet(testPlMock2, testPlMock1);
+        testSubject.assignMeet(testPlMock1, testPlMock2);
     }
 
 }

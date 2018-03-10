@@ -115,6 +115,7 @@ public class TennisTournament implements Tournament {
     @Override
     public void finishMatch(Match match, Points points) throws Exception {
         if (match == null || points == null) throw new NullPointerException();
+        if (!(isStart)) throw new Exception("Tournament is not started");
         match.setPoints(points.getPointsFirstSide(), points.getPointsSecondSide());
         match.setMatchState(MatchState.PLAYED);
         this.locationDispatcher.freeLocation(match.getLocation());
@@ -126,7 +127,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public void finishMatches(List<Match> matches, List<Points> points) throws Exception {
-        if (isStart) throw new Exception("Tournament is not started");
+        if (!(isStart)) throw new Exception("Tournament is not started");
         if (matches == null || points == null) throw new NullPointerException();
         for (int i = 0; i < matches.size(); i++) {
             finishMatch(matches.get(i), points.get(i));
@@ -135,7 +136,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public Meet getNextMeet() throws Exception {
-        if (isStart) throw new Exception("Tournament is not started");
+        if (!(isStart)) throw new Exception("Tournament is not started");
         if (schedule.getMatchesByState(MatchState.NOTPLAYED).size() == 0) return null;
         return new Meet(schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getFirstSide(), schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getSecondSide());
     }

@@ -4,7 +4,9 @@ import com.saviorru.comsserver.model.Meet;
 import com.saviorru.comsserver.model.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RoundScheme
 {
@@ -66,8 +68,13 @@ public class RoundScheme
     public void assignMeet(Player firstPlayer, Player secondPlayer) throws Exception {
         for (Meet meet: this.meetsList)
         {
-            if ((meet.getFirstPlayer().equals(firstPlayer)) && (meet.getSecondPlayer().equals(secondPlayer)) ||
-                    (meet.getSecondPlayer().equals(firstPlayer)) && (meet.getFirstPlayer().equals(secondPlayer)))
+            Set<Player> meetSet = new HashSet<>();
+            meetSet.add(meet.getFirstPlayer());
+            meetSet.add(meet.getSecondPlayer());
+            Set<Player> paramSet = new HashSet<>();
+            paramSet.add(firstPlayer);
+            paramSet.add(secondPlayer);
+            if (meetSet.equals(paramSet))
             {
                 meet.assign();
                 return;

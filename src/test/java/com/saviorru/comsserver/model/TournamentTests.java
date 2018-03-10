@@ -101,8 +101,10 @@ public class TournamentTests {
     {
         tournament.start();
         Points testPoints = new Points();
+        Match testMatch = tournament.getNextMatch();
         testPoints.setPoints(1, 0);
         tournament.finishMatch(tournament.getNextMatch(), testPoints);
+        assertFalse(testMatch == tournament.getNextMatch());
     }
 
     @Test()
@@ -119,5 +121,19 @@ public class TournamentTests {
         }
         assertEquals(null, tournament.getNextMatch());
     }
+    @Test(expected = Exception.class)
+    public void testGetNextMatchException() throws Exception
+    {
+        Match match = tournament.getNextMatch();
+        assertFalse(match.isPlayed());
+        while (tournament.getNextMatch() != null)
+        {
+            Points testPoints = new Points();
+            testPoints.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+        }
+        assertEquals(null, tournament.getNextMatch());
+    }
+
 
 }
