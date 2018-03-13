@@ -4,9 +4,10 @@ import java.util.List;
 
 public interface Scheme {
 
-    Player getContestant(Player player);
-    List<Player> getCurrentTour();
-    List<Player> getTheTour(int tourNumber);
+    Player getCurrentTourContestant(Player player);
+    List<Player> getAllContestant(Player player);
+    List<Player> getPlayersCurrentTour();
+    List<Player> getPlayersTheTour(int tourNumber);
     int getCountTour();
 
 }
