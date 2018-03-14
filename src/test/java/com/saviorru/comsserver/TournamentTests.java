@@ -1,6 +1,6 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.*;
+/*import com.saviorru.comsserver.domain.*;
 import com.saviorru.comsserver.domain.tournaments.TennisTournament;
 import org.junit.Before;
 import org.junit.Test;
@@ -164,3 +164,4 @@ public class TournamentTests {
 
 
 }
+*/
