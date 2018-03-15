@@ -74,12 +74,14 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
     private List<Match> createMatches() throws Exception
     {
         List<Match> matchesList = new ArrayList<>();
-        if (this.locationDispatcher.getAllFreeLocations().size() == 0 || tournamentScheme.getNextUnplayedPair() == null)
+        List<Location> freeLocations = this.locationDispatcher.getAllFreeLocations();
+        if (freeLocations.size() == 0)
             return matchesList;
-        for (Location location: locationDispatcher.getAllFreeLocations())
+        for (Location location: freeLocations)
         {
-            locationDispatcher.reserveLocation(location);
             Pair<Integer,Integer> playerPair = tournamentScheme.getNextUnplayedPair();
+            if (playerPair == null) break;
+            locationDispatcher.reserveLocation(location);
             Match newMatch = new OneOnOneMatch(playerDispatcher.getPlayerByNumber(playerPair.getKey()),
                     playerDispatcher.getPlayerByNumber(playerPair.getValue()), location, dateDispatcher.getNextDate());
             matchesList.add(newMatch);

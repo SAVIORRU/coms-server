@@ -41,6 +41,8 @@ public class ScheduleGeneratorTests {
 
     }
 
+    //round scheme tests
+
     @Test()
     public void genGenerateTest() throws Exception
     {
@@ -64,11 +66,11 @@ public class ScheduleGeneratorTests {
         schedule = testSubject.updateSchedule(match2, schedule);
         assertEquals(5, schedule.getAllMatches().size());
     }
-    @Test(timeout = 10000)
+    @Test()
     public void genUpdateFullTest() throws Exception
     {
         Schedule schedule =  testSubject.generateSchedule();
-        while (schedule.getAllMatches().size() != 10) {
+        while (schedule.getAllMatches().size() < 10) {
             Match match1 = schedule.getMatchesByState(MatchState.NOTPLAYED).get(0);
             match1.setPoints(1, 0);
             match1.setMatchState(MatchState.PLAYED);
