@@ -175,8 +175,7 @@ public class OlympicSchemeTest {
         pairs.add(new Pair<>(5, 8));
         assertEquals(pairs, olympicSchemeStandardSize.getAllPairsInTour(2));
     }
-
-    // --------------------------------------
+    
     @Test
     public void testGetAllPairs_whenNotStandardSizePlayers() {
         List<Pair<Integer, Integer>> pairs = new ArrayList<>();
