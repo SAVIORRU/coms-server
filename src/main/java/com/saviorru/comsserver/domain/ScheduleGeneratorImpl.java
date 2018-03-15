@@ -28,8 +28,8 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
         Scheme newScheme = null;
         if (tournamentScheme == SchemeType.ROUND)
             newScheme = new RoundScheme(playersCount);
-        if (tournamentScheme == SchemeType.OLYMPIC) {//newScheme = new OlympicScheme(playersCount);
-        }
+        if (tournamentScheme == SchemeType.OLYMPIC)
+            newScheme = new OlympicScheme(playersCount);
         return newScheme;
     }
 
@@ -79,7 +79,7 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
             return matchesList;
         for (Location location: freeLocations)
         {
-            Pair<Integer,Integer> playerPair = tournamentScheme.getNextUnplayedPair();
+            Pair<Integer,Integer> playerPair = tournamentScheme.getNextNotPlayedPair();
             if (playerPair == null) break;
             locationDispatcher.reserveLocation(location);
             Match newMatch = new OneOnOneMatch(playerDispatcher.getPlayerByNumber(playerPair.getKey()),

@@ -28,6 +28,9 @@ public class ScheduleGeneratorTests {
         playerDispatcher.addPlayer(mock(Player.class));
         playerDispatcher.addPlayer(mock(Player.class));
         playerDispatcher.addPlayer(mock(Player.class));
+        playerDispatcher.addPlayer(mock(Player.class));
+        playerDispatcher.addPlayer(mock(Player.class));
+        playerDispatcher.addPlayer(mock(Player.class));
         locationDispatcher = new LocationDispatcher();
         loc1 = new Location("1", "");
         loc2 = new Location("2", "");
@@ -36,23 +39,25 @@ public class ScheduleGeneratorTests {
         locationDispatcher.addLocation(loc2);
         locationDispatcher.addLocation(loc3);
         dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 12);
-        schemeType = SchemeType.ROUND;
-        testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
+
 
     }
 
     //round scheme tests
 
     @Test()
-    public void genGenerateTest() throws Exception
+    public void genRoundGenerateTest() throws Exception
     {
-
+        schemeType = SchemeType.ROUND;
+        testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
        Schedule schedule =  testSubject.generateSchedule();
        assertEquals(3, schedule.getAllMatches().size());
     }
     @Test()
-    public void genUpdateTest() throws Exception
+    public void genRoundUpdateTest() throws Exception
     {
+        schemeType = SchemeType.ROUND;
+        testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
         Schedule schedule =  testSubject.generateSchedule();
         Match match1 = schedule.getMatchesByState(MatchState.NOTPLAYED).get(0);
         Match match2 = schedule.getMatchesByState(MatchState.NOTPLAYED).get(1);
@@ -67,8 +72,10 @@ public class ScheduleGeneratorTests {
         assertEquals(5, schedule.getAllMatches().size());
     }
     @Test()
-    public void genUpdateFullTest() throws Exception
+    public void genRoundUpdateLoopTest() throws Exception
     {
+        schemeType = SchemeType.ROUND;
+        testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
         Schedule schedule =  testSubject.generateSchedule();
         while (schedule.getAllMatches().size() < 10) {
             Match match1 = schedule.getMatchesByState(MatchState.NOTPLAYED).get(0);
@@ -78,5 +85,15 @@ public class ScheduleGeneratorTests {
             schedule = testSubject.updateSchedule(match1, schedule);
         }
         assertEquals(10, schedule.getAllMatches().size());
+    }
+
+    //olympic scheme tests
+    @Test()
+    public void genOlympGenerateTest() throws Exception
+    {
+        schemeType = SchemeType.OLYMPIC;
+        testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
+        Schedule schedule =  testSubject.generateSchedule();
+        assertEquals(3, schedule.getAllMatches().size());
     }
 }

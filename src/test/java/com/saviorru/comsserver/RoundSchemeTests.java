@@ -1,16 +1,10 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.Player;
 import com.saviorru.comsserver.domain.RoundScheme;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
 
 public class RoundSchemeTests {
     private RoundScheme testSubject;
@@ -37,15 +31,15 @@ public class RoundSchemeTests {
     @Test()
     public void schemeGetUnplayedTest() throws Exception
     {
-        Pair<Integer, Integer> pair1 = testSubject.getNextUnplayedPair();
-        assertFalse(testSubject.getNextUnplayedPair().equals(pair1));
+        Pair<Integer, Integer> pair1 = testSubject.getNextNotPlayedPair();
+        assertFalse(testSubject.getNextNotPlayedPair().equals(pair1));
     }
     @Test()
     public void schemeGerLoopTest() throws Exception
     {
         while (true)
         {
-            Pair<Integer, Integer> pair = testSubject.getNextUnplayedPair();
+            Pair<Integer, Integer> pair = testSubject.getNextNotPlayedPair();
             if (pair == null) { break;}
             System.out.print("\n");
             System.out.print(pair);

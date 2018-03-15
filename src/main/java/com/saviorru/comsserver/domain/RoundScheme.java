@@ -67,7 +67,7 @@ public class RoundScheme implements Scheme
     }
 
     @Override
-    public Pair<Integer, Integer> getNextUnplayedPair() throws Exception {
+    public Pair<Integer, Integer> getNextNotPlayedPair() throws Exception {
         for (List<Meet> tour: this.toursList)
         {
             for (Meet meet: tour) {

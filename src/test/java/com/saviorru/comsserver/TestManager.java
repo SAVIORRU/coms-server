@@ -11,11 +11,9 @@ import org.junit.runners.Suite;
         LocationTests.class,
         LocationDispatherTests.class,
         OlympicSchemeTest.class,
-        RoundGridTests.class,
-        MeetTests.class,
         ScheduleTests.class,
         DateDispatherTests.class,
-        TournamentTests.class
+        //TournamentTests.class
 })
 public class TestManager {
 }

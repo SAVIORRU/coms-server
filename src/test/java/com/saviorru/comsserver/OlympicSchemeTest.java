@@ -118,20 +118,20 @@ public class OlympicSchemeTest {
 
 
     @Test
-    public void testGetNextNotPlayedPair_whenStandardSizePlayers_resultFirstPair() {
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers_resultFirstPair() throws Exception {
         Pair<Integer, Integer> pairs = new Pair<>(1, 2);
         assertEquals(pairs, olympicSchemeStandardSize.getNextNotPlayedPair());
     }
 
     @Test
-    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultSecondPair() {
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultSecondPair() throws Exception {
         Pair<Integer, Integer> pairs = new Pair<>(3, 4);
         olympicSchemeStandardSize.getNextNotPlayedPair();
         assertEquals(pairs, olympicSchemeStandardSize.getNextNotPlayedPair());
     }
 
     @Test
-    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultNull() {
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultNull() throws Exception {
         olympicSchemeStandardSize.getNextNotPlayedPair();
         olympicSchemeStandardSize.getNextNotPlayedPair();
         olympicSchemeStandardSize.getNextNotPlayedPair();
@@ -187,19 +187,19 @@ public class OlympicSchemeTest {
     }
 
     @Test
-    public void testGetNextNotPlayedPair_whenNotStandardSizePlayers_resultFirstPair() {
+    public void testGetNextNotPlayedPair_whenNotStandardSizePlayers_resultFirstPair() throws Exception {
         assertEquals(new Pair<>(1, 2), olympicSchemeNotStandartSize.getNextNotPlayedPair());
     }
 
     @Test
-    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultSecondPair() {
+    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultSecondPair() throws Exception {
         Pair<Integer, Integer> pairs = new Pair<>(3, 4);
         olympicSchemeNotStandartSize.getNextNotPlayedPair();
         assertEquals(pairs, olympicSchemeNotStandartSize.getNextNotPlayedPair());
     }
 
     @Test
-    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultNull() {
+    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultNull() throws Exception {
         olympicSchemeNotStandartSize.getNextNotPlayedPair();
         olympicSchemeNotStandartSize.getNextNotPlayedPair();
         olympicSchemeNotStandartSize.getNextNotPlayedPair();
