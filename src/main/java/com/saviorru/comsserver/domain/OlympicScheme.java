@@ -1,75 +1,245 @@
 package com.saviorru.comsserver.domain;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class OlympicScheme {
+public class OlympicScheme implements Scheme {
 
     private int countRounds;
+
+
+    private static class Node {
+        public Integer data;
+        public Node leftPlayer, rightPlayer, nextPositionPlayer;
+    }
+
+    private Node root;
+    private List<Node> par;
+    private List<Node> children;
+    private Integer countPlayers;
+    private List<Pair<Integer, Integer>> givenPairsPlayers;
+
+    public OlympicScheme(Integer countPlayers) throws Exception {
+        if (countPlayers < 2) throw new Exception("Incorrect number of players");
+        this.root = new Node();
+        this.root.nextPositionPlayer = this.root;
+        this.countRounds = countTour(countPlayers);
+        this.countPlayers = countPlayers;
+        this.givenPairsPlayers = new ArrayList<>();
+        buildScheme(countRounds);
+        fillFirstRound();
+    }
+
+    private void buildScheme(int level) {
+        this.par = new ArrayList<>();
+        this.children = new ArrayList<>();
+        this.par.add(this.root);
+        for (int i = 0; i < level; i++) {
+            for (Node parent : this.par) {
+                parent.leftPlayer = new Node();
+                parent.leftPlayer.nextPositionPlayer = parent;
+                this.children.add(parent.leftPlayer);
+                parent.rightPlayer = new Node();
+                parent.rightPlayer.nextPositionPlayer = parent;
+                this.children.add(parent.rightPlayer);
+            }
+            this.par = new ArrayList<Node>(this.children);
+            if (level != i + 1) this.children.clear();
+        }
+    }
+
+    private int countTour(int countPlayers) {
+        int count = 0, st = 2, n = 0;
+        do {
+            n++;
+            count = (int) Math.pow(st, n);
+        } while (count < countPlayers);
+        return n;
+    }
+
+    private void fillFirstRound() {
+        if (this.countPlayers == Math.pow(2, countTour(this.countPlayers)))
+            fillFirstTourStandardCountPlayer();
+        else {
+            fillFirstTourNotStandardCountPlayer();
+        }
+    }
+
+    private void fillFirstTourNotStandardCountPlayer() {
+        int count = 0;
+        for (int i = 0, j = 0; j < this.children.size(); i += 2, j += 4) {
+            this.children.get(j).data = i + 1;
+            this.children.get(j + 1).data = i + 2;
+            count++;
+        }
+        for (int i = count * 2, j = 2; j < this.children.size() && i < this.countPlayers; i++, j += 4) {
+            this.children.get(j).data = i + 1;
+            if (j + 4 > this.children.size() && i + 1 < this.countPlayers) {
+                this.children.get((j + 1 < this.children.size()) ? j + 1 : j).data = i + 2;
+                return;
+            }
+            addPlayersNextTour(this.children.get(j));
+        }
+    }
+
+    private void fillFirstTourStandardCountPlayer() {
+        for (int i = 0; i < this.countPlayers; i++) {
+            this.children.get(i).data = i + 1;
+        }
+    }
+
+    private Node addPlayersNextTour(Node node) {
+        if (node.nextPositionPlayer.rightPlayer.data == null || node.nextPositionPlayer.leftPlayer.data == null) {
+            if (!checkLackPartner(node.nextPositionPlayer) || checkPartner(node.nextPositionPlayer)) {
+                    if (node.nextPositionPlayer.data == null) {
+                        node.nextPositionPlayer.data = node.data;
+                        return node.nextPositionPlayer;
+                    }
+            }
+        }
+        return node;
+    }
+
+    private boolean checkPartner(Node node) {
+        return node.rightPlayer.rightPlayer.data == null && node.rightPlayer.leftPlayer.data == null && (node.leftPlayer.rightPlayer.data != null || node.leftPlayer.leftPlayer.data != null);
+    }
+
+    private boolean checkLackPartner(Node node) {
+        return node.rightPlayer.rightPlayer != null && node.rightPlayer.leftPlayer != null || node.leftPlayer.rightPlayer != null && node.leftPlayer.leftPlayer != null;
+    }
+
+    private void createSchedule(List<Integer> winnerList, List<Node> parents) {
+        for (int i = 0; i < winnerList.size(); i++) {
+            if (!addInScheme(parents, winnerList.get(i))) {
+                List<Node> p = initParents(parents);
+                if (p.size() <= 1) return;
+                createSchedule(winnerList, initParents(parents));
+            }
+        }
+    }
+
+    private ArrayList<Node> initParents(List<Node> child) {
+        ArrayList<Node> arrayList = new ArrayList<>();
+        for (int i = 0; i < child.size(); i += 2) {
+            arrayList.add(child.get(i).nextPositionPlayer);
+        }
+        return arrayList;
+    }
+
+    private boolean addInScheme(List<Node> child, Integer winner) {
+        for (Node aChild : child) {
+            if (aChild.data != null) {
+                if (aChild.data.equals(winner)) {
+                    if (aChild.nextPositionPlayer.data == null) {
+                        aChild.nextPositionPlayer.data = winner;
+                        addPlayersNextTour(aChild.nextPositionPlayer);
+                    } else return false;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private Node finedTour(Node node) {
+        if (node.nextPositionPlayer.rightPlayer.data != null && node.nextPositionPlayer.leftPlayer.data != null) {
+            if (node.nextPositionPlayer.data == null) return node.nextPositionPlayer;
+        }
+        return null;
+    }
+
+    private List<Pair<Integer, Integer>> getTheRound(int round) {
+        List<Pair<Integer, Integer>> arrayPair = new ArrayList<>();
+        List<Node> parents = new ArrayList<>();
+        parents.addAll(this.children);
+        parents = getRound(parents, --round);
+        for (int i = 0; i < parents.size(); i += 2) {
+            if (parents.get(i).nextPositionPlayer.leftPlayer.data != null && parents.get(i).nextPositionPlayer.rightPlayer.data != null)
+                arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, parents.get(i).nextPositionPlayer.rightPlayer.data));
+        }
+        return arrayPair;
+    }
+
+    private List<Node> getRound(List<Node> children, int round) {
+        List<Node> parents = new ArrayList<>(children);
+        children.clear();
+        for (int i = 0; i < parents.size(); i += 2) {
+            children.add(parents.get(i).nextPositionPlayer);
+        }
+        if (round == 0) return parents;
+        else return getRound(initParents(parents), --round);
+    }
 
     public int getCountRounds() {
         return countRounds;
     }
 
-    public static class Node {
-        public Player data;
-        public Node leftPlayer, rightPlayer, nextPositionPlayer;
-    }
-
-    private Node root;
-    private List<Node> parents;
-    private List<Node> childrens;
-
-    public OlympicScheme(int countRounds) {
-        if (countRounds < 0) throw new IndexOutOfBoundsException();
-        this.root = new Node();
-        this.root.nextPositionPlayer = this.root;
-        this.countRounds = countRounds;
-        buildScheme(countRounds);
-    }
-
-    private void buildScheme(int level) {
-        this.parents = new ArrayList<>();
-        this.childrens = new ArrayList<>();
-        this.parents.add(this.root);
-        for (int i = 0; i < level; i++) {
-            for (Node parent : this.parents) {
-                parent.leftPlayer = new Node();
-                parent.leftPlayer.nextPositionPlayer = parent;
-                this.childrens.add(parent.leftPlayer);
-                parent.rightPlayer = new Node();
-                parent.rightPlayer.nextPositionPlayer = parent;
-                this.childrens.add(parent.rightPlayer);
+    private Pair<Integer, Integer> getNextPair(List<Node> children) {
+        for (Node aChild : children) {
+            if (finedTour(aChild) != null) {
+                Pair<Integer, Integer> pair = new Pair<>(aChild.nextPositionPlayer.leftPlayer.data, aChild.nextPositionPlayer.rightPlayer.data);
+                if (!isPairInList(pair)) return pair;
             }
-            this.parents = new ArrayList<Node>(this.childrens);
-            if (level != i + 1) this.childrens.clear();
+        }
+        return (initParents(children).size() <= 1) ? null : getNextPair(initParents(children));
+    }
+
+    private void addPairsInList(List<Pair<Integer, Integer>> pairList) {
+        for (Pair<Integer, Integer> pair : pairList) {
+            if (this.givenPairsPlayers.contains(pair)) continue;
+            else this.givenPairsPlayers.add(pair);
         }
     }
 
-    public Node getRoot() {
-        return this.root;
+    private void addPairInList(Pair<Integer, Integer> pair) {
+        if (!this.givenPairsPlayers.contains(pair)) this.givenPairsPlayers.add(pair);
     }
 
-    public List<Node> getFirstRound() {
-        return this.childrens;
+    private boolean isPairInList(Pair<Integer, Integer> pair) {
+        if (this.givenPairsPlayers.contains(pair)) return true;
+        return false;
     }
 
-    public List<Node> getTheRound(int round) {
-        if (round < 0 || round > getCountRounds()) throw new IndexOutOfBoundsException();
-        parents = new ArrayList<>();
-        if (round > 0) {
-            parents = getRound(this.childrens, --round);
+    @Override
+    public List<Pair<Integer, Integer>> getAllPairs() {
+        int rounds = 1;
+        List<Pair<Integer, Integer>> pairList = new ArrayList<>();
+        while (rounds < this.countRounds) {
+            try {
+                pairList.addAll(getTheRound(rounds));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            rounds++;
         }
-        return parents;
+        addPairsInList(pairList);
+        return pairList;
     }
 
-    private List<Node> getRound(List<Node> childrens, int round) {
-        List<Node> parents = childrens;
-        childrens.clear();
-        for (int i = 0; i < parents.size(); i += 2) {
-            childrens.add(parents.get(i).nextPositionPlayer);
+    @Override
+    public Pair<Integer, Integer> getNextNotPlayedPair() {
+        Pair<Integer, Integer> pair = getNextPair(this.children);
+        if (isPairInList(pair)) return null;
+        else {
+            addPairInList(pair);
+            return pair;
         }
-        if (round == 0) return childrens;
-        else return getRound(childrens, --round);
+    }
+
+    @Override
+    public List<Pair<Integer, Integer>> getAllPairsInTour(Integer tourNumber) throws Exception {
+        if (tourNumber < 0 || tourNumber > getCountRounds()) throw new Exception("Tour out of range");
+        List<Pair<Integer, Integer>> list = getTheRound(tourNumber);
+        addPairsInList(list);
+        return list;
+    }
+
+    @Override
+    public void updateScheme(List<Integer> winnersList) throws Exception {
+        if (winnersList == null) throw new NullPointerException();
+        if (winnersList.isEmpty()) throw new Exception("Empty list winner");
+        createSchedule(winnersList, this.children);
     }
 }

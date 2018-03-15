@@ -1,7 +1,6 @@
 package com.saviorru.comsserver.domain.tournaments;
 
 import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.generators.OlympicScheduleGenerator;
 import com.saviorru.comsserver.domain.generators.RoundScheduleGenerator;
 
 import java.time.LocalDateTime;
@@ -42,10 +41,10 @@ public class TennisTournament implements Tournament {
             scheduleGenerator = new RoundScheduleGenerator();
             generate(scheduleGenerator);
         }
-        if (schemeType == SchemeType.OLYMPIC) {
-            scheduleGenerator = new OlympicScheduleGenerator();
-            generate(scheduleGenerator);
-        }
+//        if (schemeType == SchemeType.OLYMPIC) {
+//            //scheduleGenerator = new OlympicScheduleGenerator();
+//            generate(scheduleGenerator);
+//        }
     }
 
     private void generate(ScheduleGenerator scheduleGenerator) throws Exception {

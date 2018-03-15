@@ -1,0 +1,264 @@
+package com.saviorru.comsserver;
+
+import com.saviorru.comsserver.domain.OlympicScheme;
+import com.saviorru.comsserver.domain.Scheme;
+import javafx.util.Pair;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.runners.model.MultipleFailureException.assertEmpty;
+
+public class OlympicSchemeTest {
+
+    private Scheme olympicSchemeStandardSize, olympicSchemeNotStandartSize;
+
+    @Before
+    public void init() throws Exception {
+        olympicSchemeStandardSize = new OlympicScheme(16);
+        olympicSchemeNotStandartSize = new OlympicScheme(9);
+    }
+
+    @Test(expected = Exception.class)
+    public void testInit_whenNegativeParameter_resultException() throws Exception {
+        new OlympicScheme(-16);
+    }
+
+    @Test(expected = Exception.class)
+    public void testInit_whenParameterLessThan2_resultException() throws Exception {
+        new OlympicScheme(1);
+    }
+
+    @Test
+    public void testInit_whenStandardSizePlayers() throws Exception {
+        new OlympicScheme(16);
+    }
+
+    @Test
+    public void testInit_whenNotStandardSizePlayers() throws Exception {
+        new OlympicScheme(9);
+    }
+
+    @Test
+    public void testGetAllPairs_whenStandardSizePlayers() {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        pairs.add(new Pair<>(9, 10));
+        pairs.add(new Pair<>(11, 12));
+        pairs.add(new Pair<>(13, 14));
+        pairs.add(new Pair<>(15, 16));
+        assertEquals(pairs, olympicSchemeStandardSize.getAllPairs());
+    }
+
+    @Test
+    public void testGetAllPairs_whenStandardSizePlayersAndTwoTourInit() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        pairs.add(new Pair<>(9, 10));
+        pairs.add(new Pair<>(11, 12));
+        pairs.add(new Pair<>(13, 14));
+        pairs.add(new Pair<>(15, 16));
+        pairs.add(new Pair<>(1, 3));
+        pairs.add(new Pair<>(9, 12));
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(3);
+        list.add(9);
+        list.add(12);
+        olympicSchemeStandardSize.updateScheme(list);
+        assertEquals(pairs, olympicSchemeStandardSize.getAllPairs());
+    }
+
+
+    @Test
+    public void testGetAllPairs_whenStandardSizePlayersAndThreeTourInit() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        pairs.add(new Pair<>(9, 10));
+        pairs.add(new Pair<>(11, 12));
+        pairs.add(new Pair<>(13, 14));
+        pairs.add(new Pair<>(15, 16));
+        pairs.add(new Pair<>(1, 3));
+        pairs.add(new Pair<>(5, 7));
+        pairs.add(new Pair<>(9, 12));
+        pairs.add(new Pair<>(1, 5));
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(3);
+        list.add(9);
+        list.add(12);
+        olympicSchemeStandardSize.updateScheme(list);
+        list.clear();
+        list.add(1);
+        olympicSchemeStandardSize.updateScheme(list);
+        list.clear();
+        list.add(5);
+        list.add(7);
+        olympicSchemeStandardSize.updateScheme(list);
+        list.clear();
+        list.add(5);
+        olympicSchemeStandardSize.updateScheme(list);
+        assertEquals(pairs, olympicSchemeStandardSize.getAllPairs());
+    }
+
+
+    @Test
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers_resultFirstPair() {
+        Pair<Integer, Integer> pairs = new Pair<>(1, 2);
+        assertEquals(pairs, olympicSchemeStandardSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultSecondPair() {
+        Pair<Integer, Integer> pairs = new Pair<>(3, 4);
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        assertEquals(pairs, olympicSchemeStandardSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetNextNotPlayedPair_whenStandardSizePlayers__resultNull() {
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        olympicSchemeStandardSize.getNextNotPlayedPair();
+        assertEquals(null, olympicSchemeStandardSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenStandardSizePlayers__resultFirstTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        pairs.add(new Pair<>(9, 10));
+        pairs.add(new Pair<>(11, 12));
+        pairs.add(new Pair<>(13, 14));
+        pairs.add(new Pair<>(15, 16));
+        assertEquals(pairs, olympicSchemeStandardSize.getAllPairsInTour(1));
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenStandardSizePlayers__resultEmpty() throws Exception {
+        assertTrue(olympicSchemeStandardSize.getAllPairsInTour(2).isEmpty());
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenStandardSizePlayers__resultPairsOnSecondTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        list.add(5);
+        list.add(8);
+        olympicSchemeStandardSize.updateScheme(list);
+        pairs.add(new Pair<>(1, 3));
+        pairs.add(new Pair<>(5, 8));
+        assertEquals(pairs, olympicSchemeStandardSize.getAllPairsInTour(2));
+    }
+
+    // --------------------------------------
+    @Test
+    public void testGetAllPairs_whenNotStandardSizePlayers() {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        assertEquals(pairs, olympicSchemeNotStandartSize.getAllPairs());
+    }
+
+    @Test
+    public void testGetNextNotPlayedPair_whenNotStandardSizePlayers_resultFirstPair() {
+        assertEquals(new Pair<>(1, 2), olympicSchemeNotStandartSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultSecondPair() {
+        Pair<Integer, Integer> pairs = new Pair<>(3, 4);
+        olympicSchemeNotStandartSize.getNextNotPlayedPair();
+        assertEquals(pairs, olympicSchemeNotStandartSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetNextNotPlayedPair_whenNoStandardSizePlayers__resultNull() {
+        olympicSchemeNotStandartSize.getNextNotPlayedPair();
+        olympicSchemeNotStandartSize.getNextNotPlayedPair();
+        olympicSchemeNotStandartSize.getNextNotPlayedPair();
+        olympicSchemeNotStandartSize.getNextNotPlayedPair();
+        assertEquals(null, olympicSchemeNotStandartSize.getNextNotPlayedPair());
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultFirstTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(1, 2));
+        pairs.add(new Pair<>(3, 4));
+        pairs.add(new Pair<>(5, 6));
+        pairs.add(new Pair<>(7, 8));
+        assertEquals(pairs, olympicSchemeNotStandartSize.getAllPairsInTour(1));
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultEmpty() throws Exception {
+        assertTrue(olympicSchemeNotStandartSize.getAllPairsInTour(2).isEmpty());
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultPairsOnSecondTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        list.add(1);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        pairs.add(new Pair<>(1, 9));
+        assertEquals(pairs, olympicSchemeNotStandartSize.getAllPairsInTour(2));
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultPairsOnThirdTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        list.add(1);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        list.add(1);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        pairs.add(new Pair<>(1, 3));
+        assertEquals(pairs, olympicSchemeNotStandartSize.getAllPairsInTour(3));
+    }
+
+    @Test
+    public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultPairOnThirdTour() throws Exception {
+        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(7);
+        olympicSchemeNotStandartSize.updateScheme(list);
+        pairs.add(new Pair<>(5, 7));
+        assertEquals(pairs, olympicSchemeNotStandartSize.getAllPairsInTour(3));
+    }
+}
