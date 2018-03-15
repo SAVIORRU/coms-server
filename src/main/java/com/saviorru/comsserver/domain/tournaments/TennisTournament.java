@@ -1,12 +1,6 @@
 package com.saviorru.comsserver.domain.tournaments;
 
-import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.generators.RoundScheduleGenerator;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-public class TennisTournament implements Tournament {
+/*public class TennisTournament implements Tournament {
 
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
@@ -152,3 +146,4 @@ public class TennisTournament implements Tournament {
     }
 
 }
+*/

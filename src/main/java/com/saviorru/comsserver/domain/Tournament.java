@@ -13,7 +13,7 @@ public interface Tournament {
     public Match getNextMatch() throws Exception;
     public void finishMatch(Match match,Points points) throws Exception;
     public void finishMatches(List<Match> matches,List<Points> points) throws Exception;
-    public Meet getNextMeet() throws Exception;
+    // Meet getNextMeet() throws Exception;
     public boolean isStart();
     public Player getChampion() throws Exception;
 }
