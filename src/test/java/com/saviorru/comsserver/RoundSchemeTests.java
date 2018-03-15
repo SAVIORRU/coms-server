@@ -40,5 +40,17 @@ public class RoundSchemeTests {
         Pair<Integer, Integer> pair1 = testSubject.getNextUnplayedPair();
         assertFalse(testSubject.getNextUnplayedPair().equals(pair1));
     }
+    @Test()
+    public void schemeGerLoopTest() throws Exception
+    {
+        while (true)
+        {
+            Pair<Integer, Integer> pair = testSubject.getNextUnplayedPair();
+            if (pair == null) { break;}
+            System.out.print("\n");
+            System.out.print(pair);
+
+        }
+    }
 
 }
