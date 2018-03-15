@@ -1,6 +1,6 @@
 package com.saviorru.comsserver;
 
-/*import com.saviorru.comsserver.domain.*;
+import com.saviorru.comsserver.domain.*;
 import com.saviorru.comsserver.domain.tournaments.TennisTournament;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +20,17 @@ public class TournamentTests {
     private final int countPlayers = 8;
     private List<Player> playerList;
     private List<Location> locationList;
+    private LocationDispatcher locationDispatcher;
+    private Schedule schedule;
+    private LocalDateTime startDate, endDate;
+    private PlayerDispatcher playerDispatcher;
+    private DateDispatcher dateDispatcher;
+    private boolean isStart;
+    private SchemeType schemeType;
+    private Scheme scheme;
+    private String tournamentName;
+    private Player champion;
+    private ScheduleGenerator scheduleGenerator;
 
     @Before
     public void init() throws Exception {
@@ -28,30 +39,38 @@ public class TournamentTests {
         locationList.add(new Location("table1", "1"));
         locationList.add(new Location("table2", "2"));
         locationList.add(new Location("table3", "3"));
+        locationDispatcher  = new LocationDispatcher();
+        playerDispatcher = new PlayerDispatcher();
+        dateDispatcher = new DateDispatcher(LocalDateTime.now(),10,18,1);
+        schedule = new ScheduleImpl();
+        locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < countPlayers; i++) {
             playerList.add(mock(Player.class));
         }
-        tournament = new TennisTournament(playerList, locationList, SchemeType.OLYMPIC, LocalDateTime.now(), "ten");
+        playerDispatcher.addPlayers(playerList);
+        schemeType = SchemeType.ROUND;
+        tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
     }
 
     @Test(expected = NullPointerException.class)
     public void testInitNullParam() throws Exception {
-        new TennisTournament(null, null, null, null, null);
+        new TennisTournament(null, null, null, null, null,null);
     }
 
     @Test(expected = Exception.class)
     public void testInitEmptyParam() throws Exception {
-        new TennisTournament(playerList, new ArrayList<Location>(), SchemeType.OLYMPIC, LocalDateTime.now(), "ten");
+        playerDispatcher = new PlayerDispatcher();
+        new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
     }
 
     @Test
     public void testGetName() {
-        assertEquals("ten", tournament.getName());
+        assertEquals("tournament1", tournament.getName());
     }
 
     @Test
     public void testGetPlayers() {
-        assertEquals(playerList, tournament.getPlayers());
+        assertTrue(playerList.containsAll(tournament.getPlayers()));
     }
 
     @Test(expected = Exception.class)
@@ -150,18 +169,5 @@ public class TournamentTests {
         }
         assertEquals(null, tournament.getNextMatch());
     }
-    @Test()
-    public void testGetNextMeet() throws Exception
-    {
-        tournament.start();
-        Meet testMeet = tournament.getNextMeet();
-        Points testPoints = new Points();
-        tournament.finishMatch(tournament.getNextMatch(), testPoints);
-        Meet testMeet2 = tournament.getNextMeet();
-        assertFalse(testMeet == testMeet2);
-
-    }
-
 
 }
-*/
