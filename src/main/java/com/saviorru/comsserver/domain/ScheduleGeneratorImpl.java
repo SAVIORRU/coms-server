@@ -12,27 +12,16 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
     private Scheme tournamentScheme;
 
 
-    public ScheduleGeneratorImpl(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher, SchemeType tournamentScheme)
+    public ScheduleGeneratorImpl(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher, Scheme scheme)
     throws Exception {
-        if (playerDispatcher == null || dateDispatcher == null || locationDispatcher == null || tournamentScheme == null)
+        if (playerDispatcher == null || dateDispatcher == null || locationDispatcher == null || scheme == null)
             throw new NullPointerException();
         this.playerDispatcher = playerDispatcher;
         this.locationDispatcher = locationDispatcher;
         this.dateDispatcher = dateDispatcher;
-        this.tournamentScheme = createScheme(tournamentScheme, this.playerDispatcher.getAllPlayers().size());
+        this.tournamentScheme = scheme;
 
     }
-
-    private Scheme createScheme(SchemeType tournamentScheme, Integer playersCount) throws Exception
-    {
-        Scheme newScheme = null;
-        if (tournamentScheme == SchemeType.ROUND)
-            newScheme = new RoundScheme(playersCount);
-        if (tournamentScheme == SchemeType.OLYMPIC)
-            newScheme = new OlympicScheme(playersCount);
-        return newScheme;
-    }
-
 
     @Override
     public Schedule generateSchedule() throws Exception {

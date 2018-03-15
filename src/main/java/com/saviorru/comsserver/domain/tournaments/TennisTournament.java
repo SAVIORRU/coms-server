@@ -1,29 +1,33 @@
 package com.saviorru.comsserver.domain.tournaments;
 
-/*public class TennisTournament implements Tournament {
+import com.saviorru.comsserver.domain.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class TennisTournament implements Tournament {
 
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
     private LocalDateTime startDate, endDate;
-    private List<Player> players;
+    private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
     private boolean isStart;
     private SchemeType schemeType;
-    private ScheduleGenerator scheduleGenerator;
+    private Scheme scheme;
     private String tournamentName;
     private Player champion;
+    private ScheduleGenerator scheduleGenerator;
 
-    public TennisTournament(List<Player> players, List<Location> locations, SchemeType schemeType, LocalDateTime startDate, String tournamentName) throws Exception {
-        if (players == null || locations == null || schemeType == null || startDate == null || tournamentName == null)
+    public TennisTournament(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher, Schedule schedule, String tournamentName, SchemeType schemeType) throws Exception {
+        if (playerDispatcher == null || locationDispatcher == null || dateDispatcher == null || schedule == null || tournamentName == null)
             throw new NullPointerException();
-        if (players.isEmpty() || locations.isEmpty() || tournamentName.isEmpty())
+        if (playerDispatcher.getAllPlayers().isEmpty() || locationDispatcher.getAllLocations().isEmpty() || tournamentName.isEmpty())
             throw new Exception("Empty parameter");
-        this.players = players;
-        this.schedule = new ScheduleImpl();
-        this.locationDispatcher = new LocationDispatcher();
-        this.locationDispatcher.addAllLocation(locations);
-        this.startDate = startDate;
-        this.dateDispatcher = new DateDispatcher(startDate, 10, 18, 12);
+        this.playerDispatcher = playerDispatcher;
+        this.schedule = schedule;
+        this.locationDispatcher = locationDispatcher;
+        this.dateDispatcher = dateDispatcher;
         this.isStart = false;
         this.schemeType = schemeType;
         this.tournamentName = tournamentName;
@@ -32,17 +36,17 @@ package com.saviorru.comsserver.domain.tournaments;
 
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
-            scheduleGenerator = new RoundScheduleGenerator();
-            generate(scheduleGenerator);
+            generate(new RoundScheme(this.playerDispatcher.getAllPlayers().size()));
         }
-//        if (schemeType == SchemeType.OLYMPIC) {
-//            //scheduleGenerator = new OlympicScheduleGenerator();
-//            generate(scheduleGenerator);
-//        }
+        if (schemeType == SchemeType.OLYMPIC) {
+            generate(new OlympicScheme(this.playerDispatcher.getAllPlayers().size()));
+        }
     }
 
-    private void generate(ScheduleGenerator scheduleGenerator) throws Exception {
-        schedule.addMatches(scheduleGenerator.generateSchedule(players, locationDispatcher, dateDispatcher));
+    private void generate(Scheme scheme) throws Exception {
+        this.scheme = scheme;
+        this.scheduleGenerator = new ScheduleGeneratorImpl(this.playerDispatcher, this.locationDispatcher, this.dateDispatcher, scheme);
+        this.schedule = this.scheduleGenerator.generateSchedule();
     }
 
     @Override
@@ -52,7 +56,7 @@ package com.saviorru.comsserver.domain.tournaments;
 
     @Override
     public List<Player> getPlayers() {
-        return this.players;
+        return this.playerDispatcher.getAllPlayers();
     }
 
     @Override
@@ -85,8 +89,8 @@ package com.saviorru.comsserver.domain.tournaments;
     public void finish() throws Exception {
         if (this.isStart) {
             this.isStart = false;
-            if(schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
-            this.champion = schedule.getMatchesByState(MatchState.PLAYED).get(schedule.getAllMatches().size() - 1).getWinner();
+            if (schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
+            //this.champion = schedule.getMatchesByState(MatchState.PLAYED).get(schedule.getAllMatches().size() - 1).getWinner();
         }
         throw new Exception("Tournament is not started");
     }
@@ -112,10 +116,7 @@ package com.saviorru.comsserver.domain.tournaments;
         match.setPoints(points.getPointsFirstSide(), points.getPointsSecondSide());
         match.setMatchState(MatchState.PLAYED);
         this.locationDispatcher.freeLocation(match.getLocation());
-        List<Match> updateMatches = this.scheduleGenerator.updateSchedule(this.schedule.getAllMatches());
-        if (updateMatches.size() > 0) {
-            this.schedule.addMatches(updateMatches);
-        }
+        this.schedule = this.scheduleGenerator.updateSchedule(match, this.schedule);
     }
 
     @Override
@@ -125,13 +126,6 @@ package com.saviorru.comsserver.domain.tournaments;
         for (int i = 0; i < matches.size(); i++) {
             finishMatch(matches.get(i), points.get(i));
         }
-    }
-
-    @Override
-    public Meet getNextMeet() throws Exception {
-        if (!(isStart)) throw new Exception("Tournament is not started");
-        if (schedule.getMatchesByState(MatchState.NOTPLAYED).size() == 0) return null;
-        return new Meet(schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getFirstSide(), schedule.getMatchesByState(MatchState.NOTPLAYED).get(0).getSecondSide());
     }
 
     @Override
@@ -146,4 +140,3 @@ package com.saviorru.comsserver.domain.tournaments;
     }
 
 }
-*/

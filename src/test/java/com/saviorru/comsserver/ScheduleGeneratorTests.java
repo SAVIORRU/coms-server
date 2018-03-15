@@ -15,7 +15,7 @@ public class ScheduleGeneratorTests {
     private PlayerDispatcher playerDispatcher;
     private LocationDispatcher locationDispatcher;
     private DateDispatcher dateDispatcher;
-    private SchemeType schemeType;
+    private Scheme schemeType;
     private Location loc1;
     private Location loc2;
     private Location loc3;
@@ -48,7 +48,7 @@ public class ScheduleGeneratorTests {
     @Test()
     public void genRoundGenerateTest() throws Exception
     {
-        schemeType = SchemeType.ROUND;
+        schemeType = new RoundScheme(playerDispatcher.getAllPlayers().size());
         testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
        Schedule schedule =  testSubject.generateSchedule();
        assertEquals(3, schedule.getAllMatches().size());
@@ -56,7 +56,7 @@ public class ScheduleGeneratorTests {
     @Test()
     public void genRoundUpdateTest() throws Exception
     {
-        schemeType = SchemeType.ROUND;
+        schemeType = new RoundScheme(playerDispatcher.getAllPlayers().size());
         testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
         Schedule schedule =  testSubject.generateSchedule();
         Match match1 = schedule.getMatchesByState(MatchState.NOTPLAYED).get(0);
@@ -74,7 +74,7 @@ public class ScheduleGeneratorTests {
     @Test()
     public void genRoundUpdateLoopTest() throws Exception
     {
-        schemeType = SchemeType.ROUND;
+        schemeType = new RoundScheme(playerDispatcher.getAllPlayers().size());
         testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
         Schedule schedule =  testSubject.generateSchedule();
         while (schedule.getAllMatches().size() < 10) {
@@ -91,7 +91,7 @@ public class ScheduleGeneratorTests {
     @Test()
     public void genOlympGenerateTest() throws Exception
     {
-        schemeType = SchemeType.OLYMPIC;
+        schemeType = new OlympicScheme(playerDispatcher.getAllPlayers().size());
         testSubject = new ScheduleGeneratorImpl(playerDispatcher, locationDispatcher, dateDispatcher, schemeType);
         Schedule schedule =  testSubject.generateSchedule();
         assertEquals(3, schedule.getAllMatches().size());
