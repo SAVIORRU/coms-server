@@ -22,15 +22,9 @@ public class TournamentTests {
     private List<Location> locationList;
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
-    private LocalDateTime startDate, endDate;
     private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
-    private boolean isStart;
     private SchemeType schemeType;
-    private Scheme scheme;
-    private String tournamentName;
-    private Player champion;
-    private ScheduleGenerator scheduleGenerator;
 
     @Before
     public void init() throws Exception {
