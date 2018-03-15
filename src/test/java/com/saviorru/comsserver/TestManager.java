@@ -14,7 +14,6 @@ import org.junit.runners.Suite;
         RoundSchemeTests.class,
         ScheduleTests.class,
         DateDispatherTests.class,
-        OlympicSchelduleGeneratorTest.class,
         //TournamentTests.class
 })
 public class TestManager {

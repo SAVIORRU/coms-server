@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface ScheduleGenerator {
 
-    List<Match> generateSchedule(List<Player> playersLists,LocationDispatcher locationDispatcher,
-                                         DateDispatcher dateDispatcher);
+    Schedule generateSchedule() throws Exception;
 
-    List<Match> updateSchedule(List<Match> matches);
+    Schedule updateSchedule(List<Match> matchesList, Schedule existingSchedule) throws Exception;
+    Schedule updateSchedule(Match match, Schedule existingSchedule) throws Exception;
 
 }
