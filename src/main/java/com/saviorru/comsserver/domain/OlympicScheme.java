@@ -152,8 +152,7 @@ public class OlympicScheme implements Scheme {
 
     private List<Pair<Integer, Integer>> getTheRound(int round) {
         List<Pair<Integer, Integer>> arrayPair = new ArrayList<>();
-        List<Node> parents = new ArrayList<>();
-        parents.addAll(this.children);
+        List<Node> parents = new ArrayList<>(this.children);
         parents = getRound(parents, --round);
         for (int i = 0; i < parents.size(); i += 2) {
             if (parents.get(i).nextPositionPlayer.leftPlayer.data != null && parents.get(i).nextPositionPlayer.rightPlayer.data != null)
@@ -188,8 +187,9 @@ public class OlympicScheme implements Scheme {
 
     private void addPairsInList(List<Pair<Integer, Integer>> pairList) {
         for (Pair<Integer, Integer> pair : pairList) {
-            if (this.givenPairsPlayers.contains(pair)) continue;
-            else this.givenPairsPlayers.add(pair);
+            if (!this.givenPairsPlayers.contains(pair)) {
+                this.givenPairsPlayers.add(pair);
+            }
         }
     }
 
@@ -198,8 +198,7 @@ public class OlympicScheme implements Scheme {
     }
 
     private boolean isPairInList(Pair<Integer, Integer> pair) {
-        if (this.givenPairsPlayers.contains(pair)) return true;
-        return false;
+        return this.givenPairsPlayers.contains(pair);
     }
 
     @Override
