@@ -10,12 +10,12 @@ import org.junit.runners.Suite;
         OneOnOneMatchTest.class,
         LocationTests.class,
         LocationDispatherTests.class,
-        OlympicScemeTest.class,
-        RoundSchemeTests.class,
+        OlympicSchemeTest.class,
+        RoundGridTests.class,
+        MeetTests.class,
         ScheduleTests.class,
         DateDispatherTests.class,
-        OlympicSchelduleGeneratorTest.class,
-        //TournamentTests.class
+        TournamentTests.class
 })
 public class TestManager {
 }

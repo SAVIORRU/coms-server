@@ -7,7 +7,7 @@ import java.util.List;
 public interface Scheme {
 
     List<Pair<Integer, Integer>> getAllPairs();
-    Pair<Integer, Integer> getNextUnplayedPair() throws Exception;
+    Pair<Integer, Integer> getNextNotPlayedPair();
     List<Pair<Integer, Integer>> getAllPairsInTour(Integer tourNumber) throws Exception;
-    void updateScheme(List<Integer> winnersList);
+    void updateScheme(List<Integer> winnersList) throws Exception;
 }

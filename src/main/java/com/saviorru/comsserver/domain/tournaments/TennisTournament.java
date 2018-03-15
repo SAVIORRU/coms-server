@@ -35,10 +35,10 @@ package com.saviorru.comsserver.domain.tournaments;
             scheduleGenerator = new RoundScheduleGenerator();
             generate(scheduleGenerator);
         }
-        if (schemeType == SchemeType.OLYMPIC) {
-            scheduleGenerator = new OlympicScheduleGenerator();
-            generate(scheduleGenerator);
-        }
+//        if (schemeType == SchemeType.OLYMPIC) {
+//            //scheduleGenerator = new OlympicScheduleGenerator();
+//            generate(scheduleGenerator);
+//        }
     }
 
     private void generate(ScheduleGenerator scheduleGenerator) throws Exception {
