@@ -12,7 +12,7 @@ public class RoundWinnerIdentifier implements WinnerIdentifier {
     }
 
     @Override
-    public List<Player> identifyWinner(List<Match> finishedMatches) throws Exception {
+    public List<List<Player>> identifyWinner(List<Match> finishedMatches) throws Exception {
         if (finishedMatches == null) throw new NullPointerException();
 
         Map<Player, Integer> playerScores = new HashMap<>();
@@ -36,17 +36,20 @@ public class RoundWinnerIdentifier implements WinnerIdentifier {
         List<Pair<Player, Integer>> sortedScores = new ArrayList<>();
         sortedStream.sorted(Comparator.comparing(Map.Entry::getValue))
                 .forEach(e ->sortedScores.add(new Pair<Player, Integer>(e.getKey(),e.getValue())));
-        List<Player> result = new ArrayList<>();
+        List<List<Player>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        int changesCount = 0;
         for (int i = sortedScores.size() -1; i >= 1; i--)
         {
-            result.add(sortedScores.get(i).getKey());
-            if (sortedScores.get(i-1).getValue()== sortedScores.get(i).getValue() )
+            //if (changesCount > 2) break;
+            if (!(result.get(changesCount).contains(sortedScores.get(i).getKey())))
+                result.get(changesCount).add(sortedScores.get(i).getKey());
+            if (sortedScores.get(i).getValue() != sortedScores.get(i-1).getValue() )
             {
-                continue;
-            }
-            else
-            {
-                break;
+                changesCount = changesCount +1;
+                if (changesCount > 2) break;
+                result.add(new ArrayList<>());
+                result.get(changesCount).add(sortedScores.get(i-1).getKey());
             }
         }
         return result;

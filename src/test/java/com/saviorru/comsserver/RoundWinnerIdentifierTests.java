@@ -40,8 +40,9 @@ public class RoundWinnerIdentifierTests {
     public void identTest() throws Exception
     {
         testSubject.identifyWinner(matchesList);
-        assertEquals(1, testSubject.identifyWinner(matchesList).size());
-        assertEquals(playersList.get(0), testSubject.identifyWinner(matchesList).get(0));
+
+        assertEquals(1, testSubject.identifyWinner(matchesList).get(0).size());
+        assertEquals(playersList.get(0), testSubject.identifyWinner(matchesList).get(0).get(0));
     }
     @Test()
     public void identNotOneTest() throws Exception
@@ -50,6 +51,6 @@ public class RoundWinnerIdentifierTests {
         when(match.getWinner()).thenReturn(playersList.get(1));
         matchesList.add(match);
         testSubject.identifyWinner(matchesList);
-        assertEquals(2, testSubject.identifyWinner(matchesList).size());
+        assertEquals(2, testSubject.identifyWinner(matchesList).get(0).size());
     }
 }
