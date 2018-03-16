@@ -32,6 +32,10 @@ public class RoundWinnerIdentifierTests {
                 if (i == j) continue;
                 Match match = mock(Match.class);
                 when(match.getWinner()).thenReturn(playersList.get(i));
+                when(match.getFirstSide()).thenReturn(playersList.get(i));
+                when(match.getSecondSide()).thenReturn(playersList.get(j));
+                when(match.getPointsFirstSide()).thenReturn(1);
+                when(match.getPointsSecondSide()).thenReturn(0);
                 matchesList.add(match);
             }
         }
@@ -39,18 +43,19 @@ public class RoundWinnerIdentifierTests {
     @Test()
     public void identTest() throws Exception
     {
-        testSubject.identifyWinner(matchesList);
+        testSubject.identifyWinners(matchesList);
 
-        assertEquals(1, testSubject.identifyWinner(matchesList).get(0).size());
-        assertEquals(playersList.get(0), testSubject.identifyWinner(matchesList).get(0).get(0));
+        assertEquals(3, testSubject.identifyWinners(matchesList).size());
+        assertEquals(playersList.get(0), testSubject.identifyWinners(matchesList).get(0));
     }
     @Test()
     public void identNotOneTest() throws Exception
     {
-        Match match = mock(Match.class);
-        when(match.getWinner()).thenReturn(playersList.get(1));
-        matchesList.add(match);
-        testSubject.identifyWinner(matchesList);
-        assertEquals(2, testSubject.identifyWinner(matchesList).get(0).size());
+        when(matchesList.get(2).getWinner()).thenReturn(playersList.get(3));
+        when(matchesList.get(2).getPointsFirstSide()).thenReturn(0);
+        when(matchesList.get(2).getPointsSecondSide()).thenReturn(1);
+        testSubject.identifyWinners(matchesList);
+        assertEquals(3, testSubject.identifyWinners(matchesList).size());
+        assertEquals(playersList.get(1), testSubject.identifyWinners(matchesList).get(1));
     }
 }

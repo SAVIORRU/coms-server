@@ -74,7 +74,7 @@ public class TournamentTests {
 
     @Test(expected = Exception.class)
     public void testGetChampionButTournamentNotInit() throws Exception {
-        tournament.getChampion();
+        tournament.getFirstPlacePrizer();
     }
 
     @Test

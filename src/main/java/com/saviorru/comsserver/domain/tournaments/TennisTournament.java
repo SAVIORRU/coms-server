@@ -3,6 +3,7 @@ package com.saviorru.comsserver.domain.tournaments;
 import com.saviorru.comsserver.domain.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TennisTournament implements Tournament {
@@ -16,8 +17,11 @@ public class TennisTournament implements Tournament {
     private SchemeType schemeType;
     private Scheme scheme;
     private String tournamentName;
-    private Player champion;
+    private Player firstPlacePrizer;
+    private Player secondPlacePrizer;
+    private Player thirdPlacePrizer;
     private ScheduleGenerator scheduleGenerator;
+    private WinnerIdentifier winnerIdentifier;
 
     public TennisTournament(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, DateDispatcher dateDispatcher, Schedule schedule, String tournamentName, SchemeType schemeType) throws Exception {
         if (playerDispatcher == null || locationDispatcher == null || dateDispatcher == null || schedule == null || tournamentName == null)
@@ -36,9 +40,11 @@ public class TennisTournament implements Tournament {
 
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
+            this.winnerIdentifier = new RoundWinnerIdentifier();
             generate(new RoundScheme(this.playerDispatcher.getAllPlayers().size()));
         }
         if (schemeType == SchemeType.OLYMPIC) {
+            //this.winnerIdentifier = new OlympicWinnerIdentifier();
             generate(new OlympicScheme(this.playerDispatcher.getAllPlayers().size()));
         }
     }
@@ -90,7 +96,23 @@ public class TennisTournament implements Tournament {
         if (this.isStart) {
             this.isStart = false;
             if (schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
-            //this.champion = schedule.getMatchesByState(MatchState.PLAYED).get(schedule.getAllMatches().size() - 1).getWinner();
+            List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
+            for (int i =0; i < winners.size(); i++)
+            {
+                if (i == 0)
+                {
+                    this.firstPlacePrizer = winners.get(i);
+                }
+                if (i == 1)
+                {
+                    this.secondPlacePrizer = winners.get(i);
+                }
+                if (i == 2)
+                {
+                    this.thirdPlacePrizer = winners.get(i);
+                }
+            }
+
         }
         throw new Exception("Tournament is not started");
     }
@@ -133,10 +155,16 @@ public class TennisTournament implements Tournament {
         return this.isStart;
     }
 
-    @Override
-    public Player getChampion() throws Exception {
-        if (champion == null) throw new Exception("Tournament is not finished");
-        return champion;
+    public Player getFirstPlacePrizer() throws Exception {
+        if (firstPlacePrizer == null) throw new Exception("Tournament is not finished");
+        return firstPlacePrizer;
     }
 
+    public Player getSecondPlacePrizer() {
+        return secondPlacePrizer;
+    }
+
+    public Player getThirdPlacePrizer() {
+        return thirdPlacePrizer;
+    }
 }

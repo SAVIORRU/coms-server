@@ -59,7 +59,7 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
         existingSchedule.addMatches(newMatches);
         return existingSchedule;
     }
-
+    
     private List<Match> createMatches() throws Exception
     {
         List<Match> matchesList = new ArrayList<>();

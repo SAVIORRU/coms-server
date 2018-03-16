@@ -14,5 +14,7 @@ public interface Tournament {
     public void finishMatch(Match match,Points points) throws Exception;
     public void finishMatches(List<Match> matches,List<Points> points) throws Exception;
     public boolean isStart();
-    public Player getChampion() throws Exception;
+    public Player getFirstPlacePrizer() throws Exception;
+    public Player getSecondPlacePrizer() throws Exception;
+    public Player getThirdPlacePrizer() throws Exception;
 }

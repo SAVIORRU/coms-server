@@ -12,46 +12,60 @@ public class RoundWinnerIdentifier implements WinnerIdentifier {
     }
 
     @Override
-    public List<List<Player>> identifyWinner(List<Match> finishedMatches) throws Exception {
+    public List<Player> identifyWinners(List<Match> finishedMatches) throws Exception {
         if (finishedMatches == null) throw new NullPointerException();
 
         Map<Player, Integer> playerScores = new HashMap<>();
-        for (Match match: finishedMatches)
+        for (Match match : finishedMatches)
         {
+            if (!(playerScores.containsKey(match.getFirstSide())))
+                playerScores.put(match.getFirstSide(), 0);
+            if (!(playerScores.containsKey(match.getSecondSide())))
+                playerScores.put(match.getSecondSide(), 0);
+        }
+        for (Match match : finishedMatches) {
             if (match == null) throw new NullPointerException();
             Player winner = match.getWinner();
-            if (playerScores.containsKey(winner))
-            {
                 Integer score = playerScores.get(winner);
                 score = score + 1;
                 playerScores.replace(winner, score);
+            }
 
-            }
-            else
-            {
-                playerScores.put(winner, 1);
-            }
-        }
-        Stream<Map.Entry<Player, Integer>> sortedStream = playerScores.entrySet().stream();
-        List<Pair<Player, Integer>> sortedScores = new ArrayList<>();
-        sortedStream.sorted(Comparator.comparing(Map.Entry::getValue))
-                .forEach(e ->sortedScores.add(new Pair<Player, Integer>(e.getKey(),e.getValue())));
-        List<List<Player>> result = new ArrayList<>();
-        result.add(new ArrayList<>());
-        int changesCount = 0;
-        for (int i = sortedScores.size() -1; i >= 1; i--)
-        {
-            //if (changesCount > 2) break;
-            if (!(result.get(changesCount).contains(sortedScores.get(i).getKey())))
-                result.get(changesCount).add(sortedScores.get(i).getKey());
-            if (sortedScores.get(i).getValue() != sortedScores.get(i-1).getValue() )
-            {
-                changesCount = changesCount +1;
-                if (changesCount > 2) break;
-                result.add(new ArrayList<>());
-                result.get(changesCount).add(sortedScores.get(i-1).getKey());
-            }
-        }
+        List<Player> sortedPlayers = new ArrayList<>();
+        Map<Player, Integer> bergerMap = calcBerger(finishedMatches, playerScores);
+        Stream <Map.Entry<Player,Integer>> st = bergerMap.entrySet().stream();
+
+        st.sorted(Comparator.comparing(e -> e.getValue()))
+                .forEach(e ->sortedPlayers.add(e.getKey()));
+        List<Player> result = sortedPlayers.subList(sortedPlayers.size()-3, sortedPlayers.size());
+        Collections.reverse(result);
         return result;
+    }
+
+    private Map<Player, Integer> calcBerger(List<Match> matchesList, Map<Player, Integer> playerScores) throws Exception {
+        Map<Player, Integer> bergerMap = new HashMap<>();
+        for (Player player : playerScores.keySet()) {
+            Integer bergerCoeff = 0;
+            for (Match match : matchesList) {
+                if (match.getFirstSide().equals(player) || match.getSecondSide().equals(player)) {
+                    if (match.getWinner().equals(player)) {
+                        if (match.getFirstSide().equals(player)) {
+                            System.out.print(player);
+                            bergerCoeff = bergerCoeff + playerScores.get(match.getSecondSide());
+                        } else {
+                            bergerCoeff = bergerCoeff + playerScores.get(match.getFirstSide());
+                        }
+                    } else {
+                        if (match.getFirstSide().equals(player)) {
+                            bergerCoeff = bergerCoeff - playerScores.get(match.getSecondSide());
+                        } else {
+                            bergerCoeff = bergerCoeff - playerScores.get(match.getFirstSide());
+                        }
+                    }
+                }
+            }
+            bergerMap.put(player, bergerCoeff);
+        }
+        return bergerMap;
     }
 }
