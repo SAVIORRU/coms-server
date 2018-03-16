@@ -1,5 +1,6 @@
 package com.saviorru.comsserver;
 
+import com.saviorru.comsserver.domain.ScheduleGenerator;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -12,8 +13,13 @@ import org.junit.runners.Suite;
         LocationDispatherTests.class,
         OlympicSchemeTest.class,
         ScheduleTests.class,
+        ScheduleGeneratorTests.class,
         DateDispatherTests.class,
-        //TournamentTests.class
+        RoundWinnerIdentifierTests.class,
+        RoundSchemeTests.class,
+        PlayerDispatcherTests.class,
+        TournamentTests.class,
+        OlympicWinnerIndentifierTest.class
 })
 public class TestManager {
 }
