@@ -182,20 +182,21 @@ public class TennisTournament implements Tournament {
     }
 
     @Override
-    public List<List<Pair<Player, Player>>> getPlayerGrid() throws Exception {
-        List<List<Pair<Player, Player>>> playerGrid = new ArrayList<>();
-        for (int i=0; i< scheme.getToursCount(); i++)
+    public List<List<Integer>> getPlayerGrid() throws Exception {
+        List<List<Integer>> playerGrid = new ArrayList<>();
+        for (int i=0; i < scheme.getToursCount(); i++)
         {
             playerGrid.add(new ArrayList<>());
-            for (Pair<Integer, Integer> pair: scheme.getAllPairsInTour(i))
+            for (Pair<Integer, Integer> pair: scheme.getAllPairsInTour(i+1))
             {
-                Player firstPlayer = null;
-                if (pair.getKey() != 0)
-                    firstPlayer = playerDispatcher.getPlayerByNumber(pair.getKey());
-                Player secondPlayer = null;
-                if (pair.getValue() != 0)
-                    secondPlayer = playerDispatcher.getPlayerByNumber(pair.getValue());
-                playerGrid.get(i).add(new Pair<Player, Player>(firstPlayer, secondPlayer));
+//                Player firstPlayer = null;
+//                if (pair.getKey() != 0)
+//                    firstPlayer = playerDispatcher.getPlayerByNumber(pair.getKey());
+//                Player secondPlayer = null;
+//                if (pair.getValue() != 0)
+//                    secondPlayer = playerDispatcher.getPlayerByNumber(pair.getValue());
+                playerGrid.get(i).add(pair.getKey());
+                playerGrid.get(i).add(pair.getValue());
             }
         }
         return playerGrid;
