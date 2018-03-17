@@ -93,10 +93,10 @@ public class OlympicScheme implements Scheme {
     private Node addPlayersNextTour(Node node) {
         if (node.nextPositionPlayer.rightPlayer.data == null || node.nextPositionPlayer.leftPlayer.data == null) {
             if (!checkLackPartner(node.nextPositionPlayer) || checkPartner(node.nextPositionPlayer)) {
-                    if (node.nextPositionPlayer.data == null) {
-                        node.nextPositionPlayer.data = node.data;
-                        return node.nextPositionPlayer;
-                    }
+                if (node.nextPositionPlayer.data == null) {
+                    node.nextPositionPlayer.data = node.data;
+                    return node.nextPositionPlayer;
+                }
             }
         }
         return node;
@@ -156,11 +156,13 @@ public class OlympicScheme implements Scheme {
         parents = getRound(parents, --round);
         for (int i = 0; i < parents.size(); i += 2) {
             if (parents.get(i).nextPositionPlayer.leftPlayer.data == null && parents.get(i).nextPositionPlayer.rightPlayer.data == null)
-                arrayPair.add(new Pair<>(0,0));
-            else if (parents.get(i).nextPositionPlayer.leftPlayer.data == null || parents.get(i).nextPositionPlayer.rightPlayer.data == null){
-                if(parents.get(i).nextPositionPlayer.leftPlayer.data == null) arrayPair.add(new Pair<>(0, parents.get(i).nextPositionPlayer.rightPlayer.data));
-                if(parents.get(i).nextPositionPlayer.rightPlayer.data == null) arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, 0));
-            }else{
+                arrayPair.add(new Pair<>(0, 0));
+            else if (parents.get(i).nextPositionPlayer.leftPlayer.data == null || parents.get(i).nextPositionPlayer.rightPlayer.data == null) {
+                if (parents.get(i).nextPositionPlayer.leftPlayer.data == null)
+                    arrayPair.add(new Pair<>(0, parents.get(i).nextPositionPlayer.rightPlayer.data));
+                if (parents.get(i).nextPositionPlayer.rightPlayer.data == null)
+                    arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, 0));
+            } else {
                 arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, parents.get(i).nextPositionPlayer.rightPlayer.data));
             }
         }

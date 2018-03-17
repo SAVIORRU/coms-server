@@ -100,20 +100,17 @@ public class TennisTournament implements Tournament {
         if (this.isStart) {
             this.isStart = false;
             if (schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
-            if (this.schedule.getAllMatches().size() != this.scheme.getMaxPairCount()) throw new Exception("All pair are not not played yet");
+            if (this.schedule.getAllMatches().size() != this.scheme.getMaxPairCount())
+                throw new Exception("All pair are not not played yet");
             List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
-            for (int i =0; i < winners.size(); i++)
-            {
-                if (i == 0)
-                {
+            for (int i = 0; i < winners.size(); i++) {
+                if (i == 0) {
                     this.firstPlacePrizer = winners.get(i);
                 }
-                if (i == 1)
-                {
+                if (i == 1) {
                     this.secondPlacePrizer = winners.get(i);
                 }
-                if (i == 2)
-                {
+                if (i == 2) {
                     this.thirdPlacePrizer = winners.get(i);
                 }
             }
@@ -184,11 +181,9 @@ public class TennisTournament implements Tournament {
     @Override
     public List<List<Integer>> getPlayerGrid() throws Exception {
         List<List<Integer>> playerGrid = new ArrayList<>();
-        for (int i=0; i < scheme.getToursCount(); i++)
-        {
+        for (int i = 0; i < scheme.getToursCount(); i++) {
             playerGrid.add(new ArrayList<>());
-            for (Pair<Integer, Integer> pair: scheme.getAllPairsInTour(i+1))
-            {
+            for (Pair<Integer, Integer> pair : scheme.getAllPairsInTour(i + 1)) {
 //                Player firstPlayer = null;
 //                if (pair.getKey() != 0)
 //                    firstPlayer = playerDispatcher.getPlayerByNumber(pair.getKey());
@@ -201,6 +196,7 @@ public class TennisTournament implements Tournament {
         }
         return playerGrid;
     }
+
     public Scheme getScheme() {
         return scheme;
     }

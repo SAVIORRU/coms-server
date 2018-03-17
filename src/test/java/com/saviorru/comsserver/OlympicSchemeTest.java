@@ -87,7 +87,7 @@ public class OlympicSchemeTest {
 
     @Test
     public void testGetAllPairsInTour_whenStandardSizePlayers__resultEmpty() throws Exception {
-        assertEquals(4,olympicSchemeStandardSize.getAllPairsInTour(2).size());
+        assertEquals(4, olympicSchemeStandardSize.getAllPairsInTour(2).size());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class OlympicSchemeTest {
         pairs.add(new Pair<>(0, 0));
         assertEquals(pairs, olympicSchemeStandardSize.getAllPairsInTour(2));
     }
-    
+
     @Test
     public void testGetAllPairs_whenNotStandardSizePlayers() {
         assertEquals(14, olympicSchemeNotStandartSize.getAllPairs().size());
@@ -148,7 +148,7 @@ public class OlympicSchemeTest {
 
     @Test
     public void testGetAllPairsInTour_whenNoStandardSizePlayers__resultEmpty() throws Exception {
-        assertEquals(4,olympicSchemeNotStandartSize.getAllPairsInTour(2).size());
+        assertEquals(4, olympicSchemeNotStandartSize.getAllPairsInTour(2).size());
     }
 
     @Test

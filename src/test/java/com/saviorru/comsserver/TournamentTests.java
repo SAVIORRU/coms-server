@@ -34,9 +34,9 @@ public class TournamentTests {
         locationList.add(new Location("table1", "1"));
         locationList.add(new Location("table2", "2"));
         locationList.add(new Location("table3", "3"));
-        locationDispatcher  = new LocationDispatcher();
+        locationDispatcher = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
-        dateDispatcher = new DateDispatcher(LocalDateTime.now(),10,18,1);
+        dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
         schedule = new ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < countPlayers; i++) {
@@ -44,18 +44,18 @@ public class TournamentTests {
         }
         playerDispatcher.addPlayers(playerList);
         schemeType = SchemeType.OLYMPIC;
-        tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
+        tournament = new TennisTournament(playerDispatcher, locationDispatcher, dateDispatcher, schedule, "tournament1", schemeType);
     }
 
     @Test(expected = NullPointerException.class)
     public void testInitNullParam() throws Exception {
-        new TennisTournament(null, null, null, null, null,null);
+        new TennisTournament(null, null, null, null, null, null);
     }
 
     @Test(expected = Exception.class)
     public void testInitEmptyParam() throws Exception {
         playerDispatcher = new PlayerDispatcher();
-        new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
+        new TennisTournament(playerDispatcher, locationDispatcher, dateDispatcher, schedule, "tournament1", schemeType);
     }
 
     @Test
@@ -112,8 +112,7 @@ public class TournamentTests {
     }
 
     @Test()
-    public void testFinishMatch() throws Exception
-    {
+    public void testFinishMatch() throws Exception {
         tournament.start();
         Points testPoints = new Points();
         Match testMatch = tournament.getNextMatch();
@@ -123,13 +122,11 @@ public class TournamentTests {
     }
 
     @Test()
-    public void testFinishMatches() throws Exception
-    {
+    public void testFinishMatches() throws Exception {
         tournament.start();
         List<Match> testList = tournament.getSchedule().getMatchesByState(MatchState.NOTPLAYED);
-        List<Points>  testListP = new ArrayList<>();
-        for (int i = 0; i< testList.size(); i++)
-        {
+        List<Points> testListP = new ArrayList<>();
+        for (int i = 0; i < testList.size(); i++) {
             testListP.add(new Points(1, 0));
         }
         Match testMatch = tournament.getNextMatch();
@@ -138,44 +135,41 @@ public class TournamentTests {
     }
 
     @Test()
-    public void testGetNextMatch() throws Exception
-    {
+    public void testGetNextMatch() throws Exception {
         tournament.start();
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
-        while (tournament.getNextMatch() != null)
-        {
+        while (tournament.getNextMatch() != null) {
             Points testPoints = new Points();
             testPoints.setPoints(1, 0);
             tournament.finishMatch(tournament.getNextMatch(), testPoints);
         }
         assertEquals(null, tournament.getNextMatch());
     }
+
     @Test(expected = Exception.class)
-    public void testGetNextMatchException() throws Exception
-    {
+    public void testGetNextMatchException() throws Exception {
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
-        while (tournament.getNextMatch() != null)
-        {
+        while (tournament.getNextMatch() != null) {
             Points testPoints = new Points();
             testPoints.setPoints(1, 0);
             tournament.finishMatch(tournament.getNextMatch(), testPoints);
         }
         assertEquals(null, tournament.getNextMatch());
     }
+
     @Test()
-    public void testGetGrid() throws Exception
-    {
+    public void testGetGrid() throws Exception {
 //        List<List<Pair<Player, Player>>> grid = tournament.getPlayerGrid();
 //        Integer count = 0;
 //        for (List<Pair<Player, Player>> list: grid)
 //            count += list.size();
 //        assertEquals(count, tournament.getScheme().getMaxPairCount());
     }
+
     @Test()
-    public void testGetGrid2() throws Exception
-    {
+    public void testGetGrid2() throws Exception {
         List<List<Integer>> grid = tournament.getPlayerGrid();
         PrintTree printTree = new PrintTree();
         printTree.printTree(grid);
