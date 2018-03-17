@@ -41,6 +41,7 @@ public class TennisTournament implements Tournament {
         generationSchedule(schemeType);
     }
 
+
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
             this.winnerIdentifier = new RoundWinnerIdentifier();
