@@ -14,17 +14,18 @@ public class RoundWinnerIdentifier implements WinnerIdentifier {
     @Override
     public List<Player> identifyWinners(List<Match> finishedMatches) throws Exception {
         if (finishedMatches == null) throw new NullPointerException();
+        if (finishedMatches.isEmpty()) throw new Exception("Matches list is empty");
 
         Map<Player, Integer> playerScores = new HashMap<>();
         for (Match match : finishedMatches)
         {
+            if (match == null) throw new NullPointerException();
             if (!(playerScores.containsKey(match.getFirstSide())))
                 playerScores.put(match.getFirstSide(), 0);
             if (!(playerScores.containsKey(match.getSecondSide())))
                 playerScores.put(match.getSecondSide(), 0);
         }
         for (Match match : finishedMatches) {
-            if (match == null) throw new NullPointerException();
             Player winner = match.getWinner();
                 Integer score = playerScores.get(winner);
                 score = score + 1;
@@ -50,7 +51,6 @@ public class RoundWinnerIdentifier implements WinnerIdentifier {
                 if (match.getFirstSide().equals(player) || match.getSecondSide().equals(player)) {
                     if (match.getWinner().equals(player)) {
                         if (match.getFirstSide().equals(player)) {
-                            System.out.print(player);
                             bergerCoeff = bergerCoeff + playerScores.get(match.getSecondSide());
                         } else {
                             bergerCoeff = bergerCoeff + playerScores.get(match.getFirstSide());

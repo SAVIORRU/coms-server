@@ -27,8 +27,6 @@ public class PlayerDispatcherTests {
         testSubject.addPlayer(player1);
         testSubject.addPlayer(player2);
         assertEquals(2,testSubject.getAllPlayers().size());
-        System.out.print(testSubject.getAllPlayers());
-        System.out.print(testSubject.getAllPlayersNumbers());
     }
     @Test(expected = Exception.class)
     public void dispatcherAddEcxTest() throws Exception
@@ -40,7 +38,7 @@ public class PlayerDispatcherTests {
     public void dispatcherGetPlayerByNumberTest() throws Exception
     {
         testSubject.addPlayer(player1);
-        assertEquals(player1,testSubject.getPlayerByNumber(0));
+        assertEquals(player1,testSubject.getPlayerByNumber(1));
     }
 
 }

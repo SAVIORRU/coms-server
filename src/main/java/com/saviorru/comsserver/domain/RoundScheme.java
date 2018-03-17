@@ -11,11 +11,13 @@ public class RoundScheme implements Scheme
 {
 
     private List<List<Meet>> toursList;
+    private Integer playersCount;
 
     public RoundScheme(Integer playersCount) throws Exception
     {
         if (playersCount == null) throw new NullPointerException();
         this.toursList = this.buildScheme(playersCount);
+        this.playersCount = playersCount;
     }
 
     private void assignMeet(Integer firstNumber, Integer secondNumber) throws Exception {
@@ -45,7 +47,7 @@ public class RoundScheme implements Scheme
             ArrayList<Meet> tour = new ArrayList<>();
             for (int j = i; j < playersCount; j++) {
                 if (i == j) continue;
-                Meet meet = new Meet(i, j);
+                Meet meet = new Meet(i+1, j+1);
                 tour.add(meet);
             }
             toursList.add(tour);
@@ -90,6 +92,17 @@ public class RoundScheme implements Scheme
             tour.add(new Pair<>(meet.firstNumber, meet.secondNumber));
         }
         return tour;
+    }
+
+    @Override
+    public Integer getMaxPairCount() {
+
+        return (playersCount*(playersCount-1))/2;
+    }
+
+    @Override
+    public Integer getToursCount() {
+        return this.toursList.size();
     }
 
     @Override

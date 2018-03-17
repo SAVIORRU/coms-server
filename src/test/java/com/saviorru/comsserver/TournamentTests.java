@@ -2,6 +2,7 @@ package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
 import com.saviorru.comsserver.domain.tournaments.TennisTournament;
+import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -162,6 +163,15 @@ public class TournamentTests {
             tournament.finishMatch(tournament.getNextMatch(), testPoints);
         }
         assertEquals(null, tournament.getNextMatch());
+    }
+    @Test()
+    public void testGetGrid() throws Exception
+    {
+        List<List<Pair<Player, Player>>> grid = tournament.getPlayerGrid();
+        Integer count = 0;
+        for (List<Pair<Player, Player>> list: grid)
+            count += list.size();
+        assertEquals(count, tournament.getScheme().getMaxPairCount());
     }
 
 }

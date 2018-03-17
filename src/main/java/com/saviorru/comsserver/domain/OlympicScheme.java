@@ -156,7 +156,6 @@ public class OlympicScheme implements Scheme {
         parents = getRound(parents, --round);
         for (int i = 0; i < parents.size(); i += 2) {
             if (parents.get(i).nextPositionPlayer.leftPlayer.data != null && parents.get(i).nextPositionPlayer.rightPlayer.data != null)
-
                 arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, parents.get(i).nextPositionPlayer.rightPlayer.data));
         }
         return arrayPair;
@@ -234,6 +233,17 @@ public class OlympicScheme implements Scheme {
         List<Pair<Integer, Integer>> list = getTheRound(tourNumber);
         addPairsInList(list);
         return list;
+    }
+
+    @Override
+    public Integer getMaxPairCount() {
+        return countPlayers -1;
+    }
+
+    @Override
+    public Integer getToursCount() {
+
+        return this.countRounds;
     }
 
     @Override
