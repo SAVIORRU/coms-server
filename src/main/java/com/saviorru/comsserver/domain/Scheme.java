@@ -12,5 +12,6 @@ public interface Scheme {
     Integer getMaxPairCount();
     Integer getToursCount();
     void updateScheme(List<Integer> winnersList) throws Exception;
+    String toString();
 
 }

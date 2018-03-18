@@ -110,6 +110,11 @@ public class RoundScheme implements Scheme
 
     }
 
+    @Override
+    public String toString() {
+        return "Круговая система";
+    }
+
 
     private class Meet {
         private Integer firstNumber;

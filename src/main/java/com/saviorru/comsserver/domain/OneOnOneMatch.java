@@ -87,4 +87,20 @@ public class OneOnOneMatch implements Match {
     public Location getLocation() {
         return location;
     }
+
+    @Override
+    public String toString() {
+
+        String result = "";
+        result += "Дата проведения: " + getDate().toString() + "\n";
+        result += "Место проведения: " + getLocation().getPlace() + "\n";
+        result += "Состояние матча: ";
+        if (isPlayed())
+            result += "сыгран" + "\n";
+        else
+            result += "не сыгран" + "\n";
+        result += getFirstSide().toString() + "  :  " + getPointsFirstSide() + "\n";
+        result += getSecondSide().toString() + "  :  " + getPointsSecondSide() + "\n";
+        return result;
+    }
 }
