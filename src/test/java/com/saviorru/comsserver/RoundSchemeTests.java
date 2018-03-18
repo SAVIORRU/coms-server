@@ -21,7 +21,6 @@ public class RoundSchemeTests {
     public void schemeBuildTest()
     {
         assertEquals((playerCount*(playerCount-1)/2), testSubject.getAllPairs().size());
-        System.out.print(testSubject.getAllPairs());
     }
     @Test()
     public void schemeGetTourTest() throws Exception
@@ -41,8 +40,6 @@ public class RoundSchemeTests {
         {
             Pair<Integer, Integer> pair = testSubject.getNextNotPlayedPair();
             if (pair == null) { break;}
-            System.out.print("\n");
-            System.out.print(pair);
 
         }
     }

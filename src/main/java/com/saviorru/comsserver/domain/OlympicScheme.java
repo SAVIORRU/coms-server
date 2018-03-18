@@ -93,10 +93,10 @@ public class OlympicScheme implements Scheme {
     private Node addPlayersNextTour(Node node) {
         if (node.nextPositionPlayer.rightPlayer.data == null || node.nextPositionPlayer.leftPlayer.data == null) {
             if (!checkLackPartner(node.nextPositionPlayer) || checkPartner(node.nextPositionPlayer)) {
-                    if (node.nextPositionPlayer.data == null) {
-                        node.nextPositionPlayer.data = node.data;
-                        return node.nextPositionPlayer;
-                    }
+                if (node.nextPositionPlayer.data == null) {
+                    node.nextPositionPlayer.data = node.data;
+                    return node.nextPositionPlayer;
+                }
             }
         }
         return node;
@@ -155,9 +155,16 @@ public class OlympicScheme implements Scheme {
         List<Node> parents = new ArrayList<>(this.children);
         parents = getRound(parents, --round);
         for (int i = 0; i < parents.size(); i += 2) {
-            if (parents.get(i).nextPositionPlayer.leftPlayer.data != null && parents.get(i).nextPositionPlayer.rightPlayer.data != null)
-
+            if (parents.get(i).nextPositionPlayer.leftPlayer.data == null && parents.get(i).nextPositionPlayer.rightPlayer.data == null)
+                arrayPair.add(new Pair<>(0, 0));
+            else if (parents.get(i).nextPositionPlayer.leftPlayer.data == null || parents.get(i).nextPositionPlayer.rightPlayer.data == null) {
+                if (parents.get(i).nextPositionPlayer.leftPlayer.data == null)
+                    arrayPair.add(new Pair<>(0, parents.get(i).nextPositionPlayer.rightPlayer.data));
+                if (parents.get(i).nextPositionPlayer.rightPlayer.data == null)
+                    arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, 0));
+            } else {
                 arrayPair.add(new Pair<>(parents.get(i).nextPositionPlayer.leftPlayer.data, parents.get(i).nextPositionPlayer.rightPlayer.data));
+            }
         }
         return arrayPair;
     }
@@ -170,10 +177,6 @@ public class OlympicScheme implements Scheme {
         }
         if (round == 0) return parents;
         else return getRound(initParents(parents), --round);
-    }
-
-    public int getCountRounds() {
-        return countRounds;
     }
 
     private Pair<Integer, Integer> getNextPair(List<Node> children) {
@@ -214,7 +217,7 @@ public class OlympicScheme implements Scheme {
             }
             rounds++;
         }
-        addPairsInList(pairList);
+        //addPairsInList(pairList);
         return pairList;
     }
 
@@ -230,10 +233,21 @@ public class OlympicScheme implements Scheme {
 
     @Override
     public List<Pair<Integer, Integer>> getAllPairsInTour(Integer tourNumber) throws Exception {
-        if (tourNumber < 0 || tourNumber > getCountRounds()) throw new Exception("Tour out of range");
+        if (tourNumber < 0 || tourNumber > this.countRounds) throw new Exception("Tour out of range");
         List<Pair<Integer, Integer>> list = getTheRound(tourNumber);
-        addPairsInList(list);
+        //addPairsInList(list);
         return list;
+    }
+
+    @Override
+    public Integer getMaxPairCount() {
+        return countPlayers - 1;
+    }
+
+    @Override
+    public Integer getToursCount() {
+
+        return this.countRounds;
     }
 
     @Override

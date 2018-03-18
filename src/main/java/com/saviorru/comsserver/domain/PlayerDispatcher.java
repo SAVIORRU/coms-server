@@ -17,8 +17,8 @@ public class PlayerDispatcher {
         if (playersNumbersMap.containsKey(player)) throw new Exception("Player already exist in dispatcher");
         for (int i =0; i  < playersNumbersMap.entrySet().size()+1; i++)
         {
-            if (!(playersNumbersMap.values().contains(i)))
-            {playersNumbersMap.put(player, i);
+            if (!(playersNumbersMap.values().contains(i+1)))
+            {playersNumbersMap.put(player, i+1);
                 break;}
         }
     }

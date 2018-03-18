@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface Tournament {
@@ -17,4 +18,8 @@ public interface Tournament {
     public Player getFirstPlacePrizer() throws Exception;
     public Player getSecondPlacePrizer() throws Exception;
     public Player getThirdPlacePrizer() throws Exception;
+    public LocalDateTime getStartDate();
+    public LocalDateTime getEndDate();
+    public List<List<Integer>> getPlayerGrid() throws Exception;
+    public Scheme getScheme();
 }

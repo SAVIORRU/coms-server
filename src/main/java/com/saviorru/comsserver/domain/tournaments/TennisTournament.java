@@ -1,12 +1,14 @@
 package com.saviorru.comsserver.domain.tournaments;
 
 import com.saviorru.comsserver.domain.*;
+import javafx.util.Pair;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TennisTournament implements Tournament {
+
 
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
@@ -35,6 +37,7 @@ public class TennisTournament implements Tournament {
         this.isStart = false;
         this.schemeType = schemeType;
         this.tournamentName = tournamentName;
+        this.startDate = dateDispatcher.getStartDate();
         generationSchedule(schemeType);
     }
 
@@ -97,23 +100,21 @@ public class TennisTournament implements Tournament {
         if (this.isStart) {
             this.isStart = false;
             if (schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
+            if (this.schedule.getAllMatches().size() != this.scheme.getMaxPairCount())
+                throw new Exception("All pair are not not played yet");
             List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
-            for (int i =0; i < winners.size(); i++)
-            {
-                if (i == 0)
-                {
+            for (int i = 0; i < winners.size(); i++) {
+                if (i == 0) {
                     this.firstPlacePrizer = winners.get(i);
                 }
-                if (i == 1)
-                {
+                if (i == 1) {
                     this.secondPlacePrizer = winners.get(i);
                 }
-                if (i == 2)
-                {
+                if (i == 2) {
                     this.thirdPlacePrizer = winners.get(i);
                 }
             }
-
+            this.endDate = LocalDateTime.now();
         }
         throw new Exception("Tournament is not started");
     }
@@ -167,5 +168,36 @@ public class TennisTournament implements Tournament {
 
     public Player getThirdPlacePrizer() {
         return thirdPlacePrizer;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    @Override
+    public List<List<Integer>> getPlayerGrid() throws Exception {
+        List<List<Integer>> playerGrid = new ArrayList<>();
+        for (int i = 0; i < scheme.getToursCount(); i++) {
+            playerGrid.add(new ArrayList<>());
+            for (Pair<Integer, Integer> pair : scheme.getAllPairsInTour(i + 1)) {
+//                Player firstPlayer = null;
+//                if (pair.getKey() != 0)
+//                    firstPlayer = playerDispatcher.getPlayerByNumber(pair.getKey());
+//                Player secondPlayer = null;
+//                if (pair.getValue() != 0)
+//                    secondPlayer = playerDispatcher.getPlayerByNumber(pair.getValue());
+                playerGrid.get(i).add(pair.getKey());
+                playerGrid.get(i).add(pair.getValue());
+            }
+        }
+        return playerGrid;
+    }
+
+    public Scheme getScheme() {
+        return scheme;
     }
 }
