@@ -217,7 +217,6 @@ public class OlympicScheme implements Scheme {
             }
             rounds++;
         }
-        //addPairsInList(pairList);
         return pairList;
     }
 
@@ -235,7 +234,6 @@ public class OlympicScheme implements Scheme {
     public List<Pair<Integer, Integer>> getAllPairsInTour(Integer tourNumber) throws Exception {
         if (tourNumber < 0 || tourNumber > this.countRounds) throw new Exception("Tour out of range");
         List<Pair<Integer, Integer>> list = getTheRound(tourNumber);
-        //addPairsInList(list);
         return list;
     }
 

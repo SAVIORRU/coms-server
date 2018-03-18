@@ -36,8 +36,8 @@ public class Main {
         lists.add(lists3);
         lists.add(lists4);
         PrintTree printTree = new PrintTree();
-        printTree.printTree(lists);
-
+        String s = printTree.printTree(lists);
+        System.out.print(s);
     }
 
 }
