@@ -98,7 +98,6 @@ public class TennisTournament implements Tournament {
     @Override
     public void finish() throws Exception {
         if (this.isStart) {
-            this.isStart = false;
             if (schedule.getMatchesByState(MatchState.PLAYED).size() == 0) throw new Exception("Matches didn't played");
             if (this.schedule.getAllMatches().size() != this.scheme.getMaxPairCount()) throw new Exception("All pair are not not played yet");
             List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
@@ -119,6 +118,7 @@ public class TennisTournament implements Tournament {
             }
             this.endDate = LocalDateTime.now();
         }
+        else
         throw new Exception("Tournament is not started");
     }
 
@@ -161,7 +161,6 @@ public class TennisTournament implements Tournament {
     }
 
     public Player getFirstPlacePrizer() throws Exception {
-        if (firstPlacePrizer == null) throw new Exception("Tournament is not finished");
         return firstPlacePrizer;
     }
 

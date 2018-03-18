@@ -252,4 +252,9 @@ public class OlympicScheme implements Scheme {
         if (winnersList.isEmpty()) throw new Exception("Empty list winner");
         createSchedule(winnersList, this.children);
     }
+
+    @Override
+    public String toString() {
+        return "Олимпийская система";
+    }
 }

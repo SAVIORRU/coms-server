@@ -19,7 +19,10 @@ public class TournamentReport {
     public TournamentReport(Tournament tournament) throws Exception {
         if (tournament == null) throw new NullPointerException();
         this.contestersList = tournament.getPlayers();
-        this.matchesHistory = tournament.getSchedule().getAllMatches();
+        if (tournament.isStart())
+            this.matchesHistory = tournament.getSchedule().getAllMatches();
+        else
+            this.matchesHistory = new ArrayList<>();
         this.schemeType = tournament.getSchemeType();
         this.startDate = tournament.getStartDate();
         this.endDate = tournament.getEndDate();
@@ -29,7 +32,7 @@ public class TournamentReport {
         this.prizeWinners.add(tournament.getFirstPlacePrizer());
         this.prizeWinners.add(tournament.getSecondPlacePrizer());
         this.prizeWinners.add(tournament.getThirdPlacePrizer());
-        this.playerScoresTable = calcScores(this.contestersList, this.matchesHistory);
+        this.playerScoresTable = this.calcScores(this.contestersList, this.matchesHistory);
 
     }
 
@@ -38,18 +41,17 @@ public class TournamentReport {
     private List<Pair<Player, Integer>> calcScores( List<Player> contestersList, List<Match> matchesHistory) throws Exception
     {
         Map<Player, Integer> playerScores = new HashMap<>();
-        for (Match match : matchesHistory)
+        for (Player player : contestersList)
         {
-            if (!(playerScores.containsKey(match.getFirstSide())))
-                playerScores.put(match.getFirstSide(), 0);
-            if (!(playerScores.containsKey(match.getSecondSide())))
-                playerScores.put(match.getSecondSide(), 0);
+                playerScores.put(player, 0);
         }
         for (Match match : matchesHistory) {
-            Player winner = match.getWinner();
-            Integer score = playerScores.get(winner);
-            score +=  1;
-            playerScores.replace(winner, score);
+            if (match.isPlayed()) {
+                Player winner = match.getWinner();
+                Integer score = playerScores.get(winner);
+                score += 1;
+                playerScores.replace(winner, score);
+            }
         }
         List<Pair<Player, Integer>> result = new ArrayList<>();
         Stream<Map.Entry<Player,Integer>> st = playerScores.entrySet().stream();
@@ -94,5 +96,44 @@ public class TournamentReport {
 
     public String getTournamentName() {
         return tournamentName;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        result += "Дата составления отчета: " + reportDate.toString() + "\n";
+        result += "Название турнира: " + getTournamentName() + "\n";
+        result += "Дата начала: " + startDate.toString() + "\n";
+        result += "Дата окончания: ";
+        if (endDate == null)
+            result += "турнир еще не окончен" + "\n";
+        else
+            result += endDate.toString() + "\n";
+        result += "Турнирная система: ";
+        switch (schemeType)
+        {
+            case ROUND: result += "круговая" + "\n"; break;
+            case OLYMPIC: result += "олимпийская" + "\n"; break;
+        }
+        result += "Призеры турнира:" + "\n";
+        for (int i =0; i<prizeWinners.size(); i++) {
+            result += (i+1) + ". ";
+            if (prizeWinners.get(i) != null)
+                result += prizeWinners.get(i).toString();
+            result += "\n";
+        }
+        result += "Рейтинг участников в турнире: " + "\n";
+        for (int i =0; i < playerScoresTable.size(); i++)
+        {
+            result =  result + (i+1) + ".  " + playerScoresTable.get(i).getKey().toString() +  "   " +
+                    playerScoresTable.get(i).getValue().toString() + "\n";
+        }
+        result +=  "\n" + "\n";
+        result += "История матчей: " + "\n";
+        for (int i=0; i < matchesHistory.size(); i++)
+        {
+            result += result + (i+1) + ".  " + matchesHistory.get(i).toString();
+        }
+        return result;
     }
 }

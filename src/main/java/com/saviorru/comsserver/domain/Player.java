@@ -59,4 +59,12 @@ public class Player {
         return false;
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+        result += getFirstName();
+        result += " ";
+        result += getLastName();
+        return result;
+    }
 }
