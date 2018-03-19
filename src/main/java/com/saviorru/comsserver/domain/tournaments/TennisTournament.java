@@ -48,7 +48,7 @@ public class TennisTournament implements Tournament {
             generate(new RoundScheme(this.playerDispatcher.getAllPlayers().size()));
         }
         if (schemeType == SchemeType.OLYMPIC) {
-            //this.winnerIdentifier = new OlympicWinnerIdentifier();
+            this.winnerIdentifier = new OlympicWinnerIndentifier();
             generate(new OlympicScheme(this.playerDispatcher.getAllPlayers().size()));
         }
     }
