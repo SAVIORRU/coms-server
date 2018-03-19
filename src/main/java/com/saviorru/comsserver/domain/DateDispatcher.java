@@ -9,6 +9,7 @@ public class DateDispatcher {
     private Integer allowedHourStart;
     private Integer allowedHourEnd;
     private Integer dateHourOffset;
+    private LocalDateTime endDate;
 
     public DateDispatcher(LocalDateTime startDate, Integer allowedHourStart, Integer allowedHourEnd, Integer dateHourOffset) throws Exception
     {
@@ -56,5 +57,13 @@ public class DateDispatcher {
 
     public Integer getAllowedHourEnd() {
         return allowedHourEnd;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 }
