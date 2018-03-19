@@ -18,9 +18,7 @@ public class TennisTournament implements Tournament {
     private SchemeType schemeType;
     private Scheme scheme;
     private String tournamentName;
-    private Player firstPlacePrizer;
-    private Player secondPlacePrizer;
-    private Player thirdPlacePrizer;
+    private List<PrizePlace> prizePlaces;
     private ScheduleGenerator scheduleGenerator;
     private WinnerIdentifier winnerIdentifier;
 
@@ -102,13 +100,13 @@ public class TennisTournament implements Tournament {
             List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
             for (int i = 0; i < winners.size(); i++) {
                 if (i == 0) {
-                    this.firstPlacePrizer = winners.get(i);
+                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
                 }
                 if (i == 1) {
-                    this.secondPlacePrizer = winners.get(i);
+                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
                 }
                 if (i == 2) {
-                    this.thirdPlacePrizer = winners.get(i);
+                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
                 }
             }
             dateDispatcher.setEndDate(LocalDateTime.now());
@@ -155,18 +153,15 @@ public class TennisTournament implements Tournament {
     }
 
     @Override
-    public Player getFirstPlacePrizer() {
-        return firstPlacePrizer;
-    }
-
-    @Override
-    public Player getSecondPlacePrizer() {
-        return secondPlacePrizer;
-    }
-
-    @Override
-    public Player getThirdPlacePrizer() {
-        return thirdPlacePrizer;
+    public Player getThePrizePlace(int prizePlace) throws Exception {
+        if (prizePlace < 0 || prizePlace > playerDispatcher.getAllPlayers().size())
+            throw new Exception("Not a correct prize-winning place");
+        for (PrizePlace thePrizePlace : prizePlaces) {
+            if (thePrizePlace.getPrizePlace() == prizePlace) {
+                return thePrizePlace.getPlayer();
+            }
+        }
+        return null;
     }
 
     @Override
