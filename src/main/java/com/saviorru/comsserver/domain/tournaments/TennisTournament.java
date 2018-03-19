@@ -12,7 +12,6 @@ public class TennisTournament implements Tournament {
 
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
-    private LocalDateTime startDate, endDate;
     private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
     private boolean isStart;
@@ -37,7 +36,6 @@ public class TennisTournament implements Tournament {
         this.isStart = false;
         this.schemeType = schemeType;
         this.tournamentName = tournamentName;
-        this.startDate = dateDispatcher.getStartDate();
         generationSchedule(schemeType);
     }
 
@@ -48,7 +46,7 @@ public class TennisTournament implements Tournament {
             generate(new RoundScheme(this.playerDispatcher.getAllPlayers().size()));
         }
         if (schemeType == SchemeType.OLYMPIC) {
-            //this.winnerIdentifier = new OlympicWinnerIdentifier();
+            this.winnerIdentifier = new OlympicWinnerIndentifier();
             generate(new OlympicScheme(this.playerDispatcher.getAllPlayers().size()));
         }
     }
@@ -113,10 +111,9 @@ public class TennisTournament implements Tournament {
                     this.thirdPlacePrizer = winners.get(i);
                 }
             }
-            this.endDate = LocalDateTime.now();
-        }
-        else
-        throw new Exception("Tournament is not started");
+            dateDispatcher.setEndDate(LocalDateTime.now());
+        } else
+            throw new Exception("Tournament is not started");
     }
 
     @Override
@@ -157,24 +154,29 @@ public class TennisTournament implements Tournament {
         return this.isStart;
     }
 
-    public Player getFirstPlacePrizer() throws Exception {
+    @Override
+    public Player getFirstPlacePrizer() {
         return firstPlacePrizer;
     }
 
+    @Override
     public Player getSecondPlacePrizer() {
         return secondPlacePrizer;
     }
 
+    @Override
     public Player getThirdPlacePrizer() {
         return thirdPlacePrizer;
     }
 
+    @Override
     public LocalDateTime getStartDate() {
-        return startDate;
+        return dateDispatcher.getStartDate();
     }
 
+    @Override
     public LocalDateTime getEndDate() {
-        return endDate;
+        return dateDispatcher.getStartDate();
     }
 
     @Override
@@ -183,12 +185,6 @@ public class TennisTournament implements Tournament {
         for (int i = 0; i < scheme.getToursCount(); i++) {
             playerGrid.add(new ArrayList<>());
             for (Pair<Integer, Integer> pair : scheme.getAllPairsInTour(i + 1)) {
-//                Player firstPlayer = null;
-//                if (pair.getKey() != 0)
-//                    firstPlayer = playerDispatcher.getPlayerByNumber(pair.getKey());
-//                Player secondPlayer = null;
-//                if (pair.getValue() != 0)
-//                    secondPlayer = playerDispatcher.getPlayerByNumber(pair.getValue());
                 playerGrid.get(i).add(pair.getKey());
                 playerGrid.get(i).add(pair.getValue());
             }
@@ -196,6 +192,7 @@ public class TennisTournament implements Tournament {
         return playerGrid;
     }
 
+    @Override
     public Scheme getScheme() {
         return scheme;
     }
