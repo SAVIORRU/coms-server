@@ -156,9 +156,11 @@ public class TennisTournament implements Tournament {
     public Player getThePrizePlace(int prizePlace) throws Exception {
         if (prizePlace < 0 || prizePlace > playerDispatcher.getAllPlayers().size())
             throw new Exception("Not a correct prize-winning place");
-        for (PrizePlace thePrizePlace : prizePlaces) {
-            if (thePrizePlace.getPrizePlace() == prizePlace) {
-                return thePrizePlace.getPlayer();
+        if (prizePlaces != null) {
+            for (PrizePlace thePrizePlace : prizePlaces) {
+                if (thePrizePlace.getPrizePlace() == prizePlace) {
+                    return thePrizePlace.getPlayer();
+                }
             }
         }
         return null;

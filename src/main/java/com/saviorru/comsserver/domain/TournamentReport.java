@@ -29,9 +29,9 @@ public class TournamentReport {
         this.reportDate = LocalDateTime.now();
         this.tournamentName = tournament.getName();
         this.prizeWinners = new ArrayList<>();
-        this.prizeWinners.add(tournament.getFirstPlacePrizer());
-        this.prizeWinners.add(tournament.getSecondPlacePrizer());
-        this.prizeWinners.add(tournament.getThirdPlacePrizer());
+        this.prizeWinners.add(tournament.getThePrizePlace(1));
+        this.prizeWinners.add(tournament.getThePrizePlace(2));
+        this.prizeWinners.add(tournament.getThePrizePlace(3));
         this.playerScoresTable = this.calcScores(this.contestersList, this.matchesHistory);
 
     }

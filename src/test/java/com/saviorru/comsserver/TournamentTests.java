@@ -74,8 +74,8 @@ public class TournamentTests {
     }
 
     @Test
-    public void testGetChampionButTournamentNotInit(){
-        tournament.getFirstPlacePrizer();
+    public void testGetChampionButTournamentNotInit() throws Exception {
+        assertEquals(null,tournament.getThePrizePlace(1));
     }
 
     @Test
