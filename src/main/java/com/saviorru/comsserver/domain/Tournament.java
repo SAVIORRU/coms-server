@@ -15,9 +15,10 @@ public interface Tournament {
     public void finishMatch(Match match,Points points) throws Exception;
     public void finishMatches(List<Match> matches,List<Points> points) throws Exception;
     public boolean isStart();
-    Player getThePrizePlace(int count) throws Exception;
+    public Player getThePrizePlace(int count) throws Exception;
     public LocalDateTime getStartDate();
     public LocalDateTime getEndDate();
     public List<List<Integer>> getPlayerGrid() throws Exception;
     public Scheme getScheme();
+    public Tournament clone();
 }

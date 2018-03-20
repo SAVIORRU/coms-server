@@ -37,6 +37,21 @@ public class TennisTournament implements Tournament {
         generationSchedule(schemeType);
     }
 
+    private TennisTournament(TennisTournament target) throws Exception {
+        if (target != null) {
+            this.playerDispatcher = target.getPlayerDispatcher();
+            this.schedule = target.getScheduleObject();
+            this.locationDispatcher = target.getLocationDispatcher();
+            this.dateDispatcher = target.getDateDispatcher();
+            this.isStart = target.isStart();
+            this.schemeType = target.getSchemeType();
+            this.tournamentName = target.getTournamentName();
+            this.winnerIdentifier = target.getWinnerIdentifier();
+            this.tournamentName = target.getTournamentName();
+            this.prizePlaces = target.getPrizePlaces();
+            this.scheduleGenerator = target.getScheduleGenerator();
+        }
+    }
 
     private void generationSchedule(SchemeType schemeType) throws Exception {
         if (schemeType == SchemeType.ROUND) {
@@ -192,5 +207,52 @@ public class TennisTournament implements Tournament {
     @Override
     public Scheme getScheme() {
         return scheme;
+    }
+
+    @Override
+    public Tournament clone() {
+        try {
+            return new TennisTournament(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private LocationDispatcher getLocationDispatcher() {
+        return locationDispatcher;
+    }
+
+
+    private PlayerDispatcher getPlayerDispatcher() {
+        return playerDispatcher;
+    }
+
+
+    private DateDispatcher getDateDispatcher() {
+        return dateDispatcher;
+    }
+
+
+    private String getTournamentName() {
+        return tournamentName;
+    }
+
+
+    private ScheduleGenerator getScheduleGenerator() {
+        return scheduleGenerator;
+    }
+
+
+    private WinnerIdentifier getWinnerIdentifier() {
+        return winnerIdentifier;
+    }
+    private Schedule getScheduleObject(){
+        return schedule;
+    }
+
+    private List<PrizePlace> getPrizePlaces() {
+        return prizePlaces;
     }
 }
