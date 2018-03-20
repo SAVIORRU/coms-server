@@ -47,7 +47,8 @@ public class ShowScheduleCommand extends Command {
         });
         printSchedule(matches);
     }
-    private void printSchedule(List<Match> matches){
+
+    private void printSchedule(List<Match> matches) {
         int count = 0;
         for (Match match : matches) {
             String isPlayedMatch = (match.isPlayed()) ? " сыгран" : " не сыгран";
@@ -57,7 +58,7 @@ public class ShowScheduleCommand extends Command {
                         isPlayedMatch);
             else {
                 try {
-                    System.out.println("Номер матча: " + count + " " +"Игрок 1 : " + match.getFirstSide() + "\n" + "Игрок 2 : " + match.getSecondSide() + "\n" + "Дата матча : " + match.getDate().toString() + "\n" + " Статус матча: " +
+                    System.out.println("Номер матча: " + count + " " + "Игрок 1 : " + match.getFirstSide() + "\n" + "Игрок 2 : " + match.getSecondSide() + "\n" + "Дата матча : " + match.getDate().toString() + "\n" + " Статус матча: " +
                             isPlayedMatch + "\n" + " Очки первого игрока : " + match.getPointsFirstSide() + "\n" + " Очки первого игрока : " + match.getPointsSecondSide() +
                             "\n" + " Победитель : " + match.getWinner());
                 } catch (Exception e) {

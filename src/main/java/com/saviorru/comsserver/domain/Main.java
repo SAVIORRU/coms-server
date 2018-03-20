@@ -47,6 +47,8 @@ public class Main {
         commandParser.addParsingRule("show grid", new ArrayList<>());
         commandParser.addParsingRule("show schedule", new ArrayList<>());
         commandParser.addParsingRule("set match result", Arrays.asList(ArgumentType.DIGIT,ArgumentType.DIGIT, ArgumentType.DIGIT));
+        commandParser.addParsingRule("set players", Collections.singletonList(ArgumentType.DIGIT));
+        commandParser.addParsingRule("set player", Arrays.asList(ArgumentType.ALPHA,ArgumentType.ALPHA,ArgumentType.DATE));
         commandParser.addParsingRule("help", new ArrayList<>());
 
         while(true){

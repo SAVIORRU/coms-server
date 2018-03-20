@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.cly;
 
+import com.saviorru.comsserver.domain.PlayerDispatcher;
 import com.saviorru.comsserver.domain.Tournament;
 import javafx.util.Pair;
 
@@ -33,6 +34,14 @@ public class CommandManagement {
         }
         if (commandConsole.getKey().equals("show schedule")) {
             return executeCommand(new ShowScheduleCommand(tournament));
+        }
+        if (commandConsole.getKey().equals("set players")) {
+            try {
+                return executeCommand(new SetPlayersCommand(tournament,new CommandParser(),Integer.parseInt(commandConsole.getValue().get(0)),new PlayerDispatcher()));
+            } catch (Exception e) {
+                System.out.print("Не верный формат команды");
+                return false;
+            }
         }
         if (commandConsole.getKey().equals("set match result")) {
             try {

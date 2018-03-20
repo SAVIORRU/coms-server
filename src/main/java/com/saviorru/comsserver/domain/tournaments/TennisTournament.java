@@ -34,6 +34,7 @@ public class TennisTournament implements Tournament {
         this.isStart = false;
         this.schemeType = schemeType;
         this.tournamentName = tournamentName;
+        this.prizePlaces = new ArrayList<>();
         generationSchedule(schemeType);
     }
 
