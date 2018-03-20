@@ -34,9 +34,9 @@ public class CommandManagement {
         if (commandConsole.getKey().equals("show schedule")) {
             return executeCommand(new ShowScheduleCommand(tournament));
         }
-        if (commandConsole.getKey().equals("setMatchResult")) {
+        if (commandConsole.getKey().equals("set match result")) {
             try {
-                return executeCommand(new SetMatchResultCommand(tournament,Integer.parseInt(commandConsole.getValue().get(0)),Integer.parseInt(commandConsole.getValue().get(1)),Integer.parseInt(commandConsole.getValue().get(2))));
+                return executeCommand(new SetMatchResultCommand(tournament,Integer.parseInt(commandConsole.getValue().get(0))-1,Integer.parseInt(commandConsole.getValue().get(1)),Integer.parseInt(commandConsole.getValue().get(2))));
             } catch (Exception e) {
                 System.out.print("Не верный формат команды");
                 return false;

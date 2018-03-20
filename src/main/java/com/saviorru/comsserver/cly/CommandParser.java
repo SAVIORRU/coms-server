@@ -28,6 +28,7 @@ public class CommandParser {
         List<String> parts = new ArrayList<String>(Arrays.asList(commandLine.split(":")));
         String commandString = parts.get(0);
         commandString = commandString.toLowerCase();
+        commandString = commandString.trim();
         List<String> rawArguments = new ArrayList<>();
         if (parts.size() > 1)
             rawArguments = new ArrayList<String>(Arrays.asList(parts.get(1).split(",")));

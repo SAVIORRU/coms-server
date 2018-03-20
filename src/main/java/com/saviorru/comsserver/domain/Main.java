@@ -46,7 +46,7 @@ public class Main {
         commandParser.addParsingRule("finish", new ArrayList<>());
         commandParser.addParsingRule("show grid", new ArrayList<>());
         commandParser.addParsingRule("show schedule", new ArrayList<>());
-        commandParser.addParsingRule("setMatchResult", Arrays.asList(ArgumentType.DIGIT,ArgumentType.DIGIT, ArgumentType.DIGIT));
+        commandParser.addParsingRule("set match result", Arrays.asList(ArgumentType.DIGIT,ArgumentType.DIGIT, ArgumentType.DIGIT));
         commandParser.addParsingRule("help", new ArrayList<>());
 
         while(true){
@@ -57,7 +57,7 @@ public class Main {
             try {
                 commandManagement.command(commandParser.parse(command));
             } catch(Exception e){
-               System.out.println("Неверная команда/ синтаксис");
+               System.out.println(Arrays.toString(e.getStackTrace()));
             }
             if(command.equals("exit")) break;
         }
