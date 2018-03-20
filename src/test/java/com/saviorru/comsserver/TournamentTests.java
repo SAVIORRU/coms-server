@@ -161,17 +161,16 @@ public class TournamentTests {
 
     @Test()
     public void testGetGrid() throws Exception {
-//        List<List<Pair<Player, Player>>> grid = tournament.getPlayerGrid();
-//        Integer count = 0;
-//        for (List<Pair<Player, Player>> list: grid)
-//            count += list.size();
-//        assertEquals(count, tournament.getScheme().getMaxPairCount());
+        List<List<Integer>> grid = tournament.getPlayerGrid();
+        Integer count = 0;
+        for (List<Integer> list: grid)
+            count += list.size();
+        count /= 2;
+        assertEquals(count, tournament.getScheme().getMaxPairCount());
     }
 
-    @Test()
-    public void testGetGrid2() throws Exception {
-        List<List<Integer>> grid = tournament.getPlayerGrid();
-        PrintTree printTree = new PrintTree();
-        printTree.printTree(grid);
+    @Test
+    public void testClone(){
+        assertEquals(tournament.clone().getName(),tournament.getName());
     }
 }
