@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.cly;
 
+import com.saviorru.comsserver.domain.PrintTree;
 import com.saviorru.comsserver.domain.Tournament;
 
 public class ShowGridCommand extends Command {
@@ -10,6 +11,21 @@ public class ShowGridCommand extends Command {
 
     @Override
     public Boolean execute() {
-        return null;
+        try {
+            System.out.print(new PrintTree().printTree(tournament.getPlayerGrid()));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String nameCommand() {
+        return "show grid";
+    }
+
+    @Override
+    public String commandFormat() {
+        return "command";
     }
 }

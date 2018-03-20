@@ -17,4 +17,14 @@ public class FinishTournamentCommand extends Command{
         }
         return true;
     }
+
+    @Override
+    public String nameCommand() {
+        return "finish";
+    }
+
+    @Override
+    public String commandFormat() {
+        return "command";
+    }
 }

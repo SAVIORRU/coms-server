@@ -5,7 +5,7 @@ import com.saviorru.comsserver.domain.Tournament;
 public abstract class Command {
 
     protected Tournament tournament;
-    protected String backup;
+    protected Tournament backup;
 
     public Command(Tournament tournament){
         if(tournament == null) throw new NullPointerException();
@@ -13,8 +13,10 @@ public abstract class Command {
     }
 
     protected void backup() {
-//        backup = editor.textField.getText();
+       backup = tournament.clone();
     }
 
     public abstract Boolean execute();
+    public abstract String nameCommand();
+    public abstract String commandFormat();
 }

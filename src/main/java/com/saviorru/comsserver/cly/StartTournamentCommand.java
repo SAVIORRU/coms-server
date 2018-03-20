@@ -17,4 +17,14 @@ public class StartTournamentCommand extends Command {
         }
         return true;
     }
+
+    @Override
+    public String nameCommand() {
+        return "start";
+    }
+
+    @Override
+    public String commandFormat() {
+        return "command";
+    }
 }
