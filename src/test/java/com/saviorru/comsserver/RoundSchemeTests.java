@@ -1,5 +1,6 @@
 package com.saviorru.comsserver;
 
+import com.saviorru.comsserver.domain.PlayerGrid;
 import com.saviorru.comsserver.domain.RoundScheme;
 import javafx.util.Pair;
 import org.junit.Before;
@@ -42,6 +43,14 @@ public class RoundSchemeTests {
             if (pair == null) { break;}
 
         }
+    }
+    @Test()
+    public void schemeGetGridTest() throws Exception
+    {
+        testSubject.getNextNotPlayedPair();
+        testSubject.getNextNotPlayedPair();
+        PlayerGrid grid = testSubject.getPlayerGrid();
+        //System.out.print(grid);
     }
 
 }

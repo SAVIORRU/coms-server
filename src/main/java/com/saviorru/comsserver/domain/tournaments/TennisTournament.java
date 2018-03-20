@@ -177,16 +177,9 @@ public class TennisTournament implements Tournament {
     }
 
     @Override
-    public List<List<Integer>> getPlayerGrid() throws Exception {
-        List<List<Integer>> playerGrid = new ArrayList<>();
-        for (int i = 0; i < scheme.getToursCount(); i++) {
-            playerGrid.add(new ArrayList<>());
-            for (Pair<Integer, Integer> pair : scheme.getAllPairsInTour(i + 1)) {
-                playerGrid.get(i).add(pair.getKey());
-                playerGrid.get(i).add(pair.getValue());
-            }
-        }
-        return playerGrid;
+    public PlayerGrid getPlayerGrid() throws Exception {
+
+        return scheme.getPlayerGrid();
     }
 
     @Override

@@ -2,10 +2,8 @@ package com.saviorru.comsserver.domain;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class RoundScheme implements Scheme
 {
@@ -111,6 +109,62 @@ public class RoundScheme implements Scheme
     }
 
     @Override
+    public PlayerGrid getPlayerGrid() throws Exception {
+        List<List<Integer>> matrix = new ArrayList<>();
+        matrix.add(collectNumbers());
+        matrix.get(0).add(0, -1);
+        for (int i =1; i < playersCount+1; i++)
+        {
+            matrix.add(new ArrayList<>());
+            matrix.get(i).add(0, matrix.get(0).get(i));
+            for (int j =1; j < playersCount+1; j++) {
+                if (i == j) {
+                    matrix.get(i).add(-1);
+                    continue;
+                }
+                if (checkMeet(matrix.get(i).get(0), matrix.get(0).get(j)))
+                    matrix.get(i).add(1);
+                else
+                    matrix.get(i).add(0);
+            }
+        }
+        PlayerGrid grid = new RoundGrid(matrix);
+
+        return grid;
+    }
+
+    private List<Integer> collectNumbers()
+    {
+        Set<Integer> numbers = new HashSet<Integer>();
+        for (List<Meet> tour: toursList)
+        {
+            for (Meet meet: tour)
+            {
+                numbers.add(meet.getFirstNumber());
+                numbers.add(meet.getSecondNumber());
+            }
+        }
+        List<Integer> result = new ArrayList<>(numbers);
+        Collections.sort(result);
+        return result;
+    }
+
+    private Boolean checkMeet(Integer firstNumber, Integer secondNumber) throws Exception
+    {
+        Meet compareMeet = new Meet(firstNumber, secondNumber);
+        for (List<Meet> tour: toursList)
+        {
+            for (Meet meet: tour)
+            {
+                if (meet.equals(compareMeet))
+                {compareMeet = meet;
+                    break;}
+            }
+        }
+        return compareMeet.isAssigned();
+    }
+
+    @Override
     public String toString() {
         return "Круговая система";
     }
@@ -156,8 +210,13 @@ public class RoundScheme implements Scheme
 
             Meet meet = (Meet) o;
 
-            if (!getFirstNumber().equals(meet.getFirstNumber())) return false;
-            return getSecondNumber().equals(meet.getSecondNumber());
+            Set<Integer> firstSet = new HashSet<>();
+            firstSet.add(this.getFirstNumber());
+            firstSet.add(this.getSecondNumber());
+            Set<Integer> secondSet = new HashSet<>();
+            secondSet.add(meet.getFirstNumber());
+            secondSet.add(meet.getSecondNumber());
+            return firstSet.equals(secondSet);
         }
     }
 }

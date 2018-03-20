@@ -256,6 +256,11 @@ public class OlympicScheme implements Scheme {
     }
 
     @Override
+    public PlayerGrid getPlayerGrid() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "Олимпийская система";
     }
