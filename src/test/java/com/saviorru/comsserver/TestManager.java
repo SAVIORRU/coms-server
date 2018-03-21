@@ -18,6 +18,7 @@ import org.junit.runners.Suite;
         RoundWinnerIdentifierTests.class,
         RoundSchemeTests.class,
         PlayerDispatcherTests.class,
+        OlympicGridTest.class,
         TournamentTests.class,
         OlympicWinnerIndentifierTest.class
 })

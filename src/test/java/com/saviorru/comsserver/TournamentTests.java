@@ -170,8 +170,8 @@ public class TournamentTests {
 
     @Test()
     public void testGetGrid2() throws Exception {
-        List<List<Integer>> grid = tournament.getPlayerGrid();
-        PrintTree printTree = new PrintTree();
-        printTree.printTree(grid);
+//        List<List<Integer>> grid = tournament.getPlayerGrid();
+//        PrintTree printTree = new PrintTree();
+//        printTree.printTree(grid);
     }
 }
