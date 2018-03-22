@@ -6,7 +6,7 @@ import java.util.Objects;
 public class OneOnOneMatch implements Match {
 
     private LocalDateTime date;
-    private Points points;
+    private Score score;
     private Player firstSide, secondSide;
     private MatchState matchState = MatchState.NOTPLAYED;
     private Location location;
@@ -18,7 +18,7 @@ public class OneOnOneMatch implements Match {
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.location = location;
-        this.points = new Points();
+        this.score = new Score();
         this.date = date;
     }
 
@@ -30,7 +30,7 @@ public class OneOnOneMatch implements Match {
     @Override
     public Player getWinner() throws Exception {
         if (!isPlayed()) throw new Exception("Match didn't played");
-        return (this.points.getPointsFirstSide() > this.points.getPointsSecondSide()) ? this.firstSide : this.secondSide;
+        return (this.score.getPointsFirstSide() > this.score.getPointsSecondSide()) ? this.firstSide : this.secondSide;
     }
 
     @Override
@@ -55,18 +55,18 @@ public class OneOnOneMatch implements Match {
 
     @Override
     public int getPointsFirstSide() {
-        return this.points.getPointsFirstSide();
+        return this.score.getPointsFirstSide();
     }
 
     @Override
     public int getPointsSecondSide() {
-        return this.points.getPointsSecondSide();
+        return this.score.getPointsSecondSide();
     }
 
     @Override
     public void setPoints(int pointsFirstSide, int pointsSecondSide) {
         try {
-            if (!isPlayed()) this.points.setPoints(pointsFirstSide, pointsSecondSide);
+            if (!isPlayed()) this.score.setPoints(pointsFirstSide, pointsSecondSide);
         } catch (Exception e) {
 
         }

@@ -77,4 +77,8 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
         }
         return matchesList;
     }
+
+    public Scheme getScheme() {
+        return tournamentScheme;
+    }
 }
