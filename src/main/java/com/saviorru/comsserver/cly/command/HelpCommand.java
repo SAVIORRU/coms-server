@@ -5,13 +5,12 @@ import com.saviorru.comsserver.domain.tournament.Tournament;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
 
     private List<Command> commandList;
     private List<String> commandNameList;
 
-    public HelpCommand(Tournament tournament, List<Command> commandList) {
-        super(tournament);
+    public HelpCommand(List<Command> commandList) {
         this.commandList = commandList;
         this.commandNameList = new ArrayList<>();
         fillCommandNameList(commandList);
@@ -21,6 +20,11 @@ public class HelpCommand extends Command {
         for (Command command : commandList) {
             commandNameList.add(command.nameCommand());
         }
+    }
+
+    @Override
+    public void backup() {
+
     }
 
     @Override

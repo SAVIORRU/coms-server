@@ -8,15 +8,19 @@ import javafx.util.Pair;
 import java.time.LocalDate;
 import java.util.List;
 
-public class SetPlayerCommand extends Command {
+public class SetPlayerCommand implements Command {
 
     private PlayerDispatcher playerDispatcher;
     private Pair<String, List<String>> arguments;
 
-    public SetPlayerCommand(Tournament tournament, PlayerDispatcher playerDispatcher, Pair<String, List<String>> arguments) {
-        super(tournament);
+    public SetPlayerCommand(PlayerDispatcher playerDispatcher, Pair<String, List<String>> arguments) {
         this.playerDispatcher = playerDispatcher;
         this.arguments = arguments;
+    }
+
+    @Override
+    public void backup() {
+
     }
 
     @Override

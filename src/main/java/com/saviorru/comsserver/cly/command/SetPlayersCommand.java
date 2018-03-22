@@ -8,7 +8,7 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Scanner;
 
-public class SetPlayersCommand extends Command {
+public class SetPlayersCommand implements Command {
 
     private Integer countPlayers;
     private CommandParser commandParser;
@@ -16,12 +16,16 @@ public class SetPlayersCommand extends Command {
     private PlayerDispatcher playerDispatcher;
 
     public SetPlayersCommand(Tournament tournament, CommandParser commandParser, Integer countPlayers, PlayerDispatcher playerDispatcher) throws Exception {
-        super(tournament);
         if(countPlayers == null || countPlayers < 0) throw new Exception("Not correct value");
         this.countPlayers = countPlayers;
         this.commandParser = commandParser;
         this.tournament = tournament;
         this.playerDispatcher = playerDispatcher;
+    }
+
+    @Override
+    public void backup() {
+
     }
 
     @Override
@@ -35,7 +39,7 @@ public class SetPlayersCommand extends Command {
             try {
                 Pair<String, List<String>> arguments = commandParser.parse(command);
                 if (arguments.getKey().equals("set player")) {
-                    if(new SetPlayerCommand(tournament, playerDispatcher, arguments).execute())
+                    if(new SetPlayerCommand(playerDispatcher, arguments).execute())
                     countPlayers--;
                     else  System.out.println("Игрок не добавлен!");
                 } else {
