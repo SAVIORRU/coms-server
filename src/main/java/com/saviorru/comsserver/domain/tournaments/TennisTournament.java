@@ -135,7 +135,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public Player getThePrizePlace(int prizePlace) throws Exception {
-        if (prizePlace < 0 || prizePlace > playerDispatcher.getAllPlayers().size())
+        if (prizePlace < 0 || prizePlace > tournamentSettings.getPrizePlacesCount())
             throw new Exception("Not a correct prize-winning place");
         if (prizePlaces != null) {
             for (PrizePlace thePrizePlace : prizePlaces) {
