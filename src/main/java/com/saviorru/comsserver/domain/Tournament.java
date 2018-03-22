@@ -18,6 +18,6 @@ public interface Tournament {
     Player getThePrizePlace(int count) throws Exception;
     public LocalDateTime getStartDate();
     public LocalDateTime getEndDate();
-    public List<List<Integer>> getPlayerGrid() throws Exception;
+    public PlayerGrid getPlayerGrid() throws Exception;
     public Scheme getScheme();
 }

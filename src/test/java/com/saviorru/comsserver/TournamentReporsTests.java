@@ -41,7 +41,7 @@ public class TournamentReporsTests {
         schedule = new ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         playerDispatcher.addPlayers(playerList);
-        schemeType = SchemeType.ROUND;
+        schemeType = SchemeType.OLYMPIC;
         tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
     }
 
@@ -54,7 +54,7 @@ public class TournamentReporsTests {
         }
         tournament.finish();
         TournamentReport report = new TournamentReport(tournament);
-        //System.out.print(report);
+        System.out.print(report);
     }
 
 }

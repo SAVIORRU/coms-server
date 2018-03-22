@@ -256,6 +256,24 @@ public class OlympicScheme implements Scheme {
     }
 
     @Override
+    public PlayerGrid getPlayerGrid() {
+        List<List<Integer>> listList = new ArrayList<>();
+        for (int i = 0; i < countRounds; i++) {
+            listList.add(new ArrayList<>());
+            for (Pair<Integer, Integer> pair : getTheRound(i + 1)) {
+                listList.get(i).add(pair.getKey());
+                listList.get(i).add(pair.getValue());
+            }
+        }
+        try {
+            return new OlympicGrid(listList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "Олимпийская система";
     }
