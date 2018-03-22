@@ -1,11 +1,12 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
+import com.saviorru.comsserver.domain.tournament.TournamentSettings;
+import com.saviorru.comsserver.domain.tournament.TournamentSettingsImpl;
 import org.junit.Before;
 
-import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+
 import static junit.framework.TestCase.*;
 
 import java.time.LocalDateTime;
