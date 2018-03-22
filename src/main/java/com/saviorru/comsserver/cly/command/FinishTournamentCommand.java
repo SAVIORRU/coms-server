@@ -1,17 +1,18 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cly.command;
 
+import com.saviorru.comsserver.cly.command.Command;
 import com.saviorru.comsserver.domain.tournament.Tournament;
 
-public class ShowGridCommand extends Command {
+public class FinishTournamentCommand extends Command {
 
-    public ShowGridCommand(Tournament tournament) {
+    public FinishTournamentCommand(Tournament tournament) {
         super(tournament);
     }
 
     @Override
-    public Boolean execute() {
+    public Boolean execute(){
         try {
-            System.out.print(new PrintTree().printTree(tournament.getPlayerGrid()));
+            tournament.finish();
         } catch (Exception e) {
             return false;
         }
@@ -20,7 +21,7 @@ public class ShowGridCommand extends Command {
 
     @Override
     public String nameCommand() {
-        return "show grid";
+        return "finish";
     }
 
     @Override

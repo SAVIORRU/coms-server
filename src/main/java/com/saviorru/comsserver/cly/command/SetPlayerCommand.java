@@ -1,5 +1,6 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cly.command;
 
+import com.saviorru.comsserver.cly.command.Command;
 import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.tournament.Tournament;
