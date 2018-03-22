@@ -3,6 +3,7 @@ package com.saviorru.comsserver.domain.tournaments;
 import com.saviorru.comsserver.domain.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TennisTournament implements Tournament {
@@ -30,6 +31,7 @@ public class TennisTournament implements Tournament {
         this.dateDispatcher = tournamentSettings.getDateDispatcher();
         this.isStart = false;
         this.tournamentSettings = tournamentSettings;
+        this.prizePlaces = new ArrayList<>();
         generationSchedule();
     }
 

@@ -100,40 +100,40 @@ public class TournamentReport {
 
     @Override
     public String toString() {
-        String result = "";
-        result += "Дата составления отчета: " + reportDate.toString() + "\n";
-        result += "Название турнира: " + getTournamentName() + "\n";
-        result += "Дата начала: " + startDate.toString() + "\n";
-        result += "Дата окончания: ";
+        StringBuilder result = new StringBuilder();
+        result.append( "Дата составления отчета: " + reportDate.toString() + "\n");
+        result.append( "Название турнира: " + getTournamentName() + "\n");
+        result.append( "Дата начала: " + startDate.toString() + "\n");
+        result.append( "Дата окончания: ");
         if (endDate == null)
-            result += "турнир еще не окончен" + "\n";
+            result.append( "турнир еще не окончен" + "\n");
         else
-            result += endDate.toString() + "\n";
-        result += "Турнирная система: ";
+            result.append( endDate.toString() + "\n");
+        result.append( "Турнирная система: ");
         switch (schemeType)
         {
-            case ROUND: result += "круговая" + "\n"; break;
-            case OLYMPIC: result += "олимпийская" + "\n"; break;
+            case ROUND: result.append( "круговая" + "\n"); break;
+            case OLYMPIC: result.append( "олимпийская" + "\n"); break;
         }
-        result += "Призеры турнира:" + "\n";
+        result.append( "Призеры турнира:" + "\n");
         for (int i =0; i<prizeWinners.size(); i++) {
-            result += (i+1) + ". ";
+            result.append( (i+1) + ". ");
             if (prizeWinners.get(i) != null)
-                result += prizeWinners.get(i).toString();
-            result += "\n";
+                result.append( prizeWinners.get(i).toString());
+            result.append( "\n");
         }
-        result += "Рейтинг участников в турнире: " + "\n";
+        result.append( "Рейтинг участников в турнире: " + "\n");
         for (int i =0; i < playerScoresTable.size(); i++)
         {
-            result =  result + (i+1) + ".  " + playerScoresTable.get(i).getKey().toString() +  "   " +
-                    playerScoresTable.get(i).getValue().toString() + "\n";
+             result.append( + (i+1) + ".  " + playerScoresTable.get(i).getKey().toString() +  "   " +
+                    playerScoresTable.get(i).getValue().toString() + "\n");
         }
-        result +=  "\n" + "\n";
-        result += "История матчей: " + "\n";
+        result.append(  "\n" + "\n");
+        result.append( "История матчей: " + "\n");
         for (int i=0; i < matchesHistory.size(); i++)
         {
-            result += result + (i+1) + ".  " + matchesHistory.get(i).toString();
+            result.append((i+1) + ".  " + matchesHistory.get(i).toString());
         }
-        return result;
+        return result.toString();
     }
 }
