@@ -22,7 +22,7 @@ public class TournamentSettingsTests {
     {
         schemeType = SchemeType.ROUND;
         timeSettings = new TimeSettings(11, 18, 12);
-        testSubject = new TournamentSettingsImpl(schemeType, LocalDateTime.now(), timeSettings);
+        testSubject = new TournamentSettingsImpl("tournament1", schemeType, LocalDateTime.now(), timeSettings);
     }
     @Test()
     public void settingsGetDateDispatherTest() throws Exception

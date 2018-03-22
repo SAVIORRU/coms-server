@@ -6,13 +6,16 @@ public class TournamentSettingsImpl implements TournamentSettings {
     private SchemeType schemeType;
     private LocalDateTime startDate;
     private TimeSettings timeSettings;
+    private String tournamentName;
 
-    public TournamentSettingsImpl(SchemeType schemeType, LocalDateTime startDate, TimeSettings timeSettings)
+    public TournamentSettingsImpl(String tournamentName, SchemeType schemeType, LocalDateTime startDate, TimeSettings timeSettings)
     throws Exception {
         if (schemeType == null || startDate == null || timeSettings == null) throw new NullPointerException();
+        if (tournamentName.isEmpty()) throw new Exception("Empty tournament name");
         this.schemeType = schemeType;
         this.startDate = startDate;
         this.timeSettings = timeSettings;
+        this.tournamentName = tournamentName;
     }
 
 
@@ -55,5 +58,10 @@ public class TournamentSettingsImpl implements TournamentSettings {
 
     public TimeSettings getTimeSettings() {
         return timeSettings;
+    }
+
+    @Override
+    public String getTournamentName() {
+        return this.tournamentName;
     }
 }

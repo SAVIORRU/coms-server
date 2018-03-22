@@ -46,19 +46,19 @@ public class TournamentTests {
         playerDispatcher.addPlayers(playerList);
         timeSettings = new TimeSettings(10, 18, 1);
         schemeType = SchemeType.OLYMPIC;
-        settings = new TournamentSettingsImpl(schemeType, LocalDateTime.now(),timeSettings);
-        tournament = new TennisTournament("Tournament", playerDispatcher, locationDispatcher, settings, schedule);
+        settings = new TournamentSettingsImpl("tournament1", schemeType, LocalDateTime.now(),timeSettings);
+        tournament = new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test(expected = NullPointerException.class)
     public void testInitNullParam() throws Exception {
-        new TennisTournament(null, null, null, null, null);
+        new TennisTournament(null, null, null, null);
     }
 
     @Test(expected = Exception.class)
     public void testInitEmptyParam() throws Exception {
         playerDispatcher = new PlayerDispatcher();
-        new TennisTournament("Tournament", playerDispatcher, locationDispatcher, settings, schedule);
+        new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test

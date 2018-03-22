@@ -10,4 +10,5 @@ public interface TournamentSettings {
     public SchemeType getSchemeType();
     public LocalDateTime getStartDate();
     public TimeSettings getTimeSettings();
+    public String getTournamentName();
 }

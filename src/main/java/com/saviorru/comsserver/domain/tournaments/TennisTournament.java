@@ -13,23 +13,21 @@ public class TennisTournament implements Tournament {
     private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
     private boolean isStart;
-    private String tournamentName;
     private List<PrizePlace> prizePlaces;
     private ScheduleGenerator scheduleGenerator;
     private WinnerIdentifier winnerIdentifier;
     private TournamentSettings tournamentSettings;
 
-    public TennisTournament(String tournamentName, PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, TournamentSettings tournamentSettings, Schedule schedule) throws Exception {
-        if (playerDispatcher == null || locationDispatcher == null ||  schedule == null || tournamentName == null || tournamentSettings == null)
+    public TennisTournament(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, TournamentSettings tournamentSettings, Schedule schedule) throws Exception {
+        if (playerDispatcher == null || locationDispatcher == null ||  schedule == null || tournamentSettings == null)
             throw new NullPointerException();
-        if (playerDispatcher.getAllPlayers().isEmpty() || locationDispatcher.getAllLocations().isEmpty() || tournamentName.isEmpty())
+        if (playerDispatcher.getAllPlayers().isEmpty() || locationDispatcher.getAllLocations().isEmpty())
             throw new Exception("Empty parameter");
         this.playerDispatcher = playerDispatcher;
         this.schedule = schedule;
         this.locationDispatcher = locationDispatcher;
         this.dateDispatcher = tournamentSettings.getDateDispatcher();
         this.isStart = false;
-        this.tournamentName = tournamentName;
         this.tournamentSettings = tournamentSettings;
         generationSchedule();
     }
@@ -47,7 +45,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public String getName() {
-        return this.tournamentName;
+        return this.tournamentSettings.getTournamentName();
     }
 
     @Override

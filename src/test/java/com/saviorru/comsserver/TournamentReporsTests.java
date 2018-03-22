@@ -45,8 +45,8 @@ public class TournamentReporsTests {
         schemeType = SchemeType.OLYMPIC;
         timeSettings = new TimeSettings(10, 18, 1);
         schemeType = SchemeType.OLYMPIC;
-        settings = new TournamentSettingsImpl(schemeType, LocalDateTime.now(),timeSettings);
-        tournament = new TennisTournament("Tournament", playerDispatcher, locationDispatcher, settings, schedule);
+        settings = new TournamentSettingsImpl("Tournament1" ,schemeType, LocalDateTime.now(),timeSettings);
+        tournament = new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test()
