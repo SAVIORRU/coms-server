@@ -1,7 +1,7 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
 import com.saviorru.comsserver.domain.model.Location;
 import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.model.OneOnOneMatch;

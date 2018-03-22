@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.domain.Dispatcher;
+package com.saviorru.comsserver.domain.dispatcher;
 
 import com.saviorru.comsserver.domain.model.Location;
 

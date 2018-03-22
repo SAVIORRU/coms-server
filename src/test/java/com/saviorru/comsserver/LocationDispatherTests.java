@@ -1,7 +1,7 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.model.Location;
-import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;

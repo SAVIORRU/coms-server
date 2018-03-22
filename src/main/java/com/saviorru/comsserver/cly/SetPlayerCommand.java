@@ -1,7 +1,7 @@
 package com.saviorru.comsserver.cly;
 
 import com.saviorru.comsserver.domain.model.Player;
-import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.tournament.Tournament;
 import javafx.util.Pair;
 

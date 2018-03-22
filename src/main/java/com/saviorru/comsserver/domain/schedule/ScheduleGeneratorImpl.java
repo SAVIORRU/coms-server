@@ -1,8 +1,8 @@
 package com.saviorru.comsserver.domain.schedule;
 
-import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
-import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
-import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.model.Location;
 import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.model.OneOnOneMatch;
