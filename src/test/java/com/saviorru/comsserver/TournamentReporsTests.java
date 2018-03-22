@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
-import static sun.audio.AudioPlayer.player;
 
 public class TournamentReporsTests {
     private Tournament tournament;
@@ -23,6 +22,8 @@ public class TournamentReporsTests {
     private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
     private SchemeType schemeType;
+    private TournamentSettings settings;
+    private TimeSettings timeSettings;
 
     @Before
     public void init() throws Exception {
@@ -42,7 +43,10 @@ public class TournamentReporsTests {
         locationDispatcher.addAllLocation(locationList);
         playerDispatcher.addPlayers(playerList);
         schemeType = SchemeType.OLYMPIC;
-        tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
+        timeSettings = new TimeSettings(10, 18, 1);
+        schemeType = SchemeType.OLYMPIC;
+        settings = new TournamentSettingsImpl("Tournament1" ,schemeType, LocalDateTime.now(),timeSettings);
+        tournament = new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test()
@@ -50,7 +54,7 @@ public class TournamentReporsTests {
     {
         tournament.start();
         while (tournament.getNextMatch() != null) {
-            tournament.finishMatch(tournament.getNextMatch(), new Points(1, 0));
+            tournament.finishMatch(tournament.getNextMatch(), new Score(1, 0));
         }
         tournament.finish();
         TournamentReport report = new TournamentReport(tournament);

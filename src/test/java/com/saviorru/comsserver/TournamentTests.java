@@ -2,7 +2,6 @@ package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
 import com.saviorru.comsserver.domain.tournaments.TennisTournament;
-import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +25,8 @@ public class TournamentTests {
     private PlayerDispatcher playerDispatcher;
     private DateDispatcher dateDispatcher;
     private SchemeType schemeType;
+    private TournamentSettings settings;
+    private TimeSettings timeSettings;
 
     @Before
     public void init() throws Exception {
@@ -43,19 +44,21 @@ public class TournamentTests {
             playerList.add(mock(Player.class));
         }
         playerDispatcher.addPlayers(playerList);
+        timeSettings = new TimeSettings(10, 18, 1);
         schemeType = SchemeType.OLYMPIC;
-        tournament = new TennisTournament(playerDispatcher, locationDispatcher, dateDispatcher, schedule, "tournament1", schemeType);
+        settings = new TournamentSettingsImpl("tournament1", schemeType, LocalDateTime.now(),timeSettings);
+        tournament = new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test(expected = NullPointerException.class)
     public void testInitNullParam() throws Exception {
-        new TennisTournament(null, null, null, null, null, null);
+        new TennisTournament(null, null, null, null);
     }
 
     @Test(expected = Exception.class)
     public void testInitEmptyParam() throws Exception {
         playerDispatcher = new PlayerDispatcher();
-        new TennisTournament(playerDispatcher, locationDispatcher, dateDispatcher, schedule, "tournament1", schemeType);
+        new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
     }
 
     @Test
@@ -114,10 +117,10 @@ public class TournamentTests {
     @Test()
     public void testFinishMatch() throws Exception {
         tournament.start();
-        Points testPoints = new Points();
+        Score testScore = new Score();
         Match testMatch = tournament.getNextMatch();
-        testPoints.setPoints(1, 0);
-        tournament.finishMatch(tournament.getNextMatch(), testPoints);
+        testScore.setPoints(1, 0);
+        tournament.finishMatch(tournament.getNextMatch(), testScore);
         assertFalse(testMatch == tournament.getNextMatch());
     }
 
@@ -125,9 +128,9 @@ public class TournamentTests {
     public void testFinishMatches() throws Exception {
         tournament.start();
         List<Match> testList = tournament.getSchedule().getMatchesByState(MatchState.NOTPLAYED);
-        List<Points> testListP = new ArrayList<>();
+        List<Score> testListP = new ArrayList<>();
         for (int i = 0; i < testList.size(); i++) {
-            testListP.add(new Points(1, 0));
+            testListP.add(new Score(1, 0));
         }
         Match testMatch = tournament.getNextMatch();
         tournament.finishMatches(testList, testListP);
@@ -140,9 +143,9 @@ public class TournamentTests {
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
         while (tournament.getNextMatch() != null) {
-            Points testPoints = new Points();
-            testPoints.setPoints(1, 0);
-            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+            Score testScore = new Score();
+            testScore.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testScore);
         }
         assertEquals(null, tournament.getNextMatch());
     }
@@ -152,9 +155,9 @@ public class TournamentTests {
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
         while (tournament.getNextMatch() != null) {
-            Points testPoints = new Points();
-            testPoints.setPoints(1, 0);
-            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+            Score testScore = new Score();
+            testScore.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testScore);
         }
         assertEquals(null, tournament.getNextMatch());
     }

@@ -12,12 +12,13 @@ public interface Tournament {
     public void start() throws Exception;
     public void finish() throws Exception;
     public Match getNextMatch() throws Exception;
-    public void finishMatch(Match match,Points points) throws Exception;
-    public void finishMatches(List<Match> matches,List<Points> points) throws Exception;
+    public void finishMatch(Match match,Score score) throws Exception;
+    public void finishMatches(List<Match> matches,List<Score> points) throws Exception;
     public boolean isStart();
     Player getThePrizePlace(int count) throws Exception;
     public LocalDateTime getStartDate();
     public LocalDateTime getEndDate();
     public PlayerGrid getPlayerGrid() throws Exception;
     public Scheme getScheme();
+    public TournamentReport getTournamentReport() throws Exception;
 }

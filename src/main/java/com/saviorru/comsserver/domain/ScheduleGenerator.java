@@ -8,5 +8,6 @@ public interface ScheduleGenerator {
 
     Schedule updateSchedule(List<Match> matchesList, Schedule existingSchedule) throws Exception;
     Schedule updateSchedule(Match match, Schedule existingSchedule) throws Exception;
+    Scheme getScheme();
 
 }
