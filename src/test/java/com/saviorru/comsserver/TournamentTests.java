@@ -1,8 +1,17 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.tournaments.TennisTournament;
-import javafx.util.Pair;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Score;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
+import com.saviorru.comsserver.domain.tournament.TennisTournament;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +46,7 @@ public class TournamentTests {
         locationDispatcher = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
         dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
-        schedule = new ScheduleImpl();
+        schedule = new Schedule.ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < countPlayers; i++) {
             playerList.add(mock(Player.class));
@@ -114,10 +123,10 @@ public class TournamentTests {
     @Test()
     public void testFinishMatch() throws Exception {
         tournament.start();
-        Points testPoints = new Points();
+        Score testScore = new Score();
         Match testMatch = tournament.getNextMatch();
-        testPoints.setPoints(1, 0);
-        tournament.finishMatch(tournament.getNextMatch(), testPoints);
+        testScore.setPoints(1, 0);
+        tournament.finishMatch(tournament.getNextMatch(), testScore);
         assertFalse(testMatch == tournament.getNextMatch());
     }
 
@@ -125,9 +134,9 @@ public class TournamentTests {
     public void testFinishMatches() throws Exception {
         tournament.start();
         List<Match> testList = tournament.getSchedule().getMatchesByState(MatchState.NOTPLAYED);
-        List<Points> testListP = new ArrayList<>();
+        List<Score> testListP = new ArrayList<>();
         for (int i = 0; i < testList.size(); i++) {
-            testListP.add(new Points(1, 0));
+            testListP.add(new Score(1, 0));
         }
         Match testMatch = tournament.getNextMatch();
         tournament.finishMatches(testList, testListP);
@@ -140,9 +149,9 @@ public class TournamentTests {
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
         while (tournament.getNextMatch() != null) {
-            Points testPoints = new Points();
-            testPoints.setPoints(1, 0);
-            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+            Score testScore = new Score();
+            testScore.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testScore);
         }
         assertEquals(null, tournament.getNextMatch());
     }
@@ -152,9 +161,9 @@ public class TournamentTests {
         Match match = tournament.getNextMatch();
         assertFalse(match.isPlayed());
         while (tournament.getNextMatch() != null) {
-            Points testPoints = new Points();
-            testPoints.setPoints(1, 0);
-            tournament.finishMatch(tournament.getNextMatch(), testPoints);
+            Score testScore = new Score();
+            testScore.setPoints(1, 0);
+            tournament.finishMatch(tournament.getNextMatch(), testScore);
         }
         assertEquals(null, tournament.getNextMatch());
     }

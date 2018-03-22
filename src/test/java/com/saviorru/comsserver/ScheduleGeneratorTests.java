@@ -1,7 +1,18 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
-import javafx.util.Pair;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schedule.ScheduleGenerator;
+import com.saviorru.comsserver.domain.schedule.ScheduleGeneratorImpl;
+import com.saviorru.comsserver.domain.schematictype.OlympicScheme;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.schematictype.RoundScheme;
+import com.saviorru.comsserver.domain.schematictype.Scheme;
 import org.junit.Before;
 import static org.mockito.Mockito.*;
 import org.junit.Test;

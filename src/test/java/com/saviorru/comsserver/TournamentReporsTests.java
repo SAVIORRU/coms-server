@@ -1,7 +1,16 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.tournaments.TennisTournament;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Score;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
+import com.saviorru.comsserver.domain.tournament.TennisTournament;
+import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.domain.tournament.TournamentReport;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
-import static sun.audio.AudioPlayer.player;
 
 public class TournamentReporsTests {
     private Tournament tournament;
@@ -38,7 +46,7 @@ public class TournamentReporsTests {
         locationDispatcher  = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
         dateDispatcher = new DateDispatcher(LocalDateTime.now(),10,18,1);
-        schedule = new ScheduleImpl();
+        schedule = new Schedule.ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         playerDispatcher.addPlayers(playerList);
         schemeType = SchemeType.OLYMPIC;
@@ -50,7 +58,7 @@ public class TournamentReporsTests {
     {
         tournament.start();
         while (tournament.getNextMatch() != null) {
-            tournament.finishMatch(tournament.getNextMatch(), new Points(1, 0));
+            tournament.finishMatch(tournament.getNextMatch(), new Score(1, 0));
         }
         tournament.finish();
         TournamentReport report = new TournamentReport(tournament);

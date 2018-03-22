@@ -1,6 +1,6 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.Location;
+import com.saviorru.comsserver.domain.model.Location;
 import org.junit.Test;
 
 public class LocationTests {

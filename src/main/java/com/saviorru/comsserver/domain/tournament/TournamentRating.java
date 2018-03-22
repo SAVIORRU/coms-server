@@ -1,4 +1,7 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.tournament;
+
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,6 @@
 package com.saviorru.comsserver.cly;
 
-import com.saviorru.comsserver.domain.Tournament;
-import javafx.util.Pair;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 
 import java.util.ArrayList;
 import java.util.List;

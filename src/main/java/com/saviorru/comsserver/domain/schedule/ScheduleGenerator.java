@@ -1,4 +1,7 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.schedule;
+
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.schedule.Schedule;
 
 import java.util.List;
 

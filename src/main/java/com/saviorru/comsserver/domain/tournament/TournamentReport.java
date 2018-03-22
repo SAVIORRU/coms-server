@@ -1,5 +1,8 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.tournament;
 
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
+import com.saviorru.comsserver.domain.model.Player;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;

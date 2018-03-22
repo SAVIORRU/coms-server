@@ -1,6 +1,10 @@
 package com.saviorru.comsserver;
 
 import com.saviorru.comsserver.domain.*;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.OneOnOneMatch;
+import com.saviorru.comsserver.domain.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,5 +1,12 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.schedule;
 
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.OneOnOneMatch;
+import com.saviorru.comsserver.domain.schematictype.Scheme;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -25,7 +32,7 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
 
     @Override
     public Schedule generateSchedule() throws Exception {
-        Schedule newSchedule = new ScheduleImpl();
+        Schedule newSchedule = new Schedule.ScheduleImpl();
         newSchedule.addMatches(this.createMatches());
         return newSchedule;
     }

@@ -1,6 +1,18 @@
-package com.saviorru.comsserver.domain.tournaments;
+package com.saviorru.comsserver.domain.tournament;
 
 import com.saviorru.comsserver.domain.*;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schedule.ScheduleGenerator;
+import com.saviorru.comsserver.domain.schedule.ScheduleGeneratorImpl;
+import com.saviorru.comsserver.domain.schematictype.OlympicScheme;
+import com.saviorru.comsserver.domain.model.*;
+import com.saviorru.comsserver.domain.schematictype.*;
+import com.saviorru.comsserver.domain.winnerindetifier.OlympicWinnerIndentifier;
+import com.saviorru.comsserver.domain.winnerindetifier.RoundWinnerIdentifier;
+import com.saviorru.comsserver.domain.winnerindetifier.WinnerIdentifier;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;
@@ -145,17 +157,17 @@ public class TennisTournament implements Tournament {
     }
 
     @Override
-    public void finishMatch(Match match, Points points) throws Exception {
-        if (match == null || points == null) throw new NullPointerException();
+    public void finishMatch(Match match, Score score) throws Exception {
+        if (match == null || score == null) throw new NullPointerException();
         if (!(isStart)) throw new Exception("Tournament is not started");
-        match.setPoints(points.getPointsFirstSide(), points.getPointsSecondSide());
+        match.setPoints(score.getPointsFirstSide(), score.getPointsSecondSide());
         match.setMatchState(MatchState.PLAYED);
         this.locationDispatcher.freeLocation(match.getLocation());
         this.schedule = this.scheduleGenerator.updateSchedule(match, this.schedule);
     }
 
     @Override
-    public void finishMatches(List<Match> matches, List<Points> points) throws Exception {
+    public void finishMatches(List<Match> matches, List<Score> points) throws Exception {
         if (!(isStart)) throw new Exception("Tournament is not started");
         if (matches == null || points == null) throw new NullPointerException();
         for (int i = 0; i < matches.size(); i++) {

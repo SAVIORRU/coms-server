@@ -1,7 +1,6 @@
 package com.saviorru.comsserver.cly;
 
-import com.saviorru.comsserver.domain.PrintTree;
-import com.saviorru.comsserver.domain.Tournament;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 
 public class ShowGridCommand extends Command {
 

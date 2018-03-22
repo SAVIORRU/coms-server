@@ -1,4 +1,6 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.Dispatcher;
+
+import com.saviorru.comsserver.domain.model.Location;
 
 import java.util.ArrayList;
 import java.util.List;

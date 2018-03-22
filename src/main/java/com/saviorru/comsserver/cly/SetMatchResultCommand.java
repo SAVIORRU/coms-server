@@ -1,18 +1,18 @@
 package com.saviorru.comsserver.cly;
 
-import com.saviorru.comsserver.domain.Match;
-import com.saviorru.comsserver.domain.Points;
-import com.saviorru.comsserver.domain.Tournament;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Score;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 
 public class SetMatchResultCommand extends Command {
 
-    private Points points;
+    private Score score;
     private Match match;
 private Integer matchNumber;
     public SetMatchResultCommand(Tournament tournament, Integer matchNumber,Integer firstScore,Integer secondScore) throws Exception {
         super(tournament);
         //if(match == null || firstScore = null || secondScore == null) throw new NullPointerException();
-        this.points = new Points(firstScore,secondScore);
+        this.score = new Score(firstScore,secondScore);
         this.matchNumber =matchNumber;
     }
 
@@ -20,7 +20,7 @@ private Integer matchNumber;
     public Boolean execute(){
         try {
             this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
-            tournament.finishMatch(match,points);
+            tournament.finishMatch(match, score);
         } catch (Exception e) {
             return false;
         }

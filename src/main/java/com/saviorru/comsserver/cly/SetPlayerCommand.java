@@ -1,14 +1,12 @@
 package com.saviorru.comsserver.cly;
 
-import com.saviorru.comsserver.domain.Player;
-import com.saviorru.comsserver.domain.PlayerDispatcher;
-import com.saviorru.comsserver.domain.Tournament;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 import javafx.util.Pair;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class SetPlayerCommand extends Command {
 

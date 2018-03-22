@@ -1,5 +1,8 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.model;
 
+
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.model.PrizePlace;
 
 public class PrizePlaceThePlayer implements PrizePlace {
 

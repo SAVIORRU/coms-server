@@ -1,19 +1,16 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.OlympicScheme;
-import com.saviorru.comsserver.domain.Scheme;
+import com.saviorru.comsserver.domain.schematictype.OlympicScheme;
+import com.saviorru.comsserver.domain.schematictype.Scheme;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.runners.model.MultipleFailureException.assertEmpty;
 
 public class OlympicSchemeTest {
 

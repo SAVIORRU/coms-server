@@ -1,6 +1,5 @@
 package com.saviorru.comsserver;
 
-import com.saviorru.comsserver.domain.ScheduleGenerator;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

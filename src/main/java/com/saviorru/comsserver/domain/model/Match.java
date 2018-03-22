@@ -1,4 +1,8 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.model;
+
+import com.saviorru.comsserver.domain.MatchState;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Player;
 
 import java.time.LocalDateTime;
 

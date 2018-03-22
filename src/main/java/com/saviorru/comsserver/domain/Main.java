@@ -2,8 +2,15 @@ package com.saviorru.comsserver.domain;
 
 
 import com.saviorru.comsserver.cly.*;
-import com.saviorru.comsserver.domain.tournaments.TennisTournament;
-import sun.reflect.generics.tree.Tree;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
+import com.saviorru.comsserver.domain.tournament.TennisTournament;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +29,7 @@ public class Main {
         LocationDispatcher locationDispatcher = new LocationDispatcher();
         PlayerDispatcher playerDispatcher = new PlayerDispatcher();
         DateDispatcher dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
-        ScheduleImpl schedule = new ScheduleImpl();
+        Schedule.ScheduleImpl schedule = new Schedule.ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < 8; i++) {
             playerList.add(new Player("Artem"+i,"Popk"+i, LocalDate.of(1960+i,1,2)));

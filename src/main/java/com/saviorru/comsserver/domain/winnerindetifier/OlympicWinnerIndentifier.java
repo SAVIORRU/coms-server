@@ -1,4 +1,8 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.winnerindetifier;
+
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.winnerindetifier.WinnerIdentifier;
 
 import java.util.Collections;
 import java.util.List;

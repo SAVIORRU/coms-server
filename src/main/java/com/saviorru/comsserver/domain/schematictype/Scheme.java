@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.schematictype;
 
 import javafx.util.Pair;
 

@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.Dispatcher;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

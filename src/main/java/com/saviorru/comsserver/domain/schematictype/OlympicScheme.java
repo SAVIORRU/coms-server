@@ -1,5 +1,6 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.schematictype;
 
+import com.saviorru.comsserver.domain.schematictype.Scheme;
 import javafx.util.Pair;
 
 import java.util.ArrayList;

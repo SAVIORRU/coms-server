@@ -1,4 +1,6 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.Dispatcher;
+
+import com.saviorru.comsserver.domain.model.Player;
 
 import java.util.*;
 

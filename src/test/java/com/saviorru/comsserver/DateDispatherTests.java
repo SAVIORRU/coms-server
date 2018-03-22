@@ -1,5 +1,5 @@
 package com.saviorru.comsserver;
-import com.saviorru.comsserver.domain.DateDispatcher;
+import com.saviorru.comsserver.domain.Dispatcher.DateDispatcher;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

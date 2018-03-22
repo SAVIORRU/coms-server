@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.model;
 
 import java.time.LocalDate;
 import java.time.Period;
