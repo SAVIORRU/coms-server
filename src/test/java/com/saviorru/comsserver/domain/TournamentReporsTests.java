@@ -7,6 +7,7 @@ import com.saviorru.comsserver.domain.model.Location;
 import com.saviorru.comsserver.domain.model.Score;
 import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schedule.ScheduleImpl;
 import com.saviorru.comsserver.domain.schematictype.SchemeType;
 import com.saviorru.comsserver.domain.tournament.*;
 import org.junit.Before;
@@ -46,22 +47,14 @@ public class TournamentReporsTests {
         locationDispatcher  = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
         dateDispatcher = new DateDispatcher(LocalDateTime.now(),10,18,1);
-        schedule = new Schedule.ScheduleImpl();
+        schedule = new ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         playerDispatcher.addPlayers(playerList);
-<<<<<<< HEAD:src/test/java/com/saviorru/comsserver/TournamentReporsTests.java
         schemeType = SchemeType.OLYMPIC;
         timeSettings = new TimeSettings(10, 18, 1);
         schemeType = SchemeType.OLYMPIC;
         settings = new TournamentSettingsImpl("Tournament1" ,schemeType, LocalDateTime.now(),timeSettings);
         tournament = new TennisTournament( playerDispatcher, locationDispatcher, settings, schedule);
-||||||| merged common ancestors
-        schemeType = SchemeType.ROUND;
-        tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
-=======
-        schemeType = SchemeType.OLYMPIC;
-        tournament = new TennisTournament(playerDispatcher, locationDispatcher,dateDispatcher,schedule,"tournament1",schemeType);
->>>>>>> feature/ConsoleManagement:src/test/java/com/saviorru/comsserver/domain/TournamentReporsTests.java
     }
 
     @Test()

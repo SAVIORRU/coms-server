@@ -1,4 +1,6 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.domain.schematictype;
+
+import com.saviorru.comsserver.domain.schematictype.PlayerGrid;
 
 import java.util.List;
 

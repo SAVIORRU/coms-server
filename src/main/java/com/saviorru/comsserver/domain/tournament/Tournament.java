@@ -2,6 +2,7 @@ package com.saviorru.comsserver.domain.tournament;
 
 import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schematictype.PlayerGrid;
 import com.saviorru.comsserver.domain.schematictype.Scheme;
 import com.saviorru.comsserver.domain.schematictype.SchemeType;
 import com.saviorru.comsserver.domain.model.Location;
@@ -26,7 +27,8 @@ public interface Tournament {
     public Player getThePrizePlace(int count) throws Exception;
     public LocalDateTime getStartDate();
     public LocalDateTime getEndDate();
-    public List<List<Integer>> getPlayerGrid() throws Exception;
+    public PlayerGrid getPlayerGrid() throws Exception;
     public Scheme getScheme();
     public Tournament clone();
+    TournamentReport getTournamentReport() throws Exception;
 }

@@ -1,15 +1,3 @@
-<<<<<<< HEAD:src/test/java/com/saviorru/comsserver/TournamentTests.java
-package com.saviorru.comsserver;
-
-import com.saviorru.comsserver.domain.*;
-import com.saviorru.comsserver.domain.tournament.TournamentSettings;
-import com.saviorru.comsserver.domain.tournament.TournamentSettingsImpl;
-import com.saviorru.comsserver.domain.tournaments.TennisTournament;
-||||||| merged common ancestors
-package com.saviorru.comsserver;
-
-import com.saviorru.comsserver.domain.tournaments.TennisTournament;
-=======
 package com.saviorru.comsserver.domain;
 
 import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
@@ -20,10 +8,13 @@ import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.model.Score;
 import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schedule.ScheduleImpl;
 import com.saviorru.comsserver.domain.schematictype.SchemeType;
 import com.saviorru.comsserver.domain.tournament.TennisTournament;
 import com.saviorru.comsserver.domain.tournament.Tournament;
->>>>>>> feature/ConsoleManagement:src/test/java/com/saviorru/comsserver/domain/TournamentTests.java
+
+import com.saviorru.comsserver.domain.tournament.TournamentSettings;
+import com.saviorru.comsserver.domain.tournament.TournamentSettingsImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,7 +51,7 @@ public class TournamentTests {
         locationDispatcher = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
         dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
-        schedule = new Schedule.ScheduleImpl();
+        schedule = new ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < countPlayers; i++) {
             playerList.add(mock(Player.class));
@@ -184,31 +175,8 @@ public class TournamentTests {
         assertEquals(null, tournament.getNextMatch());
     }
 
-    @Test()
-    public void testGetGrid() throws Exception {
-        List<List<Integer>> grid = tournament.getPlayerGrid();
-        Integer count = 0;
-        for (List<Integer> list: grid)
-            count += list.size();
-        count /= 2;
-        assertEquals(count, tournament.getScheme().getMaxPairCount());
-    }
-
-<<<<<<< HEAD:src/test/java/com/saviorru/comsserver/TournamentTests.java
-    @Test()
-    public void testGetGrid2() throws Exception {
-        PlayerGrid grid = tournament.getPlayerGrid();
-        System.out.print(grid.toString());
-||||||| merged common ancestors
-    @Test()
-    public void testGetGrid2() throws Exception {
-        List<List<Integer>> grid = tournament.getPlayerGrid();
-        PrintTree printTree = new PrintTree();
-        printTree.printTree(grid);
-=======
     @Test
-    public void testClone(){
+    public void testClone() throws Exception {
         assertEquals(tournament.clone().getName(),tournament.getName());
->>>>>>> feature/ConsoleManagement:src/test/java/com/saviorru/comsserver/domain/TournamentTests.java
     }
 }

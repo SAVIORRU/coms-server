@@ -1,8 +1,11 @@
-package com.saviorru.comsserver;
+package com.saviorru.comsserver.domain;
 
 import com.saviorru.comsserver.domain.*;
+import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
 import com.saviorru.comsserver.domain.tournament.TournamentSettings;
 import com.saviorru.comsserver.domain.tournament.TournamentSettingsImpl;
+import com.saviorru.comsserver.domain.winnerindetifier.WinnerIdentifier;
 import org.junit.Before;
 
 import org.junit.Test;

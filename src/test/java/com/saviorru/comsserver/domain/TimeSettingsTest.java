@@ -1,4 +1,4 @@
-package com.saviorru.comsserver;
+package com.saviorru.comsserver.domain;
 
 import com.saviorru.comsserver.domain.TimeSettings;
 import org.junit.Before;

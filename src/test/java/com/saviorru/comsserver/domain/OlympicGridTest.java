@@ -1,11 +1,10 @@
-package com.saviorru.comsserver;
+package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.domain.OlympicGrid;
+import com.saviorru.comsserver.domain.schematictype.OlympicGrid;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

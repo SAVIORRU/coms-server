@@ -32,7 +32,7 @@ public class ScheduleGeneratorImpl implements ScheduleGenerator {
 
     @Override
     public Schedule generateSchedule() throws Exception {
-        Schedule newSchedule = new ScheduleImpl.();
+        Schedule newSchedule = new ScheduleImpl();
         newSchedule.addMatches(this.createMatches());
         return newSchedule;
     }

@@ -1,7 +1,5 @@
 package com.saviorru.comsserver.domain.schematictype;
 
-import com.saviorru.comsserver.domain.OlympicGrid;
-import com.saviorru.comsserver.domain.PlayerGrid;
 import javafx.util.Pair;
 
 import java.util.ArrayList;

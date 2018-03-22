@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class ScheduleImpl implements Schedule {
+public class ScheduleImpl implements Schedule {
     private List<Match> matchesList;
 
     public ScheduleImpl(List<Match> matchesList) throws Exception

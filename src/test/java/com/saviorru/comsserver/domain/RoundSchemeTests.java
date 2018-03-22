@@ -1,13 +1,8 @@
 package com.saviorru.comsserver.domain;
 
-<<<<<<< HEAD:src/test/java/com/saviorru/comsserver/RoundSchemeTests.java
-import com.saviorru.comsserver.domain.PlayerGrid;
-import com.saviorru.comsserver.domain.RoundScheme;
-||||||| merged common ancestors
-import com.saviorru.comsserver.domain.RoundScheme;
-=======
+
+import com.saviorru.comsserver.domain.schematictype.PlayerGrid;
 import com.saviorru.comsserver.domain.schematictype.RoundScheme;
->>>>>>> feature/ConsoleManagement:src/test/java/com/saviorru/comsserver/domain/RoundSchemeTests.java
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;

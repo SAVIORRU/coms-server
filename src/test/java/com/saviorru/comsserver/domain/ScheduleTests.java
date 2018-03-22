@@ -4,6 +4,7 @@ import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.model.OneOnOneMatch;
 import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schedule.ScheduleImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class ScheduleTests {
         testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,3,1,1)));
         testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,4,1,1)));
         testList.add(new OneOnOneMatch(mock(Player.class), mock(Player.class), mock(Location.class), LocalDateTime.of(1970, 1,5,1,1)));
-        this.testSubject = new Schedule.ScheduleImpl(testList);
+        this.testSubject = new ScheduleImpl(testList);
         this.testPlayer = mock(Player.class);
         this.testDate =  LocalDate.of(1970, 1,1);
         this.testLocation = mock(Location.class);
@@ -51,7 +52,7 @@ public class ScheduleTests {
         List<Match> testList2 = new ArrayList<>();
         testList2.add(testMatch);
         testList2.add(testMatch);
-        testSubject = new Schedule.ScheduleImpl(testList2);
+        testSubject = new ScheduleImpl(testList2);
     }
     @Test()
     public void schedAddTest() throws Exception

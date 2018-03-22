@@ -1,11 +1,8 @@
 package com.saviorru.comsserver.domain.schematictype;
 
-import com.saviorru.comsserver.domain.PlayerGrid;
-import com.saviorru.comsserver.domain.RoundGrid;
 import javafx.util.Pair;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class RoundScheme implements Scheme
 {

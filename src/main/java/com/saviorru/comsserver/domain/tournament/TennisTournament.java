@@ -1,9 +1,5 @@
 package com.saviorru.comsserver.domain.tournament;
 
-<<<<<<< HEAD:src/main/java/com/saviorru/comsserver/domain/tournaments/TennisTournament.java
-import com.saviorru.comsserver.domain.*;
-||||||| merged common ancestors
-=======
 import com.saviorru.comsserver.domain.MatchState;
 import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
 import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
@@ -58,6 +54,7 @@ public class TennisTournament implements Tournament {
             this.winnerIdentifier = target.getWinnerIdentifier();
             this.prizePlaces = target.getPrizePlaces();
             this.scheduleGenerator = target.getScheduleGenerator();
+            this.tournamentSettings = target.getTournamentSettings();
         }
     }
 
@@ -187,7 +184,6 @@ public class TennisTournament implements Tournament {
 
     @Override
     public PlayerGrid getPlayerGrid() throws Exception {
-
         return this.scheduleGenerator.getScheme().getPlayerGrid();
     }
 
@@ -195,6 +191,7 @@ public class TennisTournament implements Tournament {
     public Scheme getScheme() {
         return this.scheduleGenerator.getScheme();
     }
+
 
     @Override
     public TournamentReport getTournamentReport() throws Exception {
@@ -227,11 +224,6 @@ public class TennisTournament implements Tournament {
     }
 
 
-    private String getTournamentName() {
-        return tournamentName;
-    }
-
-
     private ScheduleGenerator getScheduleGenerator() {
         return scheduleGenerator;
     }
@@ -240,11 +232,16 @@ public class TennisTournament implements Tournament {
     private WinnerIdentifier getWinnerIdentifier() {
         return winnerIdentifier;
     }
+
     private Schedule getScheduleObject(){
         return schedule;
     }
 
     private List<PrizePlace> getPrizePlaces() {
         return prizePlaces;
+    }
+
+    private TournamentSettings getTournamentSettings() {
+        return tournamentSettings;
     }
 }
