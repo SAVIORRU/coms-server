@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.cly;
 
 import com.saviorru.comsserver.cly.ArgumentType;
 import com.saviorru.comsserver.cly.CommandParser;

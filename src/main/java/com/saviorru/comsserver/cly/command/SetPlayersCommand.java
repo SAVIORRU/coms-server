@@ -37,12 +37,12 @@ public class SetPlayersCommand extends Command {
                 if (arguments.getKey().equals("set player")) {
                     if(new SetPlayerCommand(tournament, playerDispatcher, arguments).execute())
                     countPlayers--;
-                    else  System.out.print("Игрок не добавлен!");
+                    else  System.out.println("Игрок не добавлен!");
                 } else {
-                    System.out.print("Не верная команда");
+                    System.out.println("Не верная команда");
                 }
             } catch (Exception e) {
-                System.out.print("Не верный формат команды");
+                System.out.println("Не верный формат команды");
             }
         }
         return null;
@@ -55,6 +55,6 @@ public class SetPlayersCommand extends Command {
 
     @Override
     public String commandFormat() {
-        return "command: countPlayers";
+        return "command: count players";
     }
 }

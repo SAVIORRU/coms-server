@@ -45,6 +45,8 @@ public class Main {
         commandList.add(new ShowGridCommand(tournament));
         commandList.add(new ShowScheduleCommand(tournament));
         commandList.add(new SetMatchResultCommand(tournament,0,0,0));
+        commandList.add(new SetPlayersCommand(tournament,null, 5, new PlayerDispatcher()));
+        commandList.add(new SetPlayerCommand(tournament, new PlayerDispatcher(),null));
         commandList.add(new HelpCommand(tournament,commandList));
 
         CommandManagement commandManagement = new CommandManagement(tournament,commandList);

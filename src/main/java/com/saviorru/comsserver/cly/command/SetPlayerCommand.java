@@ -41,6 +41,6 @@ public class SetPlayerCommand extends Command {
 
     @Override
     public String commandFormat() {
-        return "command: firstName, secondName, yyyy-mm-dd";
+        return "command: first name, second name, yyyy-mm-dd";
     }
 }
