@@ -11,4 +11,6 @@ public interface TournamentSettings {
     public LocalDateTime getStartDate();
     public TimeSettings getTimeSettings();
     public String getTournamentName();
+    public Integer getPrizePlacesCount();
+
 }

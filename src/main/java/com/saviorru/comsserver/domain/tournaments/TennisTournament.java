@@ -18,6 +18,7 @@ public class TennisTournament implements Tournament {
     private WinnerIdentifier winnerIdentifier;
     private TournamentSettings tournamentSettings;
 
+
     public TennisTournament(PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, TournamentSettings tournamentSettings, Schedule schedule) throws Exception {
         if (playerDispatcher == null || locationDispatcher == null ||  schedule == null || tournamentSettings == null)
             throw new NullPointerException();
@@ -86,16 +87,8 @@ public class TennisTournament implements Tournament {
             if (this.schedule.getAllMatches().size() != this.scheduleGenerator.getScheme().getMaxPairCount())
                 throw new Exception("All pair are not not played yet");
             List<Player> winners = this.winnerIdentifier.identifyWinners(schedule.getAllMatches());
-            for (int i = 0; i < winners.size(); i++) {
-                if (i == 0) {
-                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
-                }
-                if (i == 1) {
-                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
-                }
-                if (i == 2) {
-                    this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
-                }
+            for (int i = 0; i < this.tournamentSettings.getPrizePlacesCount(); i++) {
+                this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
             }
             dateDispatcher.setEndDate(LocalDateTime.now());
         } else
@@ -174,5 +167,10 @@ public class TennisTournament implements Tournament {
     @Override
     public Scheme getScheme() {
         return this.scheduleGenerator.getScheme();
+    }
+
+    @Override
+    public TournamentReport getTournamentReport() throws Exception {
+        return new TournamentReport(this);
     }
 }

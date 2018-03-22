@@ -7,6 +7,7 @@ public class TournamentSettingsImpl implements TournamentSettings {
     private LocalDateTime startDate;
     private TimeSettings timeSettings;
     private String tournamentName;
+    private Integer prizePlacesCount;
 
     public TournamentSettingsImpl(String tournamentName, SchemeType schemeType, LocalDateTime startDate, TimeSettings timeSettings)
     throws Exception {
@@ -16,6 +17,12 @@ public class TournamentSettingsImpl implements TournamentSettings {
         this.startDate = startDate;
         this.timeSettings = timeSettings;
         this.tournamentName = tournamentName;
+        if (schemeType == SchemeType.ROUND) {
+            this.prizePlacesCount = 3;
+        }
+        if (schemeType == SchemeType.OLYMPIC) {
+            this.prizePlacesCount = 1;
+        }
     }
 
 
@@ -63,5 +70,10 @@ public class TournamentSettingsImpl implements TournamentSettings {
     @Override
     public String getTournamentName() {
         return this.tournamentName;
+    }
+
+    @Override
+    public Integer getPrizePlacesCount() {
+        return prizePlacesCount;
     }
 }
