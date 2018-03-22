@@ -1,9 +1,8 @@
 package com.saviorru.comsserver.cly.command;
 
-import com.saviorru.comsserver.cly.command.Command;
-import com.saviorru.comsserver.domain.model.Match;
-import com.saviorru.comsserver.domain.schedule.Schedule;
-import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.model.Match;
+import com.saviorru.comsserver.schedule.Schedule;
+import com.saviorru.comsserver.tournament.Tournament;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1,7 +1,6 @@
 package com.saviorru.comsserver.cly.command;
 
-import com.saviorru.comsserver.cly.command.Command;
-import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.tournament.Tournament;
 
 public class FinishTournamentCommand extends Command {
 

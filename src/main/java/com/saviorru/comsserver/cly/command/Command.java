@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.cly.command;
 
-import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.tournament.Tournament;
 
 public abstract class Command {
 

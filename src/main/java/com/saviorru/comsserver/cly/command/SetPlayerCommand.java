@@ -1,9 +1,8 @@
 package com.saviorru.comsserver.cly.command;
 
-import com.saviorru.comsserver.cly.command.Command;
-import com.saviorru.comsserver.domain.model.Player;
-import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
-import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.model.Player;
+import com.saviorru.comsserver.dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.tournament.Tournament;
 import javafx.util.Pair;
 
 import java.time.LocalDate;
