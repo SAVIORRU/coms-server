@@ -1,17 +1,16 @@
 package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.MatchState;
-import com.saviorru.comsserver.dispatcher.DateDispatcher;
-import com.saviorru.comsserver.dispatcher.PlayerDispatcher;
-import com.saviorru.comsserver.dispatcher.LocationDispatcher;
-import com.saviorru.comsserver.model.Location;
-import com.saviorru.comsserver.model.Match;
-import com.saviorru.comsserver.model.Score;
-import com.saviorru.comsserver.model.Player;
-import com.saviorru.comsserver.schedule.Schedule;
-import com.saviorru.comsserver.schematictype.SchemeType;
-import com.saviorru.comsserver.tournament.TennisTournament;
-import com.saviorru.comsserver.tournament.Tournament;
+import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Score;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.domain.schematictype.SchemeType;
+import com.saviorru.comsserver.domain.tournament.TennisTournament;
+import com.saviorru.comsserver.domain.tournament.Tournament;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
 package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.schematictype.OlympicScheme;
-import com.saviorru.comsserver.schematictype.Scheme;
+import com.saviorru.comsserver.domain.schematictype.OlympicScheme;
+import com.saviorru.comsserver.domain.schematictype.Scheme;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;

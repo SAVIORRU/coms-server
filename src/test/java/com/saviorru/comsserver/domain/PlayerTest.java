@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.model.Player;
+import com.saviorru.comsserver.domain.model.Player;
 import org.junit.Test;
 
 

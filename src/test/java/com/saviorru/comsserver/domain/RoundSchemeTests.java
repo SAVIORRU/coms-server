@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.schematictype.RoundScheme;
+import com.saviorru.comsserver.domain.schematictype.RoundScheme;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;

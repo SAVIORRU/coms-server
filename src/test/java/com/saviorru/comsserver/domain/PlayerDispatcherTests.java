@@ -1,6 +1,6 @@
 package com.saviorru.comsserver.domain;
-import com.saviorru.comsserver.model.Player;
-import com.saviorru.comsserver.dispatcher.PlayerDispatcher;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;

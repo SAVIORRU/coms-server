@@ -1,13 +1,12 @@
 package com.saviorru.comsserver.domain;
 
-import com.saviorru.comsserver.MatchState;
-import com.saviorru.comsserver.dispatcher.DateDispatcher;
-import com.saviorru.comsserver.model.Location;
-import com.saviorru.comsserver.model.Match;
-import com.saviorru.comsserver.model.OneOnOneMatch;
-import com.saviorru.comsserver.model.Player;
-import com.saviorru.comsserver.winnerindetifier.OlympicWinnerIndentifier;
-import com.saviorru.comsserver.winnerindetifier.WinnerIdentifier;
+import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
+import com.saviorru.comsserver.domain.model.Location;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.OneOnOneMatch;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.winnerindetifier.OlympicWinnerIndentifier;
+import com.saviorru.comsserver.domain.winnerindetifier.WinnerIdentifier;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
 package com.saviorru.comsserver.domain;
-import com.saviorru.comsserver.model.Match;
-import com.saviorru.comsserver.model.Player;
-import com.saviorru.comsserver.winnerindetifier.RoundWinnerIdentifier;
+import com.saviorru.comsserver.domain.model.Match;
+import com.saviorru.comsserver.domain.model.Player;
+import com.saviorru.comsserver.domain.winnerindetifier.RoundWinnerIdentifier;
 import junit.framework.TestCase;
 import org.junit.Before;
 import static org.mockito.Mockito.*;
