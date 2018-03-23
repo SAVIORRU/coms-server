@@ -2,19 +2,22 @@ package com.saviorru.comsserver.cly.command;
 
 import com.saviorru.comsserver.domain.tournament.Tournament;
 
-public class ShowGridCommand extends Command {
+public class ShowGridCommand implements Command {
+
+    private Tournament tournament;
 
     public ShowGridCommand(Tournament tournament) {
-        super(tournament);
+        this.tournament = tournament;
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            System.out.print(tournament.getPlayerGrid().toString());
-        } catch (Exception e) {
-            return false;
-        }
+    public void backup() {
+
+    }
+
+    @Override
+    public Boolean execute() throws Exception {
+        System.out.print(tournament.getPlayerGrid().toString());
         return true;
     }
 

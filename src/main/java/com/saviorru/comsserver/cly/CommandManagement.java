@@ -22,7 +22,7 @@ public class CommandManagement {
 
     public boolean command(Pair<String, List<String>> commandConsole) {
         if (commandConsole.getKey().equals("help")) {
-            return executeCommand(new HelpCommand(tournament, commandList));
+            return executeCommand(new HelpCommand(commandList));
         }
         if (commandConsole.getKey().equals("start")) {
             return executeCommand(new StartTournamentCommand(tournament));

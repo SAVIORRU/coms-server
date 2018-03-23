@@ -4,20 +4,22 @@ import com.saviorru.comsserver.domain.tournament.Tournament;
 
 import java.util.Scanner;
 
-public class StartTournamentCommand extends Command {
+public class StartTournamentCommand implements Command {
+
+    private Tournament tournament;
 
     public StartTournamentCommand(Tournament tournament) {
-        super(tournament);
+        this.tournament = tournament;
     }
 
     @Override
-    public Boolean execute() {
-        try {
+    public void backup() {
 
-            tournament.start();
-        } catch (Exception e) {
-            return false;
-        }
+    }
+
+    @Override
+    public Boolean execute() throws Exception {
+        tournament.start();
         return true;
     }
 

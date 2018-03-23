@@ -8,22 +8,24 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ShowScheduleCommand extends Command {
+public class ShowScheduleCommand implements Command {
 
     private Schedule schedule;
+    private Tournament tournament;
 
     public ShowScheduleCommand(Tournament tournament) {
-        super(tournament);
+        this.tournament = tournament;
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            schedule = tournament.getSchedule();
-            showSchedule();
-        } catch (Exception e) {
-            return false;
-        }
+    public void backup() {
+
+    }
+
+    @Override
+    public Boolean execute() throws Exception {
+        schedule = tournament.getSchedule();
+        showSchedule();
         return true;
     }
 

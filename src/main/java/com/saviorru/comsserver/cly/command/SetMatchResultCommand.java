@@ -4,26 +4,29 @@ import com.saviorru.comsserver.domain.model.Match;
 import com.saviorru.comsserver.domain.model.Score;
 import com.saviorru.comsserver.domain.tournament.Tournament;
 
-public class SetMatchResultCommand extends Command {
+public class SetMatchResultCommand implements Command {
 
     private Score score;
     private Match match;
-private Integer matchNumber;
-    public SetMatchResultCommand(Tournament tournament, Integer matchNumber,Integer firstScore,Integer secondScore) throws Exception {
-        super(tournament);
-        //if(match == null || firstScore = null || secondScore == null) throw new NullPointerException();
-        this.score = new Score(firstScore,secondScore);
-        this.matchNumber =matchNumber;
+    private Integer matchNumber;
+    private Tournament tournament;
+
+    public SetMatchResultCommand(Tournament tournament, Integer matchNumber, Integer firstScore, Integer secondScore) throws Exception {
+        if (firstScore < 0 || secondScore < 0 || tournament == null) throw new NullPointerException();
+        this.tournament = tournament;
+        this.score = new Score(firstScore, secondScore);
+        this.matchNumber = matchNumber;
     }
 
     @Override
-    public Boolean execute(){
-        try {
-            this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
-            tournament.finishMatch(match, score);
-        } catch (Exception e) {
-            return false;
-        }
+    public void backup() {
+
+    }
+
+    @Override
+    public Boolean execute() throws Exception {
+        this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
+        tournament.finishMatch(match, score);
         return true;
     }
 
