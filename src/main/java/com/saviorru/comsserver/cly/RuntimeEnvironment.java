@@ -80,9 +80,9 @@ public class RuntimeEnvironment {
                     executeCommand = new FinishTournamentCommand(tournament);
                 else throw new Exception("Tournament is not started");
             }
-            if (command.equals("create tournament") && arguments.get(0) == "tennis") {
+            if (command.equals("create tournament") && arguments.get(0).equals("tennis")) {
                 if (!isTournamentCreated()) throw new Exception("Tournament is not created");
-                executeCommand = new ShowGridCommand(tournament);
+                executeCommand = new CreateTennisTournamentCommand(tournament,playerDispatcher,locationDispatcher,tournamentSettings,schedule);
             }
             if (command.equals("show grid")) {
                 if (!isTournamentCreated()) throw new Exception("Tournament is not created");
