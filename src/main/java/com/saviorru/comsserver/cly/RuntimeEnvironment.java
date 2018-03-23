@@ -43,26 +43,53 @@ public class RuntimeEnvironment {
         this.tournament = env.tournament;
     }
 
-    public String executeCommand (String command, List<String> arguments)
-    {
+    public String executeCommand(String command, List<String> arguments) {
         if (command.isEmpty()) return ("Empty command string");
         if (!commandsMap.containsKey(command)) return ("Invalid command");
         Command executeCommand = null;
         Boolean executeResult = true;
         try {
-            if (command == "help") return "help";
-            if (command.equals("set player"))
-            {
-                executeCommand = new SetPlayerCommand(playerDispatcher, new Pair<String, List<String>>(command, arguments));
-             }
-             if (command == "show grid") {
+            if (command.equals("help")) return "help";
+            if (command.equals("set players")) {
+                executeCommand = new SetPlayersCommand(new CommandParser(), Integer.parseInt(arguments.get(0)), playerDispatcher);
+            }
+            if (command.equals("set locations")) {
+                executeCommand = new SetLocationsCommand(new CommandParser(), Integer.parseInt(arguments.get(0)), locationDispatcher);
+            }
+            if (command.equals("show schedule")) {
+                executeCommand = new ShowScheduleCommand(schedule);
+            }
+            if (command.equals("show players")) {
+                executeCommand = new ShowPlayersCommand(playerDispatcher);
+            }
+            if (command.equals("show locations")) {
+                executeCommand = new ShowLocationCommand(locationDispatcher);
+            }
+            if (command.equals("set locations")) {
+                executeCommand = new SetLocationsCommand(new CommandParser(), Integer.parseInt(arguments.get(0)), locationDispatcher);
+            }
+            if (command.equals("start")) {
+                if (!isTournamentCreated()) throw new Exception("Tournament is not created");
+                if (!tournament.isStart())
+                    executeCommand = new StartTournamentCommand(tournament);
+                else throw new Exception("Tournament is started");
+            }
+            if (command.equals("finish")) {
+                if (!isTournamentCreated()) throw new Exception("Tournament is not created");
+                if (tournament.isStart())
+                    executeCommand = new FinishTournamentCommand(tournament);
+                else throw new Exception("Tournament is not started");
+            }
+            if (command.equals("create tournament") && arguments.get(0) == "tennis") {
+                if (!isTournamentCreated()) throw new Exception("Tournament is not created");
+                executeCommand = new ShowGridCommand(tournament);
+            }
+            if (command.equals("show grid")) {
                 if (!isTournamentCreated()) throw new Exception("Tournament is not created");
                 executeCommand = new ShowGridCommand(tournament);
             }
             executeResult = executeCommand.execute();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (e.getMessage() == null)
                 return "Target object are not exist";
             return e.getMessage();
@@ -72,13 +99,11 @@ public class RuntimeEnvironment {
     }
 
 
-
-    private Boolean isSettingsConfigured()
-    {
+    private Boolean isSettingsConfigured() {
         return tournamentSettings != null;
     }
-    private Boolean isTournamentCreated()
-    {
+
+    private Boolean isTournamentCreated() {
         return tournament != null;
     }
 

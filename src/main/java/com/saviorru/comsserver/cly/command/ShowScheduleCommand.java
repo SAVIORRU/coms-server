@@ -11,10 +11,8 @@ import java.util.List;
 public class ShowScheduleCommand implements Command {
 
     private Schedule schedule;
-    private Tournament tournament;
-
-    public ShowScheduleCommand(Tournament tournament) {
-        this.tournament = tournament;
+    public ShowScheduleCommand(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override
@@ -24,7 +22,6 @@ public class ShowScheduleCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        schedule = tournament.getSchedule();
         showSchedule();
         return true;
     }

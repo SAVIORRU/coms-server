@@ -6,6 +6,8 @@ import com.saviorru.comsserver.domain.tournament.Tournament;
 import javafx.util.Pair;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SetPlayerCommand implements Command {
