@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.cly.command;
 
+import com.saviorru.comsserver.cly.RuntimeEnvironment;
 import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
 import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.schedule.Schedule;
@@ -9,18 +10,10 @@ import com.saviorru.comsserver.domain.tournament.TournamentSettings;
 
 public class CreateTennisTournamentCommand implements Command {
 
-    private Tournament tournament;
-    private PlayerDispatcher playerDispatcher;
-    private LocationDispatcher locationDispatcher;
-    private TournamentSettings tournamentSettings;
-    private Schedule schedule;
+    private RuntimeEnvironment env;
 
-    public CreateTennisTournamentCommand(Tournament tournament, PlayerDispatcher playerDispatcher, LocationDispatcher locationDispatcher, TournamentSettings tournamentSettings, Schedule schedule) {
-        this.tournament = tournament;
-        this.playerDispatcher = playerDispatcher;
-        this.locationDispatcher = locationDispatcher;
-        this.tournamentSettings = tournamentSettings;
-        this.schedule = schedule;
+    public CreateTennisTournamentCommand(RuntimeEnvironment env) {
+        this.env = env;
     }
 
     @Override
@@ -30,7 +23,8 @@ public class CreateTennisTournamentCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        tournament = new TennisTournament(playerDispatcher,locationDispatcher,tournamentSettings,schedule);
+        Tournament tournament = new TennisTournament(env.getPlayerDispatcher(), env.getLocationDispatcher(), env.getTournamentSettings(), env.getSchedule());
+        env.setTournament(tournament);
         return true;
     }
 

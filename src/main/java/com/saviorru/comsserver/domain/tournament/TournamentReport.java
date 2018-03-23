@@ -21,7 +21,7 @@ public class TournamentReport {
     private Tournament tournament;
 
 
-    public TournamentReport(Tournament tournament, TournamentSettings tournamentSettings) throws Exception {
+    public TournamentReport(Tournament tournament) throws Exception {
         if (tournament == null) throw new NullPointerException();
         this.contestersList = tournament.getPlayers();
         if (tournament.isStart())
@@ -34,7 +34,6 @@ public class TournamentReport {
         this.reportDate = LocalDateTime.now();
         this.tournamentName = tournament.getName();
         this.prizeWinners = new ArrayList<>();
-        this.tournamentSettings = tournamentSettings;
         this.tournament = tournament;
         this.playerScoresTable = this.calcScores(this.contestersList, this.matchesHistory);
         fillPrizePlace();
@@ -42,7 +41,7 @@ public class TournamentReport {
     }
 
     private void fillPrizePlace() throws Exception {
-        for (int i = 0; i < tournamentSettings.getPrizePlacesCount(); i++) {
+        for (int i = 0; i < tournament.getTournamentSettings().getPrizePlacesCount(); i++) {
             this.prizeWinners.add(tournament.getThePrizePlace(i+1));
         }
     }

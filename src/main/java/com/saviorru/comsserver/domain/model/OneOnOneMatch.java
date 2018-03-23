@@ -42,7 +42,7 @@ public class OneOnOneMatch implements Match {
 
     @Override
     public boolean isPlayed() {
-        return MatchState.PLAYED == this.matchState;
+        return this.matchState == MatchState.PLAYED;
     }
 
     @Override
@@ -66,12 +66,9 @@ public class OneOnOneMatch implements Match {
     }
 
     @Override
-    public void setPoints(int pointsFirstSide, int pointsSecondSide) {
-        try {
+    public void setPoints(int pointsFirstSide, int pointsSecondSide) throws Exception {
             if (!isPlayed()) this.score.setPoints(pointsFirstSide, pointsSecondSide);
-        } catch (Exception e) {
-
-        }
+            else throw new Exception("Match is already played");
     }
 
     @Override

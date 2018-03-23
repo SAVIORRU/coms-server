@@ -10,9 +10,9 @@ import java.util.List;
 
 public class ShowScheduleCommand implements Command {
 
-    private Schedule schedule;
-    public ShowScheduleCommand(Schedule schedule) {
-        this.schedule = schedule;
+    private Tournament tournament;
+    public ShowScheduleCommand(Tournament tournament) {
+        this.tournament = tournament;
     }
 
     @Override
@@ -36,9 +36,9 @@ public class ShowScheduleCommand implements Command {
         return "command";
     }
 
-    private void showSchedule() {
+    private void showSchedule() throws Exception {
 
-        List<Match> matches = new ArrayList<>(schedule.getAllMatches());
+        List<Match> matches = new ArrayList<>(tournament.getSchedule().getAllMatches());
         matches.sort(new Comparator<Match>() {
             public int compare(Match o1, Match o2) {
                 return (o1.getDate().isAfter(o2.getDate())) ? 1 : (o1.getDate().equals(o2.getDate())) ? 0 : -1;

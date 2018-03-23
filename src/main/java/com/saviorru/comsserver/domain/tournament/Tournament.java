@@ -29,6 +29,7 @@ public interface Tournament {
     public LocalDateTime getEndDate();
     public PlayerGrid getPlayerGrid() throws Exception;
     public Scheme getScheme();
+    public TournamentSettings getTournamentSettings();
     public Tournament clone();
     TournamentReport getTournamentReport() throws Exception;
 }

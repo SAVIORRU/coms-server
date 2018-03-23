@@ -52,6 +52,9 @@ public class CommandParser {
                 case DATE:
                     parsedArguments.add(parseDate(rawArguments.get(i).trim()));
                     break;
+                case ALPHA_DIGIT:
+                    parsedArguments.add(parseAlphaDigit(rawArguments.get(i).trim()));
+                    break;
             }
         }
         return new Pair<String, List<String>>(commandString, parsedArguments);
@@ -117,6 +120,15 @@ public class CommandParser {
         if (parsedInts.get(1) < 1 || parsedInts.get(1) > 12) throw new Exception("Неверное значение аргумента MM");
         if (parsedInts.get(2) < 1 || parsedInts.get(2) > 31) throw new Exception("Неверное значение аргумента DD");
         return rawField;
+    }
+
+    private String parseAlphaDigit(String rawField) throws Exception
+    {
+        if (rawField == null || rawField.isEmpty()) throw new Exception("String cannot be empty or null");
+        if (!(rawField.matches("[A-Za-zА-Яа-я0-9]+")))
+            throw new Exception("Неверный формат аргумента");
+        return rawField;
+
     }
 }
 

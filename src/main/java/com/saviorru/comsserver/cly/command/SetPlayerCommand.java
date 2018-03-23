@@ -13,9 +13,9 @@ import java.util.List;
 public class SetPlayerCommand implements Command {
 
     private PlayerDispatcher playerDispatcher;
-    private Pair<String, List<String>> arguments;
+    private List<String> arguments;
 
-    public SetPlayerCommand(PlayerDispatcher playerDispatcher, Pair<String, List<String>> arguments) {
+    public SetPlayerCommand(PlayerDispatcher playerDispatcher, List<String> arguments) {
         this.playerDispatcher = playerDispatcher;
         this.arguments = arguments;
     }
@@ -27,14 +27,13 @@ public class SetPlayerCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        if (arguments.getKey().equals(nameCommand())) {
-            playerDispatcher.addPlayer(new Player(arguments.getValue().get(0), arguments.getValue().get(1),
-                    LocalDate.of(Integer.parseInt(arguments.getValue().get(2).substring(0, 3)),
-                            Integer.parseInt(arguments.getValue().get(2).substring(5, 6)),
-                            Integer.parseInt(arguments.getValue().get(2).substring(8, 9)))));
+
+            LocalDate birthDate = null;
+            List<String> stringDate = Arrays.asList(arguments.get(2).split("-"));
+            birthDate = LocalDate.of(Integer.parseInt(stringDate.get(0)), Integer.parseInt(stringDate.get(1)),
+                    Integer.parseInt( stringDate.get(2)));
+            playerDispatcher.addPlayer(new Player(arguments.get(0), arguments.get(1), birthDate));
             return true;
-        }
-        return false;
     }
 
     @Override

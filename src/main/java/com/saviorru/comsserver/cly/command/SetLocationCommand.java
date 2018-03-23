@@ -12,9 +12,9 @@ import java.util.List;
 public class SetLocationCommand implements Command {
 
     private LocationDispatcher locationDispatcher;
-    private Pair<String, List<String>> arguments;
+    private List<String> arguments;
 
-    public SetLocationCommand(LocationDispatcher locationDispatcher, Pair<String, List<String>> arguments) {
+    public SetLocationCommand(LocationDispatcher locationDispatcher, List<String> arguments) {
         this.locationDispatcher = locationDispatcher;
         this.arguments = arguments;
     }
@@ -26,11 +26,8 @@ public class SetLocationCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        if (arguments.getKey().equals(nameCommand())) {
-            locationDispatcher.addLocation(new Location(arguments.getValue().get(0),arguments.getValue().get(1)));
-            return true;
-        }
-        return false;
+        locationDispatcher.addLocation(new Location(arguments.get(0), arguments.get(1)));
+        return true;
     }
 
     @Override

@@ -65,7 +65,7 @@ public class TournamentReporsTests {
             tournament.finishMatch(tournament.getNextMatch(), new Score(1, 0));
         }
         tournament.finish();
-        TournamentReport report = new TournamentReport(tournament,settings);
+        TournamentReport report = new TournamentReport(tournament);
         System.out.print(report);
     }
 

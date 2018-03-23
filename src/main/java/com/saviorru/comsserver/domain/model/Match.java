@@ -14,7 +14,7 @@ public interface Match {
     Player getSecondSide();
     int getPointsFirstSide();
     int getPointsSecondSide();
-    void setPoints(int pointsFirstSide,int pointsSecondSide);
+    void setPoints(int pointsFirstSide,int pointsSecondSide) throws Exception;
     Location getLocation();
     String toString();
 }

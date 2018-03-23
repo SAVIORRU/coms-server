@@ -195,7 +195,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public TournamentReport getTournamentReport() throws Exception {
-        return new TournamentReport(this,tournamentSettings);
+        return new TournamentReport(this);
     }
 
     @Override
@@ -206,5 +206,9 @@ public class TennisTournament implements Tournament {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public TournamentSettings getTournamentSettings() {
+        return tournamentSettings;
     }
 }
