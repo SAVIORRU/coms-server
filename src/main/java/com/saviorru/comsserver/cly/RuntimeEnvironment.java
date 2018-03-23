@@ -1,9 +1,6 @@
 package com.saviorru.comsserver.cly;
 
-import com.saviorru.comsserver.cly.command.Command;
-import com.saviorru.comsserver.cly.command.SetPlayerCommand;
-import com.saviorru.comsserver.cly.command.ShowGridCommand;
-import com.saviorru.comsserver.cly.command.TestCommand;
+import com.saviorru.comsserver.cly.command.*;
 import com.saviorru.comsserver.domain.TimeSettings;
 import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
 import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
@@ -36,23 +33,38 @@ public class RuntimeEnvironment {
         schedule = new ScheduleImpl();
     }
 
-    public String executeCommand (String command, List<String> arguments) throws Exception
+    public RuntimeEnvironment(RuntimeEnvironment env) {
+        this.playerDispatcher = env.playerDispatcher;
+        this.locationDispatcher = env.locationDispatcher;
+        this.schedule = env.schedule;
+        this.tournamentSettings = env.tournamentSettings;
+        this.timeSettings = env.timeSettings;
+        this.commandsMap = env.commandsMap;
+        this.tournament = env.tournament;
+    }
+
+    public String executeCommand (String command, List<String> arguments)
     {
         if (command.isEmpty()) return ("Empty command string");
         if (!commandsMap.containsKey(command)) return ("Invalid command");
         Command executeCommand = null;
         Boolean executeResult = true;
         try {
-            if (command == "test") executeCommand = new TestCommand();
-            if (command == "set player")
+            if (command == "help") return "help";
+            if (command.equals("set player"))
             {
                 executeCommand = new SetPlayerCommand(playerDispatcher, new Pair<String, List<String>>(command, arguments));
              }
-             if (command == "show grid") executeCommand = new ShowGridCommand(tournament);
+             if (command == "show grid") {
+                if (!isTournamentCreated()) throw new Exception("Tournament is not created");
+                executeCommand = new ShowGridCommand(tournament);
+            }
             executeResult = executeCommand.execute();
         }
         catch (Exception e)
         {
+            if (e.getMessage() == null)
+                return "Target object are not exist";
             return e.getMessage();
         }
         if (!executeResult) return "FAIL";

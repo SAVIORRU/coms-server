@@ -31,12 +31,6 @@ public class RuntimeEnvironmentTests {
       assertEquals("DONE", result);
     }
     @Test()
-    public void reTestTest() throws Exception
-    {
-        String result =  testSubject.executeCommand("test", new ArrayList<String>());
-        assertEquals("DONE", result);
-    }
-    @Test()
     public void reSetPlayerExcTest() throws Exception
     {
         String result =  testSubject.executeCommand("show grid", new ArrayList<String>());

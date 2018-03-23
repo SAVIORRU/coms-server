@@ -18,13 +18,8 @@ public class StartTournamentCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
-        try {
-
-            tournament.start();
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean execute() throws Exception {
+        tournament.start();
         return true;
     }
 
