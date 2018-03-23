@@ -32,7 +32,7 @@ public class SetMatchResultCommand implements Command {
 
     @Override
     public String nameCommand() {
-        return "setMatchResult";
+        return "set match result";
     }
 
     @Override

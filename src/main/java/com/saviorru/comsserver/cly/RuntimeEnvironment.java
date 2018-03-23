@@ -82,7 +82,17 @@ public class RuntimeEnvironment {
             }
             if (command.equals("create tournament") && arguments.get(0).equals("tennis")) {
                 if (!isTournamentCreated()) throw new Exception("Tournament is not created");
-                executeCommand = new CreateTennisTournamentCommand(tournament,playerDispatcher,locationDispatcher,tournamentSettings,schedule);
+                executeCommand = new CreateTennisTournamentCommand(tournament, playerDispatcher, locationDispatcher, tournamentSettings, schedule);
+            }
+            if (command.equals("set match result")) {
+                if (!isTournamentCreated()) throw new Exception("Tournament is not created");
+                if (tournament.isStart())
+                    executeCommand = new SetMatchResultCommand(tournament, Integer.parseInt(arguments.get(0)), Integer.parseInt(arguments.get(1)),
+                            Integer.parseInt(arguments.get(2)));
+                else throw new Exception("Tournament is not started");
+            }
+            if (command.equals("set setting")) {
+                executeCommand = new SetSettingTournamentCommand(tournamentSettings,arguments,timeSettings);
             }
             if (command.equals("show grid")) {
                 if (!isTournamentCreated()) throw new Exception("Tournament is not created");
