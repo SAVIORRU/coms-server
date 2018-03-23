@@ -16,7 +16,7 @@ public class SetPlayersCommand implements Command {
     private PlayerDispatcher playerDispatcher;
 
     public SetPlayersCommand(Tournament tournament, CommandParser commandParser, Integer countPlayers, PlayerDispatcher playerDispatcher) throws Exception {
-        if(countPlayers == null || countPlayers < 0) throw new Exception("Not correct value");
+        if (countPlayers == null || countPlayers < 0) throw new Exception("Not correct value");
         this.countPlayers = countPlayers;
         this.commandParser = commandParser;
         this.tournament = tournament;
@@ -29,24 +29,18 @@ public class SetPlayersCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
+    public Boolean execute() throws Exception {
         Scanner scanner = new Scanner(System.in);
         String command = "";
         SetPlayersCommand setPlayersCommand;
         while (countPlayers > 0) {
             System.out.print("Введите данные игрока");
             command = scanner.nextLine();
-            try {
-                Pair<String, List<String>> arguments = commandParser.parse(command);
-                if (arguments.getKey().equals("set player")) {
-                    if(new SetPlayerCommand(playerDispatcher, arguments).execute())
+            Pair<String, List<String>> arguments = commandParser.parse(command);
+            if (arguments.getKey().equals("set player")) {
+                if (new SetPlayerCommand(playerDispatcher, arguments).execute())
                     countPlayers--;
-                    else  System.out.println("Игрок не добавлен!");
-                } else {
-                    System.out.println("Не верная команда");
-                }
-            } catch (Exception e) {
-                System.out.println("Не верный формат команды");
+                else System.out.println("Игрок не добавлен!");
             }
         }
         return null;

@@ -16,12 +16,8 @@ public class ShowGridCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            System.out.print(tournament.getPlayerGrid().toString());
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean execute() throws Exception {
+        System.out.print(tournament.getPlayerGrid().toString());
         return true;
     }
 

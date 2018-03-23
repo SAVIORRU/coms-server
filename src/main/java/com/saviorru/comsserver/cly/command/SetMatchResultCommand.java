@@ -24,13 +24,9 @@ public class SetMatchResultCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
-            tournament.finishMatch(match, score);
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean execute() throws Exception {
+        this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
+        tournament.finishMatch(match, score);
         return true;
     }
 

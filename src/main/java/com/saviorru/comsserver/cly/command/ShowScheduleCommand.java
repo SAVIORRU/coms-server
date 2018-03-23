@@ -23,13 +23,9 @@ public class ShowScheduleCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            schedule = tournament.getSchedule();
-            showSchedule();
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean execute() throws Exception {
+        schedule = tournament.getSchedule();
+        showSchedule();
         return true;
     }
 

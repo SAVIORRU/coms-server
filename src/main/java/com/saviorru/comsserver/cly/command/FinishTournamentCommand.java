@@ -17,12 +17,8 @@ public class FinishTournamentCommand implements Command {
     }
 
     @Override
-    public Boolean execute() {
-        try {
-            tournament.finish();
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean execute() throws Exception {
+        tournament.finish();
         return true;
     }
 
