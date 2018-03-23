@@ -25,7 +25,7 @@ public class SetPlayerCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        if (arguments.getKey() == nameCommand()) {
+        if (arguments.getKey().equals(nameCommand())) {
             playerDispatcher.addPlayer(new Player(arguments.getValue().get(0), arguments.getValue().get(1),
                     LocalDate.of(Integer.parseInt(arguments.getValue().get(2).substring(0, 3)),
                             Integer.parseInt(arguments.getValue().get(2).substring(5, 6)),
