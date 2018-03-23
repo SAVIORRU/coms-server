@@ -17,9 +17,11 @@ public class TournamentReport {
     private List<Player> prizeWinners;
     private LocalDateTime startDate, endDate, reportDate;
     private String tournamentName;
+    private TournamentSettings tournamentSettings;
+    private Tournament tournament;
 
 
-    public TournamentReport(Tournament tournament) throws Exception {
+    public TournamentReport(Tournament tournament, TournamentSettings tournamentSettings) throws Exception {
         if (tournament == null) throw new NullPointerException();
         this.contestersList = tournament.getPlayers();
         if (tournament.isStart())
@@ -32,21 +34,23 @@ public class TournamentReport {
         this.reportDate = LocalDateTime.now();
         this.tournamentName = tournament.getName();
         this.prizeWinners = new ArrayList<>();
-        this.prizeWinners.add(tournament.getThePrizePlace(1));
-        this.prizeWinners.add(tournament.getThePrizePlace(2));
-        this.prizeWinners.add(tournament.getThePrizePlace(3));
+        this.tournamentSettings = tournamentSettings;
+        this.tournament = tournament;
         this.playerScoresTable = this.calcScores(this.contestersList, this.matchesHistory);
+        fillPrizePlace();
 
     }
 
+    private void fillPrizePlace() throws Exception {
+        for (int i = 0; i < tournamentSettings.getPrizePlacesCount(); i++) {
+            this.prizeWinners.add(tournament.getThePrizePlace(i+1));
+        }
+    }
 
-
-    private List<Pair<Player, Integer>> calcScores( List<Player> contestersList, List<Match> matchesHistory) throws Exception
-    {
+    private List<Pair<Player, Integer>> calcScores(List<Player> contestersList, List<Match> matchesHistory) throws Exception {
         Map<Player, Integer> playerScores = new HashMap<>();
-        for (Player player : contestersList)
-        {
-                playerScores.put(player, 0);
+        for (Player player : contestersList) {
+            playerScores.put(player, 0);
         }
         for (Match match : matchesHistory) {
             if (match.isPlayed()) {
@@ -57,10 +61,10 @@ public class TournamentReport {
             }
         }
         List<Pair<Player, Integer>> result = new ArrayList<>();
-        Stream<Map.Entry<Player,Integer>> st = playerScores.entrySet().stream();
+        Stream<Map.Entry<Player, Integer>> st = playerScores.entrySet().stream();
 
         st.sorted(Comparator.comparing(e -> e.getValue()))
-                .forEach(e ->result.add(new Pair<Player, Integer> (e.getKey(), e.getValue())));
+                .forEach(e -> result.add(new Pair<Player, Integer>(e.getKey(), e.getValue())));
         Collections.reverse(result);
         return result;
     }
@@ -104,38 +108,39 @@ public class TournamentReport {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append( "Дата составления отчета: " + reportDate.toString() + "\n");
-        result.append( "Название турнира: " + getTournamentName() + "\n");
-        result.append( "Дата начала: " + startDate.toString() + "\n");
-        result.append( "Дата окончания: ");
+        result.append("Дата составления отчета: " + reportDate.toString() + "\n");
+        result.append("Название турнира: " + getTournamentName() + "\n");
+        result.append("Дата начала: " + startDate.toString() + "\n");
+        result.append("Дата окончания: ");
         if (endDate == null)
-            result.append( "турнир еще не окончен" + "\n");
+            result.append("турнир еще не окончен" + "\n");
         else
-            result.append( endDate.toString() + "\n");
-        result.append( "Турнирная система: ");
-        switch (schemeType)
-        {
-            case ROUND: result.append( "круговая" + "\n"); break;
-            case OLYMPIC: result.append( "олимпийская" + "\n"); break;
+            result.append(endDate.toString() + "\n");
+        result.append("Турнирная система: ");
+        switch (schemeType) {
+            case ROUND:
+                result.append("круговая" + "\n");
+                break;
+            case OLYMPIC:
+                result.append("олимпийская" + "\n");
+                break;
         }
-        result.append( "Призеры турнира:" + "\n");
-        for (int i =0; i<prizeWinners.size(); i++) {
-            result.append( (i+1) + ". ");
+        result.append("Призеры турнира:" + "\n");
+        for (int i = 0; i < prizeWinners.size(); i++) {
+            result.append((i + 1) + ". ");
             if (prizeWinners.get(i) != null)
-                result.append( prizeWinners.get(i).toString());
-            result.append( "\n");
+                result.append(prizeWinners.get(i).toString());
+            result.append("\n");
         }
-        result.append( "Рейтинг участников в турнире: " + "\n");
-        for (int i =0; i < playerScoresTable.size(); i++)
-        {
-             result.append( + (i+1) + ".  " + playerScoresTable.get(i).getKey().toString() +  "   " +
+        result.append("Рейтинг участников в турнире: " + "\n");
+        for (int i = 0; i < playerScoresTable.size(); i++) {
+            result.append(+(i + 1) + ".  " + playerScoresTable.get(i).getKey().toString() + "   " +
                     playerScoresTable.get(i).getValue().toString() + "\n");
         }
-        result.append(  "\n" + "\n");
-        result.append( "История матчей: " + "\n");
-        for (int i=0; i < matchesHistory.size(); i++)
-        {
-            result.append((i+1) + ".  " + matchesHistory.get(i).toString());
+        result.append("\n" + "\n");
+        result.append("История матчей: " + "\n");
+        for (int i = 0; i < matchesHistory.size(); i++) {
+            result.append((i + 1) + ".  " + matchesHistory.get(i).toString());
         }
         return result.toString();
     }

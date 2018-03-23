@@ -195,7 +195,7 @@ public class TennisTournament implements Tournament {
 
     @Override
     public TournamentReport getTournamentReport() throws Exception {
-        return new TournamentReport(this);
+        return new TournamentReport(this,tournamentSettings);
     }
 
     @Override
