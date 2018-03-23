@@ -20,7 +20,7 @@ public class CommandManagement {
         this.tournament = tournament;
     }
 
-    public boolean command(Pair<String, List<String>> commandConsole) {
+    public boolean command(Pair<String, List<String>> commandConsole) throws Exception {
         if (commandConsole.getKey().equals("help")) {
             return executeCommand(new HelpCommand(commandList));
         }
@@ -38,7 +38,7 @@ public class CommandManagement {
         }
         if (commandConsole.getKey().equals("set players")) {
             try {
-                return executeCommand(new SetPlayersCommand(tournament,new CommandParser(),Integer.parseInt(commandConsole.getValue().get(0)),new PlayerDispatcher()));
+                return executeCommand(new SetPlayersCommand(new CommandParser(),Integer.parseInt(commandConsole.getValue().get(0)),new PlayerDispatcher()));
             } catch (Exception e) {
                 System.out.print("Не верный формат команды");
                 return false;
@@ -55,7 +55,7 @@ public class CommandManagement {
         return false;
     }
 
-    private boolean executeCommand(Command command){
+    private boolean executeCommand(Command command) throws Exception {
         return command.execute();
     }
 }

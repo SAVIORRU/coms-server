@@ -46,15 +46,15 @@ public class TennisTournament implements Tournament {
 
     private TennisTournament(TennisTournament target) throws Exception {
         if (target != null) {
-            this.playerDispatcher = target.getPlayerDispatcher();
-            this.schedule = target.getScheduleObject();
-            this.locationDispatcher = target.getLocationDispatcher();
-            this.dateDispatcher = target.getDateDispatcher();
-            this.isStart = target.isStart();
-            this.winnerIdentifier = target.getWinnerIdentifier();
-            this.prizePlaces = target.getPrizePlaces();
-            this.scheduleGenerator = target.getScheduleGenerator();
-            this.tournamentSettings = target.getTournamentSettings();
+            this.playerDispatcher = target.playerDispatcher;
+            this.schedule = target.schedule;
+            this.locationDispatcher = target.locationDispatcher;
+            this.dateDispatcher = target.dateDispatcher;
+            this.isStart = target.isStart;
+            this.winnerIdentifier = target.winnerIdentifier;
+            this.prizePlaces = target.prizePlaces;
+            this.scheduleGenerator = target.scheduleGenerator;
+            this.tournamentSettings = target.tournamentSettings;
         }
     }
 
@@ -206,42 +206,5 @@ public class TennisTournament implements Tournament {
             e.printStackTrace();
         }
         return null;
-    }
-
-
-    private LocationDispatcher getLocationDispatcher() {
-        return locationDispatcher;
-    }
-
-
-    private PlayerDispatcher getPlayerDispatcher() {
-        return playerDispatcher;
-    }
-
-
-    private DateDispatcher getDateDispatcher() {
-        return dateDispatcher;
-    }
-
-
-    private ScheduleGenerator getScheduleGenerator() {
-        return scheduleGenerator;
-    }
-
-
-    private WinnerIdentifier getWinnerIdentifier() {
-        return winnerIdentifier;
-    }
-
-    private Schedule getScheduleObject(){
-        return schedule;
-    }
-
-    private List<PrizePlace> getPrizePlaces() {
-        return prizePlaces;
-    }
-
-    private TournamentSettings getTournamentSettings() {
-        return tournamentSettings;
     }
 }
