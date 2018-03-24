@@ -48,7 +48,7 @@ public class ConsoleController {
         commandsMap.put("show players", new ArrayList<>());
         commandsMap.put("show locations", new ArrayList<>());
         commandsMap.put("set match result", Arrays.asList(ArgumentType.DIGIT, ArgumentType.DIGIT, ArgumentType.DIGIT));
-        commandsMap.put("set player", Arrays.asList(ArgumentType.ALPHA, ArgumentType.ALPHA, ArgumentType.DATE));
+        commandsMap.put("set player", Arrays.asList(ArgumentType.ALPHA_DIGIT, ArgumentType.ALPHA_DIGIT, ArgumentType.DATE));
         commandsMap.put("set location", Arrays.asList(ArgumentType.ALPHA_DIGIT, ArgumentType.ALPHA_DIGIT));
         commandsMap.put("set setting", Arrays.asList(ArgumentType.ALPHA_DIGIT,ArgumentType.ALPHA,ArgumentType.DATE_TIME));
         commandsMap.put("create tournament", new ArrayList<>());
