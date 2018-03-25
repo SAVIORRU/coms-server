@@ -1,27 +1,20 @@
 package com.saviorru.comsserver.domain.dispatcher;
 
+import com.saviorru.comsserver.domain.TimeSettings;
+
 import java.time.LocalDateTime;
 
 public class DateDispatcher {
 
     private LocalDateTime startDate;
-    private Integer allowedHourStart;
-    private Integer allowedHourEnd;
-    private Integer dateHourOffset;
     private LocalDateTime endDate;
+    private TimeSettings timeSettings;
 
-    public DateDispatcher(LocalDateTime startDate, Integer allowedHourStart, Integer allowedHourEnd, Integer dateHourOffset) throws Exception
+    public DateDispatcher(LocalDateTime startDate, TimeSettings timeSettings)
     {
-        if ((startDate == null) || (allowedHourStart == null) || (allowedHourEnd == null) || (dateHourOffset == null))
-            throw new NullPointerException();
-        if (dateHourOffset < 0) throw new Exception("Time offset cannot be below zero");
-        if (allowedHourEnd <= allowedHourStart) throw new Exception("End of allowed time cannot be lower or equal to start time");
-        if ((allowedHourEnd > 23) || (allowedHourEnd < 0) || (allowedHourStart > 23) || (allowedHourStart < 0))
-            throw new Exception("Bad hour values");
+        if (startDate == null) throw new NullPointerException();
         this.startDate = startDate;
-        this.allowedHourStart = allowedHourStart;
-        this.allowedHourEnd = allowedHourEnd;
-        this.dateHourOffset = dateHourOffset;
+        this.timeSettings = timeSettings;
     }
 
     public LocalDateTime getNextDate()
@@ -31,16 +24,16 @@ public class DateDispatcher {
         {
             currentDate = this.startDate;
         }
-        currentDate = currentDate.plusHours(this.dateHourOffset);
-        if (currentDate.getHour() < allowedHourStart)
+        currentDate = currentDate.plusHours(this.timeSettings.getDateHourOffset());
+        if (currentDate.getHour() < timeSettings.getAllowedHourStart())
         {
-            currentDate = currentDate.withHour(allowedHourStart);
+            currentDate = currentDate.withHour(timeSettings.getAllowedHourStart());
             return currentDate;
         }
-        if (currentDate.getHour() > allowedHourStart)
+        if (currentDate.getHour() > timeSettings.getAllowedHourStart())
         {
             currentDate = currentDate.plusDays(1);
-            currentDate = currentDate.withHour(allowedHourStart);
+            currentDate = currentDate.withHour(timeSettings.getAllowedHourStart());
             return currentDate;
         }
         return currentDate;
@@ -51,11 +44,11 @@ public class DateDispatcher {
     }
 
     public Integer getAllowedHourStart() {
-        return allowedHourStart;
+        return timeSettings.getAllowedHourStart();
     }
 
     public Integer getAllowedHourEnd() {
-        return allowedHourEnd;
+        return timeSettings.getAllowedHourEnd();
     }
 
     public LocalDateTime getEndDate() {
