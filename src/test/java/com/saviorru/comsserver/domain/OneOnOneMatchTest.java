@@ -68,15 +68,15 @@ public class OneOnOneMatchTest {
         assertEquals(11, match.getPointsSecondSide());
     }
 
-    @Test
-    public void testSetPointsParamNegativeNumberResultDefaultValue() throws Exception {
+    @Test(expected = Exception.class)
+    public void testSetPointsParamNegativeNumberResultException() throws Exception {
         match.setPoints(-5, 11);
         assertEquals(0, match.getPointsFirstSide());
         assertEquals(0, match.getPointsSecondSide());
     }
 
-    @Test
-    public void testSetPointsWhenPlayedMatchResultNoChangePoints() throws Exception {
+    @Test(expected = Exception.class)
+    public void testSetPointsWhenPlayedMatchResultExceptionAllMatchPlayed() throws Exception {
         match.setPoints(10, 11);
         match.setMatchState(MatchState.PLAYED);
         match.setPoints(8, 5);

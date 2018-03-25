@@ -116,4 +116,16 @@ public class RuntimeEnvironmentTests {
         result =  testSubject.executeCommand("show schedule", new ArrayList<String>());
         assertEquals("DONE", result);
     }
+    @Test
+    public void testShowGrid(){
+        String result = testSubject.executeCommand("set location", Arrays.asList("1", ""));
+        result = testSubject.executeCommand("set player", Arrays.asList("Igor", "Savochkin", "1969-10-12"));
+        result = testSubject.executeCommand("set player", Arrays.asList("Egor", "Savochkin", "1969-10-12"));
+        result = testSubject.executeCommand("set player", Arrays.asList("Artem", "Savochkin", "1969-10-12"));
+        result = testSubject.executeCommand("set setting", Arrays.asList("Trnmt1", "Olympic", "2019-10-12-12-00"));
+        result = testSubject.executeCommand("create tournament", new ArrayList<String>());
+        result =  testSubject.executeCommand("start", new ArrayList<String>());
+        result =  testSubject.executeCommand("show grid", new ArrayList<String>());
+        assertEquals("DONE", result);
+    }
 }

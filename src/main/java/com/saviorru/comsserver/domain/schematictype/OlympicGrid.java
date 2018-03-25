@@ -55,16 +55,16 @@ public class OlympicGrid implements PlayerGrid {
 
     private void printRelation(double space, int round, StringBuilder stringBuilder) {
         int shift = (STEP / 2 - 1) * round;
-        int spaceS = (STEP / 2 + 1)*round;
+        int spaceS = (STEP / 2 + 1) * round;
         double spaceLeft = space - 4;
-        while(spaceLeft > 0){
+        while (spaceLeft > 0) {
             spaceLeft--;
             stringBuilder.append(" ");
         }
         for (int i = 0; i < shift; i++)
             stringBuilder.append(" ");
         stringBuilder.append("\\");
-        for (int i = 0; i < spaceS*round - space; i++)
+        for (int i = 0; i < spaceS * round - space; i++)
             stringBuilder.append(" ");
         stringBuilder.append("/");
         for (int k = 0; k < space + 14; k++) {

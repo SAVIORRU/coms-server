@@ -266,7 +266,7 @@ public class OlympicScheme implements Scheme {
                 listList.get(i).add(pair.getValue());
             }
         }
-        listList.add(Collections.singletonList(root.data));
+        listList.add(Collections.singletonList((root.data == null) ? 0 : root.data));
         try {
             return new OlympicGrid(listList);
         } catch (Exception e) {

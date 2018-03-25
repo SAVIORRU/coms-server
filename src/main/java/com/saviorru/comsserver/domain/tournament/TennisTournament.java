@@ -34,6 +34,8 @@ public class TennisTournament implements Tournament {
             throw new NullPointerException();
         if (playerDispatcher.getAllPlayers().isEmpty() || locationDispatcher.getAllLocations().isEmpty())
             throw new Exception("Empty parameter");
+        if(playerDispatcher.getAllPlayers().size() < 2 || locationDispatcher.getAllLocations().size() < 1)
+            throw new Exception("Not enough players or tables");
         this.playerDispatcher = playerDispatcher;
         this.schedule = schedule;
         this.locationDispatcher = locationDispatcher;

@@ -12,8 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class OlympicGridTest {
 
     private List<List<Integer>> listList;
-    private final Integer COUNT_ROUND = 4;
-    private final Integer COUNT_PLAYERS = 8;
+    private final Integer COUNT_ROUND = 5;
+    private final Integer COUNT_PLAYERS = 9;
 
     @Before
     public void init() {
@@ -24,7 +24,7 @@ public class OlympicGridTest {
             for (Integer j = 0; j < countPlayers; j++) {
                 listList.get(i).add(j+1);
             }
-            countPlayers /= 2;
+            countPlayers /=  2;
         }
     }
 

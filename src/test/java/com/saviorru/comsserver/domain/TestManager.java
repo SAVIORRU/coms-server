@@ -21,7 +21,6 @@ import org.junit.runners.Suite;
         OlympicGridTest.class,
         TournamentSettingsTests.class,
         TournamentReporsTests.class,
-        TimeSettingsTest.class,
         TournamentTests.class,
         OlympicWinnerIndentifierTest.class
 })
