@@ -1,6 +1,6 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cli;
 
-import com.saviorru.comsserver.cly.command.CommandInfo;
+import com.saviorru.comsserver.cli.command.CommandInfo;
 import javafx.util.Pair;
 
 import java.util.*;

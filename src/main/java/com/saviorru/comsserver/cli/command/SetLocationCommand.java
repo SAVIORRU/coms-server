@@ -1,12 +1,8 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
 import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
-import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.model.Location;
-import com.saviorru.comsserver.domain.model.Player;
-import javafx.util.Pair;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class SetLocationCommand implements Command {

@@ -1,20 +1,8 @@
-package com.saviorru.comsserver.domain;
+package com.saviorru.comsserver.cli;
 
 
-import com.saviorru.comsserver.cly.*;
-import com.saviorru.comsserver.cly.command.*;
-import com.saviorru.comsserver.domain.dispatcher.DateDispatcher;
-import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
-import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
-import com.saviorru.comsserver.domain.model.Location;
-import com.saviorru.comsserver.domain.model.Player;
-import com.saviorru.comsserver.domain.schedule.*;
-import com.saviorru.comsserver.domain.schematictype.SchemeType;
-import com.saviorru.comsserver.domain.tournament.TennisTournament;
-import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.cli.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 

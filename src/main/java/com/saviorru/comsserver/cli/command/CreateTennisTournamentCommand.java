@@ -1,12 +1,8 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
-import com.saviorru.comsserver.cly.RuntimeEnvironment;
-import com.saviorru.comsserver.domain.dispatcher.LocationDispatcher;
-import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
-import com.saviorru.comsserver.domain.schedule.Schedule;
+import com.saviorru.comsserver.cli.RuntimeEnvironment;
 import com.saviorru.comsserver.domain.tournament.TennisTournament;
 import com.saviorru.comsserver.domain.tournament.Tournament;
-import com.saviorru.comsserver.domain.tournament.TournamentSettings;
 
 public class CreateTennisTournamentCommand implements Command {
 

@@ -1,14 +1,15 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
 import com.saviorru.comsserver.domain.tournament.Tournament;
+import com.saviorru.comsserver.domain.tournament.TournamentReport;
 
-public class ShowGridCommand implements Command {
-
+public class ReportCommand implements Command {
     private Tournament tournament;
 
-    public ShowGridCommand(Tournament tournament) {
+    public ReportCommand(Tournament tournament) {
         this.tournament = tournament;
     }
+
 
     @Override
     public void backup() {
@@ -17,13 +18,14 @@ public class ShowGridCommand implements Command {
 
     @Override
     public Boolean execute() throws Exception {
-        System.out.print(tournament.getPlayerGrid().toString());
+        TournamentReport report = new TournamentReport(tournament);
+        System.out.print(report);
         return true;
     }
 
     @Override
     public String nameCommand() {
-        return "show grid";
+        return "report";
     }
 
     @Override

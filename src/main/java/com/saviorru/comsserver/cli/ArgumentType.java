@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cli;
 
 public enum ArgumentType {
     DIGIT,                                          //1111111

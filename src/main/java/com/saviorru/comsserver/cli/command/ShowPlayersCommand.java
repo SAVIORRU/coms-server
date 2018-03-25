@@ -1,7 +1,6 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
 import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
-import com.saviorru.comsserver.domain.model.Location;
 import com.saviorru.comsserver.domain.model.Player;
 
 public class ShowPlayersCommand implements Command {
