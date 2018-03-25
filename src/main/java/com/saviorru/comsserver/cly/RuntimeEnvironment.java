@@ -56,7 +56,7 @@ public class RuntimeEnvironment {
 
             if (command.equals("set player")) {
                 if (isTournamentCreated()) return "Tournament is created";
-                executeCommand = new SetPlayerCommand(playerDispatcher, arguments);
+                //executeCommand = new SetPlayerCommand(playerDispatcher, arguments);
             }
             if (command.equals("show schedule")) {
                 executeCommand = new ShowScheduleCommand(tournament);
@@ -85,7 +85,7 @@ public class RuntimeEnvironment {
             }
             if (command.equals("create tournament")) {
                 if (isTournamentCreated()) return "Tournament is created";
-                executeCommand = new CreateTennisTournamentCommand(this);
+                //executeCommand = new CreateTennisTournamentCommand(this);
             }
             if (command.equals("set match result")) {
                 if (!isTournamentCreated()) return "Tournament is not created";
@@ -96,7 +96,7 @@ public class RuntimeEnvironment {
             }
             if (command.equals("set setting")) {
                 if (isTournamentCreated()) return "Tournament is created";
-                executeCommand = new SetSettingTournamentCommand(arguments,timeSettings, this);
+               // executeCommand = new SetSettingTournamentCommand(arguments,timeSettings, this);
             }
             if (command.equals("show grid")) {
                 if (!isTournamentCreated()) return "Tournament is not created";
