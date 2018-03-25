@@ -12,23 +12,13 @@ public class FinishTournamentCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        tournament.finish();
+    public Boolean execute(){
+        try {
+            tournament.finish();
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String nameCommand() {
-        return "finish";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
-    }
 }

@@ -13,12 +13,7 @@ public class ShowPlayersCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
+    public Boolean execute(){
         int number = 0;
         for(Player player: playerDispatcher.getAllPlayers()){
             number++;
@@ -27,15 +22,5 @@ public class ShowPlayersCommand implements Command {
 
         }
         return number > 0;
-    }
-
-    @Override
-    public String nameCommand() {
-        return "show players";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
     }
 }

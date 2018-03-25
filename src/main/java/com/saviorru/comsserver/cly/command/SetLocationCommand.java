@@ -20,23 +20,13 @@ public class SetLocationCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        locationDispatcher.addLocation(new Location(arguments.get(0), arguments.get(1)));
+    public Boolean execute(){
+        try {
+            locationDispatcher.addLocation(new Location(arguments.get(0), arguments.get(1)));
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String nameCommand() {
-        return "set location";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command: name location, description";
-    }
 }

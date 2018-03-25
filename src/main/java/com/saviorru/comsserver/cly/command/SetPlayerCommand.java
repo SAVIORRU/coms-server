@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.cly.command;
 
+import com.saviorru.comsserver.domain.model.Location;
 import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.dispatcher.PlayerDispatcher;
 import com.saviorru.comsserver.domain.tournament.Tournament;
@@ -14,35 +15,22 @@ public class SetPlayerCommand implements Command {
 
     private PlayerDispatcher playerDispatcher;
     private List<String> arguments;
+    private LocalDate birthDate;
 
-    public SetPlayerCommand(PlayerDispatcher playerDispatcher, List<String> arguments) {
+    public SetPlayerCommand(PlayerDispatcher playerDispatcher, List<String> arguments, LocalDate birthDate) {
         this.playerDispatcher = playerDispatcher;
         this.arguments = arguments;
+        this.birthDate = birthDate;
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-
-            LocalDate birthDate = null;
-            List<String> stringDate = Arrays.asList(arguments.get(2).split("-"));
-            birthDate = LocalDate.of(Integer.parseInt(stringDate.get(0)), Integer.parseInt(stringDate.get(1)),
-                    Integer.parseInt( stringDate.get(2)));
+    public Boolean execute(){
+        try {
             playerDispatcher.addPlayer(new Player(arguments.get(0), arguments.get(1), birthDate));
-            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    public String nameCommand() {
-        return "set player";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command: first name, second name, yyyy-mm-dd";
-    }
 }

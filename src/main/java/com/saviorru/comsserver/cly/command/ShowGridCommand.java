@@ -11,23 +11,13 @@ public class ShowGridCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        System.out.print(tournament.getPlayerGrid().toString());
+    public Boolean execute(){
+        try {
+            System.out.print(tournament.getPlayerGrid().toString());
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String nameCommand() {
-        return "show grid";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
-    }
 }

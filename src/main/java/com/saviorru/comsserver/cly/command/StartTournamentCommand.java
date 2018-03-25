@@ -13,24 +13,13 @@ public class StartTournamentCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        tournament.start();
+    public Boolean execute(){
+        try {
+            tournament.start();
+        } catch (Exception e) {
+            return false;
+        }
         return true;
-    }
-
-    @Override
-    public String nameCommand() {
-        return "start";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
     }
 
     private boolean addPlayers() {

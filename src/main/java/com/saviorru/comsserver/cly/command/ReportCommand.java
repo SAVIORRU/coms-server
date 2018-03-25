@@ -10,26 +10,13 @@ public class ReportCommand implements Command {
         this.tournament = tournament;
     }
 
-
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        TournamentReport report = new TournamentReport(tournament);
-        System.out.print(report);
+    public Boolean execute() {
+        try {
+            System.out.println(new TournamentReport(tournament));
+        } catch (Exception e) {
+            return false;
+        }
         return true;
-    }
-
-    @Override
-    public String nameCommand() {
-        return "report";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
     }
 }

@@ -11,12 +11,7 @@ public class ShowLocationCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
+    public Boolean execute(){
         int number = 1;
         for(Location location: locationDispatcher.getAllLocations()){
             number++;
@@ -24,15 +19,5 @@ public class ShowLocationCommand implements Command {
                             + "; Описание: " + location.getDescription());
         }
         return number > 0;
-    }
-
-    @Override
-    public String nameCommand() {
-        return "show locations";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
     }
 }

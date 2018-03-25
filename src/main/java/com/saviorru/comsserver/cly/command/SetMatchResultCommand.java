@@ -19,24 +19,14 @@ public class SetMatchResultCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
-        tournament.finishMatch(match, score);
+    public Boolean execute() {
+        try {
+            this.match = tournament.getSchedule().getAllMatches().get(matchNumber);
+            tournament.finishMatch(match, score);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String nameCommand() {
-        return "set match result";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command: matchNumber, number, number";
-    }
 }

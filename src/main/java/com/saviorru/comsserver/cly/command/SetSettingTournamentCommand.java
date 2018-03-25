@@ -16,43 +16,27 @@ import java.util.List;
 public class SetSettingTournamentCommand implements Command {
 
     private TournamentSettings tournamentSettings;
-    private List<String> arguments;
+    private SchemeType schemeType;
     private TimeSettings timeSettings;
-    private RuntimeEnvironment env;
+    private String nameTournament;
+    private LocalDateTime startDate;
 
-    public SetSettingTournamentCommand(List<String> arguments, TimeSettings timeSettings, RuntimeEnvironment env) {
-        this.arguments = arguments;
+    public SetSettingTournamentCommand(TournamentSettings tournamentSettings, SchemeType schemeType, TimeSettings timeSettings, String nameTournament, LocalDateTime startDate) {
+        this.tournamentSettings = tournamentSettings;
+        this.schemeType = schemeType;
         this.timeSettings = timeSettings;
-        this.env = env;
+        this.nameTournament = nameTournament;
+        this.startDate = startDate;
     }
 
-    @Override
-    public void backup() {
-
-    }
 
     @Override
-    public Boolean execute() throws Exception {
-        SchemeType schemeType = null;
-        if (arguments.get(1).toLowerCase().equals("olympic"))
-            schemeType = SchemeType.OLYMPIC;
-        if (arguments.get(1).toLowerCase().equals("round"))
-            schemeType = SchemeType.ROUND;
-        List<String> stringDate = Arrays.asList(arguments.get(2).split("-"));
-        LocalDateTime startDate = LocalDateTime.of(Integer.parseInt(stringDate.get(0)), Integer.parseInt(stringDate.get(1)),
-                Integer.parseInt( stringDate.get(2)), Integer.parseInt(stringDate.get(3)), Integer.parseInt(stringDate.get(4)));
-        tournamentSettings = new TournamentSettingsImpl(arguments.get(0), schemeType, startDate, timeSettings);
-        this.env.setTournamentSettings(tournamentSettings);
+    public Boolean execute(){
+        try {
+            tournamentSettings = new TournamentSettingsImpl(nameTournament, schemeType, startDate, timeSettings);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
-    }
-
-    @Override
-    public String nameCommand() {
-        return "set setting";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command: tournament name, type scheme (olympic/round ...), date start (yyyy-mm-dd-hh-minmin)";
     }
 }

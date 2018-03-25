@@ -17,26 +17,14 @@ public class ShowScheduleCommand implements Command {
     }
 
     @Override
-    public void backup() {
-
-    }
-
-    @Override
-    public Boolean execute() throws Exception {
-        showSchedule();
+    public Boolean execute(){
+        try {
+            showSchedule();
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
-
-    @Override
-    public String nameCommand() {
-        return "show schedule";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
-    }
-
     private void showSchedule() throws Exception {
 
         List<Match> matches = new ArrayList<>(tournament.getSchedule().getAllMatches());

@@ -25,10 +25,6 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void backup() {
-    }
-
-    @Override
     public Boolean execute() {
         boolean flag = false;
         for (String name : commandNameList) {
@@ -38,13 +34,4 @@ public class HelpCommand implements Command {
         return flag;
     }
 
-    @Override
-    public String nameCommand() {
-        return "help";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "command";
-    }
 }
