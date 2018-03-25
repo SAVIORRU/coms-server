@@ -29,7 +29,7 @@ public class OlympicWinnerIndentifierTest {
         playerList = new ArrayList<>();
         locationList = new ArrayList<>();
         matchList = new ArrayList<>();
-        dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
+        dateDispatcher = new DateDispatcher(LocalDateTime.now(), new TimeSettings(10, 18, 1));
         for (int i = 0; i < 8; i++) {
             playerList.add(new Player("Andrey" + i, "Momp", LocalDate.of(1950 + i, 1, 1)));
             locationList.add(new Location("Table" + i, ""));

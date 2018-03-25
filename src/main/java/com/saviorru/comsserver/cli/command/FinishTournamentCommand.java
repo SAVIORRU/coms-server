@@ -1,4 +1,4 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
 import com.saviorru.comsserver.domain.tournament.Tournament;
 

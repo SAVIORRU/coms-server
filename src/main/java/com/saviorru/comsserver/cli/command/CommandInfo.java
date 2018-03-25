@@ -1,6 +1,6 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
-import com.saviorru.comsserver.cly.ArgumentType;
+import com.saviorru.comsserver.cli.ArgumentType;
 
 import java.util.List;
 

@@ -1,11 +1,8 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cli;
 
 import javafx.util.Pair;
 
-import java.time.LocalDateTime;
 import java.util.*;
-
-import com.saviorru.comsserver.cly.ArgumentType;
 
 public class CommandParser {
     private Map<String, List<ArgumentType>> parsingRules;

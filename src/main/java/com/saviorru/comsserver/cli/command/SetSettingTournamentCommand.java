@@ -1,14 +1,11 @@
-package com.saviorru.comsserver.cly.command;
+package com.saviorru.comsserver.cli.command;
 
-import com.saviorru.comsserver.cly.RuntimeEnvironment;
+import com.saviorru.comsserver.cli.RuntimeEnvironment;
 import com.saviorru.comsserver.domain.TimeSettings;
-import com.saviorru.comsserver.domain.model.Player;
 import com.saviorru.comsserver.domain.schematictype.SchemeType;
 import com.saviorru.comsserver.domain.tournament.TournamentSettings;
 import com.saviorru.comsserver.domain.tournament.TournamentSettingsImpl;
-import javafx.util.Pair;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;

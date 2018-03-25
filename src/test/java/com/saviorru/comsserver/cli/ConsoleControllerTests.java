@@ -1,11 +1,6 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cli;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
-
-import static org.mockito.Mockito.*;
-import static junit.framework.TestCase.*;
 
 public class ConsoleControllerTests {
 

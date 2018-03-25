@@ -37,9 +37,8 @@ public class TournamentSettingsImpl implements TournamentSettings {
 
 
     @Override
-    public DateDispatcher getDateDispatcher() throws Exception {
-        return new DateDispatcher(startDate, this.timeSettings.getAllowedHourStart(), this.timeSettings.getAllowedHourEnd(),
-                this.timeSettings.getDateHourOffset());
+    public DateDispatcher getDateDispatcher()  {
+        return new DateDispatcher(startDate, timeSettings);
     }
 
     @Override

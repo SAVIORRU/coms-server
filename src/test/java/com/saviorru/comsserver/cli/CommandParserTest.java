@@ -1,7 +1,5 @@
-package com.saviorru.comsserver.cly;
+package com.saviorru.comsserver.cli;
 
-import com.saviorru.comsserver.cly.ArgumentType;
-import com.saviorru.comsserver.cly.CommandParser;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
 import static junit.framework.TestCase.*;
 
 public class CommandParserTest {

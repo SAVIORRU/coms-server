@@ -35,7 +35,6 @@ public class PlayerDispatcher {
     }
     public List<Integer> getAllPlayersNumbers()
     {
-
         return new ArrayList<Integer>(this.playersNumbersMap.values());
     }
     public Integer getPlayerNumber(Player player) throws Exception

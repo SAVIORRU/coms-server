@@ -21,7 +21,6 @@ public class TennisTournament implements Tournament {
     private LocationDispatcher locationDispatcher;
     private Schedule schedule;
     private PlayerDispatcher playerDispatcher;
-    private DateDispatcher dateDispatcher;
     private boolean isStart;
     private List<PrizePlace> prizePlaces;
     private ScheduleGenerator scheduleGenerator;
@@ -39,7 +38,6 @@ public class TennisTournament implements Tournament {
         this.playerDispatcher = playerDispatcher;
         this.schedule = schedule;
         this.locationDispatcher = locationDispatcher;
-        this.dateDispatcher = tournamentSettings.getDateDispatcher();
         this.isStart = false;
         this.tournamentSettings = tournamentSettings;
         this.prizePlaces = new ArrayList<>();
@@ -51,7 +49,6 @@ public class TennisTournament implements Tournament {
             this.playerDispatcher = target.playerDispatcher;
             this.schedule = target.schedule;
             this.locationDispatcher = target.locationDispatcher;
-            this.dateDispatcher = target.dateDispatcher;
             this.isStart = target.isStart;
             this.winnerIdentifier = target.winnerIdentifier;
             this.prizePlaces = target.prizePlaces;
@@ -66,7 +63,7 @@ public class TennisTournament implements Tournament {
     }
 
     private void generate(Scheme scheme) throws Exception {
-        this.scheduleGenerator = new ScheduleGeneratorImpl(this.playerDispatcher, this.locationDispatcher, this.dateDispatcher, scheme);
+        this.scheduleGenerator = new ScheduleGeneratorImpl(this.playerDispatcher, this.locationDispatcher, tournamentSettings.getDateDispatcher(), scheme);
         this.schedule = this.scheduleGenerator.generateSchedule();
     }
 
@@ -116,7 +113,7 @@ public class TennisTournament implements Tournament {
             for (int i = 0; i < this.tournamentSettings.getPrizePlacesCount(); i++) {
                 this.prizePlaces.add(new PrizePlaceThePlayer(winners.get(i), i + 1));
             }
-            dateDispatcher.setEndDate(LocalDateTime.now());
+            tournamentSettings.getDateDispatcher().setEndDate(LocalDateTime.now());
         } else
             throw new Exception("Tournament is not started");
     }
@@ -175,13 +172,22 @@ public class TennisTournament implements Tournament {
 
     @Override
     public LocalDateTime getStartDate() {
-
-        return dateDispatcher.getStartDate();
+        try {
+            return tournamentSettings.getDateDispatcher().getStartDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public LocalDateTime getEndDate() {
-        return dateDispatcher.getEndDate();
+        try {
+            return tournamentSettings.getDateDispatcher().getEndDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -209,7 +215,7 @@ public class TennisTournament implements Tournament {
         }
         return null;
     }
-
+    @Override
     public TournamentSettings getTournamentSettings() {
         return tournamentSettings;
     }
