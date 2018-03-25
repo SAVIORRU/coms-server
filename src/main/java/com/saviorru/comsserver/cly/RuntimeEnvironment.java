@@ -20,11 +20,11 @@ public class RuntimeEnvironment {
     private Schedule schedule;
     private TournamentSettings tournamentSettings;
     private TimeSettings timeSettings;
-    private Map<String, List<ArgumentType>> commandsMap;
+    private Map<String, CommandInfo> commandsMap;
     private Tournament tournament;
 
 
-    public RuntimeEnvironment(Map<String, List<ArgumentType>> commandsMap) throws Exception {
+    public RuntimeEnvironment(Map<String, CommandInfo> commandsMap) throws Exception {
         if (commandsMap == null || commandsMap.isEmpty()) throw new Exception("Commands map empty or null");
         this.commandsMap = commandsMap;
         this.playerDispatcher = new PlayerDispatcher();

@@ -125,7 +125,7 @@ public class CommandParser {
     private String parseAlphaDigit(String rawField) throws Exception
     {
         if (rawField == null || rawField.isEmpty()) throw new Exception("String cannot be empty or null");
-        if (!(rawField.matches("[A-Za-zА-Яа-я0-9]+")))
+        if (!(rawField.matches("[A-Za-zА-Яа-я0-9 ]+")))
             throw new Exception("Неверный формат аргумента");
         return rawField;
 

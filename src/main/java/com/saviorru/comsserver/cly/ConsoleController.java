@@ -1,5 +1,6 @@
 package com.saviorru.comsserver.cly;
 
+import com.saviorru.comsserver.cly.command.CommandInfo;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -7,15 +8,15 @@ import java.util.*;
 public class ConsoleController {
     private RuntimeEnvironment env, backup;
     private CommandParser parser;
-    private Map<String, List<ArgumentType>> commandsMap;
+    private Map<String, CommandInfo> commandsMap;
 
 
     public ConsoleController() throws Exception {
         initCommandsMap();
         env = new RuntimeEnvironment(this.commandsMap);
         parser = new CommandParser();
-        for (Map.Entry<String, List<ArgumentType>> entry : this.commandsMap.entrySet()) {
-            parser.addParsingRule(entry.getKey(), entry.getValue());
+        for (Map.Entry<String, CommandInfo> entry : this.commandsMap.entrySet()) {
+            parser.addParsingRule(entry.getKey(), entry.getValue().getArgumentsList());
         }
     }
 
