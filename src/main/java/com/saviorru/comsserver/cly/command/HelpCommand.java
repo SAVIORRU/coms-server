@@ -1,24 +1,25 @@
 package com.saviorru.comsserver.cly.command;
 
 import com.saviorru.comsserver.domain.tournament.Tournament;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelpCommand implements Command {
 
-    private List<Command> commandList;
+    private List<Pair<String, String>> commandList;
     private List<String> commandNameList;
 
-    public HelpCommand(List<Command> commandList) {
+    public HelpCommand(List<Pair<String, String>> commandList) {
         this.commandList = commandList;
         this.commandNameList = new ArrayList<>();
         fillCommandNameList(commandList);
     }
 
-    private void fillCommandNameList(List<Command> commandList) {
-        for (Command command : commandList) {
-            commandNameList.add(command.nameCommand());
+    private void fillCommandNameList(List<Pair<String, String>> commandList) {
+        for (Pair<String, String> command : commandList) {
+            commandNameList.add(command.getKey());
         }
     }
 
@@ -31,9 +32,9 @@ public class HelpCommand implements Command {
     public Boolean execute() {
         boolean flag = false;
         for (String name : commandNameList)
-            for (Command command : commandList)
-                if (command.nameCommand().equals(name)) {
-                    System.out.println("Команда: " + command.nameCommand() + " " + "Формат ввода: " + command.commandFormat());
+            for (Pair<String, String> command : commandList)
+                if (command.getKey().equals(name)) {
+                    System.out.println("Команда: " + command.getKey() + " , " + "Формат ввода: " + command.getValue());
                     flag = true;
                 }
         return flag;

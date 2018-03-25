@@ -10,6 +10,7 @@ import com.saviorru.comsserver.domain.tournament.Tournament;
 import com.saviorru.comsserver.domain.tournament.TournamentSettings;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,23 @@ public class RuntimeEnvironment {
         Command executeCommand = null;
         Boolean executeResult = true;
         try {
-            if (command.equals("help")) return "help";
+            if (command.equals("help")) {
+                List<Pair<String,String>> pairList = new ArrayList<>();
+                pairList.add(new Pair<>("start","command"));
+                pairList.add(new Pair<>("finish","command"));
+                pairList.add(new Pair<>("show schedule","command"));
+                pairList.add(new Pair<>("show players","command"));
+                pairList.add(new Pair<>("show location","command"));
+                pairList.add(new Pair<>("create tournament","command"));
+                pairList.add(new Pair<>("show grid","command"));
+                pairList.add(new Pair<>("report","command"));
+                pairList.add(new Pair<>("set player","command: first name, second name, yyyy-mm-dd"));
+                pairList.add(new Pair<>("set location","command: name location, description"));
+                pairList.add(new Pair<>("set match result","command: matchNumber, number, number"));
+                pairList.add(new Pair<>("set setting","command: tournament name, type scheme (olympic/round ...), date start (yyyy-mm-dd-hh-minmin)"));
+                pairList.add(new Pair<>("exit","command"));
+                executeCommand = new HelpCommand(pairList);
+            }
 
             if (command.equals("set player")) {
                 if (isTournamentCreated()) return "Tournament is created";

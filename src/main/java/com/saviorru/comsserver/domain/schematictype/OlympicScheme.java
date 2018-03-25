@@ -3,6 +3,7 @@ package com.saviorru.comsserver.domain.schematictype;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OlympicScheme implements Scheme {
@@ -265,6 +266,7 @@ public class OlympicScheme implements Scheme {
                 listList.get(i).add(pair.getValue());
             }
         }
+        listList.add(Collections.singletonList(root.data));
         try {
             return new OlympicGrid(listList);
         } catch (Exception e) {

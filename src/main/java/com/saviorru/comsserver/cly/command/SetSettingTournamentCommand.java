@@ -53,6 +53,6 @@ public class SetSettingTournamentCommand implements Command {
 
     @Override
     public String commandFormat() {
-        return "command: tournament name, type scheme (Olympic/Round ...), date start (yyyy-mm-dd)";
+        return "command: tournament name, type scheme (olympic/round ...), date start (yyyy-mm-dd-hh-minmin)";
     }
 }

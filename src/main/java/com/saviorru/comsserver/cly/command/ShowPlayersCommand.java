@@ -22,7 +22,7 @@ public class ShowPlayersCommand implements Command {
         int number = 0;
         for(Player player: playerDispatcher.getAllPlayers()){
             number++;
-            System.out.print("Игрок " + number + " : " + player.getFirstName()  + " , "
+            System.out.println("Игрок " + number + " : " + player.getFirstName()  + " , "
                             + player.getLastName() + " , " +  " age: " + player.getAge());
 
         }
