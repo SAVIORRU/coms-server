@@ -51,21 +51,7 @@ public class RuntimeEnvironment {
         Boolean executeResult = true;
         try {
             if (command.equals("help")) {
-                List<Pair<String,String>> pairList = new ArrayList<>();
-                pairList.add(new Pair<>("start","command"));
-                pairList.add(new Pair<>("finish","command"));
-                pairList.add(new Pair<>("show schedule","command"));
-                pairList.add(new Pair<>("show players","command"));
-                pairList.add(new Pair<>("show location","command"));
-                pairList.add(new Pair<>("create tournament","command"));
-                pairList.add(new Pair<>("show grid","command"));
-                pairList.add(new Pair<>("report","command"));
-                pairList.add(new Pair<>("set player","command: first name, second name, yyyy-mm-dd"));
-                pairList.add(new Pair<>("set location","command: name location, description"));
-                pairList.add(new Pair<>("set match result","command: matchNumber, number, number"));
-                pairList.add(new Pair<>("set setting","command: tournament name, type scheme (olympic/round ...), date start (yyyy-mm-dd-hh-minmin)"));
-                pairList.add(new Pair<>("exit","command"));
-                executeCommand = new HelpCommand(pairList);
+                executeCommand = new HelpCommand(commandsMap);
             }
 
             if (command.equals("set player")) {

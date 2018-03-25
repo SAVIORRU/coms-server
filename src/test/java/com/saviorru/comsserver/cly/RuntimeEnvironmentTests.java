@@ -1,4 +1,5 @@
 package com.saviorru.comsserver.cly;
+import com.saviorru.comsserver.cly.command.CommandInfo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,28 +12,27 @@ import static junit.framework.TestCase.*;
 
 public class RuntimeEnvironmentTests {
     private RuntimeEnvironment testSubject;
-    private Map<String, List<ArgumentType>> commandsMap;
+    private Map<String, CommandInfo> commandsMap;
 
 
     @Before()
     public void initTest() throws Exception
     {
         commandsMap = new HashMap<>();
-        commandsMap.put("undo", new ArrayList<>());
-        commandsMap.put("start", new ArrayList<>());
-        commandsMap.put("finish", new ArrayList<>());
-        commandsMap.put("show grid", new ArrayList<>());
-        commandsMap.put("show schedule", new ArrayList<>());
-        commandsMap.put("show players", new ArrayList<>());
-        commandsMap.put("show locations", new ArrayList<>());
-        commandsMap.put("set match result", Arrays.asList(ArgumentType.DIGIT, ArgumentType.DIGIT, ArgumentType.DIGIT));
-        commandsMap.put("set players", Collections.singletonList(ArgumentType.DIGIT));
-        commandsMap.put("set player", Arrays.asList(ArgumentType.ALPHA, ArgumentType.ALPHA, ArgumentType.DATE));
-        commandsMap.put("set locations", Collections.singletonList(ArgumentType.DIGIT));
-        commandsMap.put("set location", Arrays.asList(ArgumentType.ALPHA, ArgumentType.ALPHA));
-        commandsMap.put("set setting", Arrays.asList(ArgumentType.ALPHA,ArgumentType.ALPHA,ArgumentType.DATE));
-        commandsMap.put("create tournament", Collections.singletonList(ArgumentType.ALPHA));
-        commandsMap.put("help", new ArrayList<>());
+        commandsMap.put("undo", new CommandInfo("undo", new ArrayList<>(), "command"));
+        commandsMap.put("start", new CommandInfo("start", new ArrayList<>(), "command"));
+        commandsMap.put("finish", new CommandInfo("finish", new ArrayList<>(), "command"));
+        commandsMap.put("show grid", new CommandInfo("show grid", new ArrayList<>(), "command"));
+        commandsMap.put("show schedule", new CommandInfo("show schedule", new ArrayList<>(), "command"));
+        commandsMap.put("show players", new CommandInfo("show players", new ArrayList<>(), "command"));
+        commandsMap.put("show locations", new CommandInfo("show locations", new ArrayList<>(), "command"));
+        commandsMap.put("set match result", new CommandInfo("set match result", Arrays.asList(ArgumentType.DIGIT, ArgumentType.DIGIT, ArgumentType.DIGIT), "command: matchNumber, number, number"));
+        commandsMap.put("set player", new CommandInfo("set player", Arrays.asList(ArgumentType.ALPHA_DIGIT, ArgumentType.ALPHA_DIGIT, ArgumentType.DATE), "command: first name, second name, yyyy-mm-dd"));
+        commandsMap.put("set location", new CommandInfo("set location", Arrays.asList(ArgumentType.ALPHA_DIGIT, ArgumentType.ALPHA_DIGIT), "command: name location, description"));
+        commandsMap.put("set setting", new CommandInfo("set setting",Arrays.asList(ArgumentType.ALPHA_DIGIT, ArgumentType.ALPHA, ArgumentType.DATE_TIME),"command: tournament name, type scheme (olympic/round ...), date start (yyyy-mm-dd-hh-mm"));
+        commandsMap.put("create tournament", new CommandInfo("create tournament",new ArrayList<>(),"command"));
+        commandsMap.put("help", new CommandInfo("help",new ArrayList<>(),"command"));
+        commandsMap.put("report", new CommandInfo("report",new ArrayList<>(),"command"));
         testSubject = new RuntimeEnvironment(commandsMap);
     }
 

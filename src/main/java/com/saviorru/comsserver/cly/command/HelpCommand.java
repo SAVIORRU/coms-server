@@ -5,38 +5,36 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HelpCommand implements Command {
 
-    private List<Pair<String, String>> commandList;
+    private Map<String, CommandInfo> commandsMap;
     private List<String> commandNameList;
 
-    public HelpCommand(List<Pair<String, String>> commandList) {
-        this.commandList = commandList;
+    public HelpCommand(Map<String, CommandInfo> commandsMap) {
+        this.commandsMap = commandsMap;
         this.commandNameList = new ArrayList<>();
-        fillCommandNameList(commandList);
+        fillCommandNameList(commandsMap);
     }
 
-    private void fillCommandNameList(List<Pair<String, String>> commandList) {
-        for (Pair<String, String> command : commandList) {
-            commandNameList.add(command.getKey());
+    private void fillCommandNameList(Map<String, CommandInfo> commandsMap) {
+        for (Map.Entry entry : commandsMap.entrySet()) {
+            commandNameList.add(entry.getKey().toString());
         }
     }
 
     @Override
     public void backup() {
-
     }
 
     @Override
     public Boolean execute() {
         boolean flag = false;
-        for (String name : commandNameList)
-            for (Pair<String, String> command : commandList)
-                if (command.getKey().equals(name)) {
-                    System.out.println("Команда: " + command.getKey() + " , " + "Формат ввода: " + command.getValue());
-                    flag = true;
-                }
+        for (String name : commandNameList) {
+            System.out.println("Команда: " + commandsMap.get(name).getCommand() + " , " + "Формат ввода: " + commandsMap.get(name).getHelp());
+            flag = true;
+        }
         return flag;
     }
 
