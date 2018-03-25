@@ -50,7 +50,7 @@ public class TournamentTests {
         locationList.add(new Location("table3", "3"));
         locationDispatcher = new LocationDispatcher();
         playerDispatcher = new PlayerDispatcher();
-        dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 1);
+        dateDispatcher = new DateDispatcher(LocalDateTime.now(),new TimeSettings( 10, 18, 1));
         schedule = new ScheduleImpl();
         locationDispatcher.addAllLocation(locationList);
         for (int i = 0; i < countPlayers; i++) {

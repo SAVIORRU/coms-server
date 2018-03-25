@@ -37,7 +37,7 @@ public class TournamentSettingsImpl implements TournamentSettings {
 
 
     @Override
-    public DateDispatcher getDateDispatcher() throws Exception {
+    public DateDispatcher getDateDispatcher()  {
         return new DateDispatcher(startDate, timeSettings);
     }
 

@@ -48,7 +48,7 @@ public class ScheduleGeneratorTests {
         locationDispatcher.addLocation(loc1);
         locationDispatcher.addLocation(loc2);
         locationDispatcher.addLocation(loc3);
-        dateDispatcher = new DateDispatcher(LocalDateTime.now(), 10, 18, 12);
+        dateDispatcher = new DateDispatcher(LocalDateTime.now(), new TimeSettings(10, 18, 12));
 
 
     }
